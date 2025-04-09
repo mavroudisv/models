@@ -46,7 +46,11 @@ jobs:
 
       # Run the data collection script
       - name: Run data collection script
-        run: python stampr_ai-collector/collect_data.py
+        run: python -m stampr_ai_collector.cli --model gpt-4o-2024-05-13 --output-dir data/gpt-4o-2024-05-13 --config="configs/config_gpt-4o-2024-05-13.yaml"
+      
+      # How do we permanently store on this repo the signature json that is produced by the above script?
+
+      # Run script that finds the latest signature added for each model and update the page
 
       # Deploy the static content to GitHub Pages
       - name: Setup Pages
