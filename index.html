@@ -1,1 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StampR AI - Model Signature Tracker</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .signature-card {
+            transition: transform 0.2s ease-in-out;
+        }
+        .signature-card:hover {
+            transform: translateY(-5px);
+        }
+        .chart-container {
+            height: 400px;
+        }
+        .nav-tab {
+            cursor: pointer;
+        }
+        .nav-tab.active {
+            border-bottom: 3px solid #4F46E5;
+            color: #4F46E5;
+        }
+        .history-timeline {
+            position: relative;
+        }
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: #e5e7eb;
+            z-index: 0;
+        }
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 15px;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #4F46E5;
+            z-index: 1;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">StampR AI</h1>
+                    <p class="text-gray-600">Model Signature Tracker</p>
+                </div>
+                <div>
+                    <p id="last-updated" class="text-sm text-gray-500">Last updated: April 09, 2025</p>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-8">
+                <div class="nav-tab active py-4 px-1 text-gray-700 font-medium" data-tab="overview">Overview</div>
+                <div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="comparison">Model Comparison</div>
+                <div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="history">Historical Data</div>
+                <div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="about">About StampR</div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Model Signatures</h2>
+                <p class="text-gray-600 mb-4">Current signature snapshots for monitored models. Each signature represents a unique distribution fingerprint that can be used to identify model versions.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Model Card Example - Will be generated dynamically -->
+                    <div class="signature-card bg-white rounded-lg shadow overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-200 bg-indigo-50">
+                            <div class="font-bold text-xl text-gray-800">gpt-4o-2024-05-13</div>
+                            <div class="text-sm text-gray-600">Latest: April 09, 2025</div>
+                        </div>
+                        <div class="px-6 py-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-700">Hash:</span>
+                                <span class="font-mono text-gray-600">28bf7b</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-700">Stability:</span>
+                                <span class="text-green-600">Consistent</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-700">Changes:</span>
+                                <span class="text-gray-600">None in 7 days</span>
+                            </div>
+                        </div>
+                        <div class="px-6 py-3 bg-gray-50">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">View details →</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional model cards would be here -->
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="font-bold text-xl text-gray-800">Recent Changes</h3>
+                </div>
+                <div class="px-6 py-4">
+                    <div class="chart-container">
+                        <canvas id="changesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Model Comparison Tab -->
+        <div id="comparison" class="tab-content">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Model Comparison</h2>
+                <p class="text-gray-600 mb-4">Compare signature distributions across models to understand their similarities and differences.</p>
+                
+                <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-xl text-gray-800">Distribution Comparison</h3>
+                            <div class="flex space-x-2">
+                                <select class="border border-gray-300 rounded px-3 py-1 text-sm">
+                                    <option>Select Model 1</option>
+                                    <option>gpt-4o-2024-05-13</option>
+                                    <option>gpt-4-0125-preview</option>
+                                    <!-- Other models would be here -->
+                                </select>
+                                <select class="border border-gray-300 rounded px-3 py-1 text-sm">
+                                    <option>Select Model 2</option>
+                                    <option>gpt-4o-2024-05-13</option>
+                                    <option>gpt-4-0125-preview</option>
+                                    <!-- Other models would be here -->
+                                </select>
+                                <button class="bg-indigo-600 text-white px-3 py-1 rounded text-sm">Compare</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4">
+                        <div class="chart-container">
+                            <canvas id="comparisonChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="font-bold text-xl text-gray-800">Similarity Matrix</h3>
+                    </div>
+                    <div class="px-6 py-4">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Model</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">gpt-4o</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">gpt-4</th>
+                                        <!-- Other model columns would be here -->
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">gpt-4o</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">100%</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">87%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">gpt-4</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">87%</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">100%</td>
+                                    </tr>
+                                    <!-- Other model rows would be here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historical Data Tab -->
+        <div id="history" class="tab-content">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Historical Data</h2>
+                <p class="text-gray-600 mb-4">Track signature changes over time for each model.</p>
+                
+                <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-xl text-gray-800">Signature History</h3>
+                            <select class="border border-gray-300 rounded px-3 py-1 text-sm">
+                                <option>Select Model</option>
+                                <option selected>gpt-4o-2024-05-13</option>
+                                <option>gpt-4-0125-preview</option>
+                                <!-- Other models would be here -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4">
+                        <div class="history-timeline pl-12">
+                            <!-- Timeline Item -->
+                            <div class="mb-8 relative timeline-node">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-bold text-gray-800">Signature Change Detected</h4>
+                                            <p class="text-sm text-gray-600">April 09, 2025</p>
+                                        </div>
+                                        <span class="font-mono text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded">28bf7b</span>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="text-sm text-gray-700">New signature recorded. Distribution shows minor changes in token probabilities.</p>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">View signature details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Additional timeline items would be here -->
+                            <div class="mb-8 relative timeline-node">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-bold text-gray-800">Baseline Signature</h4>
+                                            <p class="text-sm text-gray-600">April 02, 2025</p>
+                                        </div>
+                                        <span class="font-mono text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded">a17f3c</span>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="text-sm text-gray-700">Initial signature recorded for this model.</p>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">View signature details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="font-bold text-xl text-gray-800">Stability Over Time</h3>
+                    </div>
+                    <div class="px-6 py-4">
+                        <div class="chart-container">
+                            <canvas id="stabilityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Tab -->
+        <div id="about" class="tab-content">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">About StampR</h2>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="px-6 py-4">
+                        <h3 class="font-bold text-xl text-gray-800 mb-4">What is StampR?</h3>
+                        <p class="text-gray-700 mb-4">
+                            StampR is a tool for analyzing token distributions in language models, which can be used for model fingerprinting and comparison.
+                        </p>
+                        <p class="text-gray-700 mb-4">
+                            This project provides utilities for generating and analyzing token distribution signatures from language models. These signatures can be used to:
+                        </p>
+                        <ul class="list-disc pl-5 mb-4 text-gray-700">
+                            <li class="mb-2">Identify and compare different models</li>
+                            <li class="mb-2">Track model changes over time</li>
+                            <li class="mb-2">Detect potential issues in model behavior</li>
+                            <li class="mb-2">Verify the specific model version being used</li>
+                        </ul>
+                        
+                        <h3 class="font-bold text-xl text-gray-800 mb-4 mt-6">How It Works</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                            <ol class="list-decimal pl-5 text-gray-700">
+                                <li class="mb-2"><strong>Pathfinding:</strong> The tool first constructs a "path" through the model by finding the most likely token at each position.</li>
+                                <li class="mb-2"><strong>Distribution Sampling:</strong> It then collects a distribution of tokens at a target position, requiring that tokens in earlier positions match the path.</li>
+                                <li class="mb-2"><strong>Signature Generation:</strong> The collected distribution is saved as a JSON file with metadata and a unique hash.</li>
+                            </ol>
+                        </div>
+                        
+                        <h3 class="font-bold text-xl text-gray-800 mb-4 mt-6">Resources</h3>
+                        <div class="flex flex-col space-y-2">
+                            <a href="https://github.com/yourusername/stampr_ai_collector" class="text-indigo-600 hover:text-indigo-800">
+                                GitHub Repository
+                            </a>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800">
+                                Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex justify-center md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="mt-8 md:mt-0 md:order-1">
+                    <p class="text-center text-base text-gray-400">
+                        &copy; 2025 StampR AI. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Initialize sample charts
+        document.addEventListener('DOMContentLoaded', () => {
+            // Recent Changes Chart
+            const changesCtx = document.getElementById('changesChart').getContext('2d');
+            const changesChart = new Chart(changesCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mar 10', 'Mar 15', 'Mar 20', 'Mar 25', 'Apr 01', 'Apr 05', 'Apr 09'],
+                    datasets: [
+                        {
+                            label: 'gpt-4o-2024-05-13',
+                            data: [0, 0, 1, 0, 0, 0, 1],
+                            borderColor: 'rgba(79, 70, 229, 1)',
+                            backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'gpt-4-0125-preview',
+                            data: [0, 1, 0, 0, 1, 0, 0],
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Signature Changes per Model'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Changes Detected'
+                            },
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Comparison Chart (when tab is active)
+            document.querySelector('[data-tab="comparison"]').addEventListener('click', () => {
+                if (!window.comparisonChart) {
+                    const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+                    window.comparisonChart = new Chart(comparisonCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Token 1', 'Token 2', 'Token 3', 'Token 4', 'Token 5', 'Token 6', 'Token 7', 'Token 8'],
+                            datasets: [
+                                {
+                                    label: 'gpt-4o-2024-05-13',
+                                    data: [0.32, 0.21, 0.18, 0.13, 0.07, 0.05, 0.03, 0.01],
+                                    backgroundColor: 'rgba(79, 70, 229, 0.7)'
+                                },
+                                {
+                                    label: 'gpt-4-0125-preview',
+                                    data: [0.29, 0.23, 0.17, 0.12, 0.08, 0.06, 0.03, 0.02],
+                                    backgroundColor: 'rgba(16, 185, 129, 0.7)'
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Token Distribution Comparison'
+                                },
+                                tooltip: {
+                                    mode: 'index',
+                                    intersect: false
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Probability'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+            
+            // Stability Chart (when tab is active)
+            document.querySelector('[data-tab="history"]').addEventListener('click', () => {
+                if (!window.stabilityChart) {
+                    const stabilityCtx = document.getElementById('stabilityChart').getContext('2d');
+                    window.stabilityChart = new Chart(stabilityCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Mar 10', 'Mar 15', 'Mar 20', 'Mar 25', 'Apr 01', 'Apr 05', 'Apr 09'],
+                            datasets: [
+                                {
+                                    label: 'Signature Similarity',
+                                    data: [100, 100, 92, 92, 92, 92, 87],
+                                    borderColor: 'rgba(79, 70, 229, 1)',
+                                    backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                                    tension: 0.4,
+                                    fill: true
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Signature Stability Over Time (% similarity to initial)'
+                                },
+                                tooltip: {
+                                    mode: 'index',
+                                    intersect: false
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    min: 0,
+                                    max: 100,
+                                    title: {
+                                        display: true,
+                                        text: 'Similarity (%)'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
