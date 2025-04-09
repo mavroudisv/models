@@ -1,21 +1,17 @@
 name: Deploy static content to Pages
-
 on:
   schedule:
-    - cron: '0 * * * *'  # Every hour on the hour
+    - cron: '0 0 * * *'  # Once a day at midnight
   push:
     branches: ["main"]  # Runs on pushes to main
   workflow_dispatch:  # Manual trigger option
-
 permissions:
-  contents: read
+  contents: write  # Changed to write to allow committing back to the repo
   pages: write
   id-token: write
-
 concurrency:
   group: "pages"
   cancel-in-progress: false
-
 jobs:
   deploy:
     environment:
@@ -25,42 +21,155 @@ jobs:
     steps:
       - name: Checkout Page Repo
         uses: actions/checkout@v4
-
+      
       # Pull the private script repo
       - name: Clone script repo (private)
         run: |
           git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/mavroudisv/stampr_ai-collector.git
-
+      
       # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
+      
       # Install any dependencies from the script repo
       - name: Install requirements (if any)
         run: |
           if [ -f stampr_ai-collector/requirements.txt ]; then
             pip install -r stampr_ai-collector/requirements.txt
           fi
-
+          cd stampr_ai-collector
+          pip install -e .
+          cd ..
+      
+      # Configure Git user
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+      
+      # Create output directory if it doesn't exist
+      - name: Ensure output directory exists
+        run: |
+          mkdir -p signatures/gpt-4o-2024-05-13
+      
       # Run the data collection script
       - name: Run data collection script
-        run: python -m stampr_ai_collector.cli --model gpt-4o-2024-05-13 --output-dir data/gpt-4o-2024-05-13 --config="configs/config_gpt-4o-2024-05-13.yaml"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          cd stampr_ai-collector
+          python -m stampr_ai_collector.cli --model gpt-4o-2024-05-13 --output-dir ../signatures/gpt-4o-2024-05-13 --config configs/config_gpt-4o-2024-05-13.yaml
       
-      # How do we permanently store on this repo the signature json that is produced by the above script?
-
-      # Run script that finds the latest signature added for each model and update the page
-
+      # Store the signature JSON permanently in this repo
+      - name: Commit and push new signatures
+        run: |
+          # Check if there are new files
+          if [[ -n $(git status --porcelain signatures/) ]]; then
+            # Add the new files
+            git add signatures/
+            
+            # Commit the changes
+            git commit -m "Add new signature data [automated]"
+            
+            # Push changes back to the repo
+            git push
+          else
+            echo "No new signature files to commit"
+          fi
+      
+      # Run script to update the page with latest signatures
+      - name: Update page with latest signatures
+        run: |
+          # Create a script to find the latest signature for each model and update the page
+          cat > update_page.py << 'EOL'
+          import os
+          import json
+          import glob
+          import re
+          from datetime import datetime
+          
+          # Find all model directories
+          model_dirs = glob.glob('signatures/*')
+          
+          # Create HTML for the latest signatures
+          html_content = "<h1>Model Signatures</h1>\n"
+          html_content += "<p>Last updated: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "</p>\n"
+          html_content += "<table>\n"
+          html_content += "<tr><th>Model</th><th>Latest Signature</th><th>Date</th><th>Hash</th></tr>\n"
+          
+          for model_dir in model_dirs:
+              model_name = os.path.basename(model_dir)
+              signature_files = glob.glob(f'{model_dir}/*.json')
+              
+              if signature_files:
+                  # Sort by date in filename (most recent first)
+                  # Assuming filename format is hash_YYYY-MM-DD.json
+                  def get_date_from_filename(filename):
+                      match = re.search(r'_(\d{4}-\d{2}-\d{2})\.json$', filename)
+                      if match:
+                          return match.group(1)
+                      return '0000-00-00'  # Default for sorting if pattern not found
+                  
+                  latest_file = sorted(signature_files, key=get_date_from_filename, reverse=True)[0]
+                  file_name = os.path.basename(latest_file)
+                  
+                  # Extract date from filename
+                  date_match = re.search(r'_(\d{4}-\d{2}-\d{2})\.json$', file_name)
+                  display_date = date_match.group(1) if date_match else "Unknown"
+                  
+                  # Extract hash from filename
+                  hash_match = re.search(r'^([^_]+)_', file_name)
+                  display_hash = hash_match.group(1) if hash_match else "Unknown"
+                  
+                  # Get additional info from the JSON file
+                  try:
+                      with open(latest_file, 'r') as f:
+                          data = json.load(f)
+                      # Get full hash from file if available
+                      full_hash = data.get('metadata', {}).get('distribution_hash', display_hash)
+                  except:
+                      full_hash = display_hash
+                  
+                  html_content += f"<tr><td>{model_name}</td><td><a href='{latest_file}'>{file_name}</a></td><td>{display_date}</td><td>{full_hash}</td></tr>\n"
+          
+          html_content += "</table>\n"
+          
+          # Write to index.html
+          with open('index.html', 'w') as f:
+              f.write("""
+              <!DOCTYPE html>
+              <html>
+              <head>
+                <title>StampR AI Model Signatures</title>
+                <style>
+                  body { font-family: Arial, sans-serif; margin: 40px; }
+                  table { border-collapse: collapse; width: 100%; }
+                  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                  th { background-color: #f2f2f2; }
+                  tr:nth-child(even) { background-color: #f9f9f9; }
+                </style>
+              </head>
+              <body>
+              """)
+              f.write(html_content)
+              f.write("""
+              </body>
+              </html>
+              """)
+          EOL
+          
+          # Run the update script
+          python update_page.py
+      
       # Deploy the static content to GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'  # Upload the entire repository or update specific files
-
+          path: '.'  # Upload the entire repository
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
