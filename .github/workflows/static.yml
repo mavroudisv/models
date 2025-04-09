@@ -58,6 +58,10 @@ jobs:
       
       - name: Commit and push new signatures
         run: |
+          # Pull the latest changes first
+          git pull --rebase origin main
+
+          # Then check if there are changes to commit       
           if [[ -n $(git status --porcelain signatures/) ]]; then
             git add signatures/
             git commit -m "Add new signature data [automated]"
