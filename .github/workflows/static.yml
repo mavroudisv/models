@@ -56,89 +56,142 @@ jobs:
           cd stampr_ai-collector
           python -m stampr_ai_collector.cli --model gpt-4o-2024-05-13 --output-dir ../signatures/gpt-4o-2024-05-13 --config configs/config_gpt-4o-2024-05-13.yaml
       
-      - name: Generate signatures.json index
-        run: |
-          cat > generate_index.py << 'EOL'
-import os
-import json
-import glob
-import re
-from datetime import datetime
-from collections import defaultdict
-
-# Find all model directories
-model_dirs = glob.glob('signatures/*')
-all_signatures = {}
-
-for model_dir in sorted(model_dirs):
-    model_name = os.path.basename(model_dir)
-    signature_files = glob.glob(f'{model_dir}/*.json')
-    
-    if signature_files:
-        # Sort by date in filename (most recent first)
-        def get_date_from_filename(filename):
-            match = re.search(r'_(\d{4}-\d{2}-\d{2})\.json$', filename)
-            if match:
-                return match.group(1)
-            return '0000-00-00'
-        
-        # Sort all files by date
-        sorted_files = sorted(signature_files, key=get_date_from_filename, reverse=True)
-        
-        # Create data for this model
-        model_data = []
-        for file_path in sorted_files:
-            file_name = os.path.basename(file_path)
-            date_match = re.search(r'_(\d{4}-\d{2}-\d{2})\.json$', file_name)
-            file_date = date_match.group(1) if date_match else "Unknown"
-            
-            hash_match = re.search(r'^([^_]+)_', file_name)
-            file_hash = hash_match.group(1) if hash_match else "Unknown"
-            
-            # Try to get full hash from file
-            try:
-                with open(file_path, 'r') as f:
-                    data = json.load(f)
-                file_full_hash = data.get('metadata', {}).get('distribution_hash', file_hash)
-            except:
-                file_full_hash = file_hash
-            
-            # Add to model data
-            model_data.append({
-                'file': file_path,
-                'date': file_date,
-                'hash': file_hash,
-                'full_hash': file_full_hash
-            })
-        
-        # Add to all signatures
-        all_signatures[model_name] = model_data
-
-# Update the last_updated timestamp
-metadata = {
-    'last_updated': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-}
-
-# Write to data.json
-with open('signatures.json', 'w') as f:
-    json.dump({
-        'metadata': metadata,
-        'models': all_signatures
-    }, f, indent=2)
-EOL
-          
-          # Run the update script
-          python generate_index.py
-      
       - name: Commit and push new signatures
         run: |
-          if [[ -n $(git status --porcelain signatures/ signatures.json) ]]; then
-            git add signatures/ signatures.json
+          if [[ -n $(git status --porcelain signatures/) ]]; then
+            git add signatures/
             git commit -m "Add new signature data [automated]"
             git push
           else
             echo "No new signature files to commit"
           fi
+      
+      - name: Update page with latest signatures and hash table
+        run: |
+          cat > update_page.py << 'EOL'
+          import os
+          import json
+          import glob
+          import re
+          from datetime import datetime
+          from collections import defaultdict
+
+          # Find all model directories
+          model_dirs = glob.glob('signatures/*')
+          
+          # Create HTML for the latest signatures
+          html_content = "<h1>StampR AI Model Signatures</h1>\n"
+          html_content += "<p>Last updated: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "</p>\n"
+          
+          # First table: Latest signatures per model
+          html_content += "<h2>Latest Signatures</h2>\n"
+          html_content += "<table>\n"
+          html_content += "<tr><th>Model</th><th>Latest Signature</th><th>Date</th><th>Hash</th></tr>\n"
+          
+          # Create a dictionary to store all signatures by model for the second table
+          all_signatures = defaultdict(list)
+          
+          for model_dir in sorted(model_dirs):
+              model_name = os.path.basename(model_dir)
+              signature_files = glob.glob(f'{model_dir}/*.json')
+              
+              if signature_files:
+                  # Sort by date in filename (most recent first)
+                  def get_date_from_filename(filename):
+                      match = re.search(r'_(\d{4}-\d{2}-\d{2})\.json$', filename)
+                      if match:
+                          return match.group(1)
+                      return '0000-00-00'
+                  
+                  # Sort all files by date
+                  sorted_files = sorted(signature_files, key=get_date_from_filename, reverse=True)
+                  latest_file = sorted_files[0]
+                  file_name = os.path.basename(latest_file)
+                  
+                  # Extract date from filename
+                  date_match = re.search(r'_(\d{4}-\d{2}-\d{2})\.json$', file_name)
+                  display_date = date_match.group(1) if date_match else "Unknown"
+                  
+                  # Extract hash from filename
+                  hash_match = re.search(r'^([^_]+)_', file_name)
+                  display_hash = hash_match.group(1) if hash_match else "Unknown"
+                  
+                  # Get additional info from the JSON file
+                  try:
+                      with open(latest_file, 'r') as f:
+                          data = json.load(f)
+                      full_hash = data.get('metadata', {}).get('distribution_hash', display_hash)
+                  except:
+                      full_hash = display_hash
+                  
+                  html_content += f"<tr><td>{model_name}</td><td><a href='{latest_file}'>{file_name}</a></td><td>{display_date}</td><td>{full_hash}</td></tr>\n"
+                  
+                  # Store all signatures for this model for the second table
+                  for file_path in sorted_files:
+                      file_name = os.path.basename(file_path)
+                      date_match = re.search(r'_(\d{4}-\d{2}-\d{2})\.json$', file_name)
+                      file_date = date_match.group(1) if date_match else "Unknown"
+                      
+                      hash_match = re.search(r'^([^_]+)_', file_name)
+                      file_hash = hash_match.group(1) if hash_match else "Unknown"
+                      
+                      # Try to get full hash from file
+                      try:
+                          with open(file_path, 'r') as f:
+                              data = json.load(f)
+                          file_full_hash = data.get('metadata', {}).get('distribution_hash', file_hash)
+                      except:
+                          file_full_hash = file_hash
+                      
+                      all_signatures[model_name].append({
+                          'file_path': file_path,
+                          'file_name': file_name,
+                          'date': file_date,
+                          'hash': file_full_hash
+                      })
+          
+          html_content += "</table>\n"
+          
+          # Second table: All hash signatures organized by model
+          html_content += "<h2>All Signature Hashes</h2>\n"
+          
+          for model_name, signatures in sorted(all_signatures.items()):
+              html_content += f"<h3>{model_name}</h3>\n"
+              html_content += "<table>\n"
+              html_content += "<tr><th>Date</th><th>File</th><th>Hash</th></tr>\n"
+              
+              for sig in signatures:
+                  html_content += f"<tr><td>{sig['date']}</td><td><a href='{sig['file_path']}'>{sig['file_name']}</a></td><td>{sig['hash']}</td></tr>\n"
+              
+              html_content += "</table>\n"
+          
+          # Write to status.html
+          with open('status.html', 'w') as f:
+              f.write("""
+              <!DOCTYPE html>
+              <html>
+              <head>
+                <title>StampR AI Model Signatures</title>
+                <style>
+                  body { font-family: Arial, sans-serif; margin: 40px; }
+                  table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+                  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                  th { background-color: #f2f2f2; }
+                  tr:nth-child(even) { background-color: #f9f9f9; }
+                  h1, h2, h3 { color: #333; }
+                </style>
+              </head>
+              <body>
+              """)
+              f.write(html_content)
+              f.write("""
+              </body>
+              </html>
+              """)
+          EOL
+          
+          # Run the update script
+          python update_page.py
       
       - name: Setup Pages
         uses: actions/configure-pages@v5
