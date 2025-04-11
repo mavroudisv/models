@@ -462,9 +462,17 @@
             }
             
             // Determine event title
-            const isFirst = index === modelData.signatures.length - 1;
-            const eventTitle = isFirst ? "Baseline Signature" : "Signature Change Detected";
-            
+            let eventTitle;
+            if (index === modelData.signatures.length - 1) {
+              eventTitle = "Baseline Signature";
+            } else {
+              // Compare current hash with previous hash
+              const currentHash = signature.hash;
+              const previousHash = modelData.signatures[index + 1].hash; // +1 because we're going backwards in time
+              eventTitle = currentHash !== previousHash ? 
+                "Signature Change Detected" : 
+                "Signature Check (No Change)";
+            }
             const nodeHtml = `
               <div class="mb-8 relative timeline-node">
                 <div class="bg-gray-50 rounded-lg p-4">
