@@ -1,0 +1,59 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.signature-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.signature-card:hover {
+    transform: translateY(-5px);
+}
+
+.chart-container {
+    height: 400px;
+}
+
+.nav-tab {
+    cursor: pointer;
+}
+
+.nav-tab.active {
+    border-bottom: 3px solid #4F46E5;
+    color: #4F46E5;
+}
+
+.history-timeline {
+    position: relative;
+}
+
+.history-timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: #e5e7eb;
+    z-index: 0;
+}
+
+.timeline-node::before {
+    content: '';
+    position: absolute;
+    left: -36px;
+    top: 15px;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #4F46E5;
+    z-index: 1;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
