@@ -134,19 +134,25 @@ jobs:
           # Run the update script
           python generate_index.py
       
-      - name: Commit and push new signatures
-        run: |
-          # Pull the latest changes first
-          git pull --rebase origin main
-
-          # Then check if there are changes to commit       
-          if [[ -n $(git status --porcelain signatures/ signatures.json) ]]; then
-            git add signatures/ signatures.json
-            git commit -m "Add new signature data [automated]"
-            git push
-          else
-            echo "No new signature files to commit"
-          fi
+    - name: Commit and push new signatures
+      run: |
+        # Stage any new or modified signature files
+        git add signatures/
+        
+        # Check if there are changes to commit
+        if [[ -n $(git status --porcelain signatures/) ]]; then
+          # Configure Git to handle potential conflicts during pull
+          git config pull.rebase false
+          
+          # Pull any changes that might have happened in parallel runs
+          git pull origin main
+          
+          # Commit and push
+          git commit -m "Add new signature data [automated]"
+          git push
+        else
+          echo "No new signature files to commit"
+        fi
       
       - name: Update page with latest signatures and hash table
         run: |
