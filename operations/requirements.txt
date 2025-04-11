@@ -1,0 +1,1 @@
+stampr_ai_collector>=0.1.0 
