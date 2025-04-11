@@ -541,8 +541,14 @@
                   ? `Changed on ${formattedDate}` 
                   : "No changes detected";
                   
-                const stabilityClass = modelData.signatures.length > 1 ? "text-green-600" : "text-gray-600";
-                const stabilityText = modelData.signatures.length > 1 ? "Consistent" : "Baseline";
+                // Check if the model has multiple signatures with the same hash
+                const hasMultipleSignatures = modelData.signatures.length > 1;
+                const hasChanges = hasMultipleSignatures && 
+                  modelData.signatures.some(sig => sig.hash !== modelData.signatures[0].hash);
+                
+                const stabilityClass = hasChanges ? "text-yellow-600" : "text-green-600";
+                const stabilityText = hasChanges ? "Changed" : 
+                  (hasMultipleSignatures ? "Consistent" : "Baseline");
                 
                 const cardHtml = `
                   <div class="signature-card bg-white rounded-lg shadow overflow-hidden">
