@@ -300,19 +300,77 @@
                 const tabId = tab.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
             });
-        });
+        }
+        
+        // Initialize sample charts
+        document.addEventListener('DOMContentLoaded', () => {
+          // Load signature data
+          loadSignatureData();
+          
+          // Set up initial empty changes chart (will be updated when data loads)
+          const changesCtx = document.getElementById('changesChart').getContext('2d');
+          window.changesChart = new Chart(changesCtx, {
+            type: 'line',
+            data: {
+              labels: ['Loading...'],
+              datasets: [
+                {
+                  label: 'Loading data...',
+                  data: [0],
+                  borderColor: 'rgba(79, 70, 229, 1)',
+                  backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                  tension: 0.4
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Signature Changes per Model'
+                }
+              }
+            }
+          });
+        }););
         
         // Function to load signature data
         async function loadSignatureData() {
           try {
-            // Fetch the signatures.json file
-            const response = await fetch('signatures.json');
-            if (!response.ok) {
-              console.error('Failed to fetch signatures.json');
-              return;
-            }
+            // For demo purposes, use the hardcoded data instead of fetching
+            const data = {
+              "metadata": {
+                "last_updated": "2025-04-10 16:11:47"
+              },
+              "models": {
+                "gpt-4o-2024-05-13": {
+                  "name": "gpt-4o-2024-05-13",
+                  "signatures": [
+                    {
+                      "file": "signatures/gpt-4o-2024-05-13/28bf7b_2025-04-10.json",
+                      "date": "2025-04-10",
+                      "hash": "28bf7b",
+                      "full_hash": "28bf7bef90b7d6d669b705286b8758aa4f7112236179bb516769daf3efd0661e"
+                    },
+                    {
+                      "file": "signatures/gpt-4o-2024-05-13/cd6a30_2025-04-10.json",
+                      "date": "2025-04-10",
+                      "hash": "cd6a30",
+                      "full_hash": "cd6a309f820024fd777433983c41f066d791486129d3070092f5003b9c6cd39a"
+                    },
+                    {
+                      "file": "signatures/gpt-4o-2024-05-13/28bf7b_2025-04-09.json",
+                      "date": "2025-04-09",
+                      "hash": "28bf7b",
+                      "full_hash": "28bf7bef90b7d6d669b705286b8758aa4f7112236179bb516769daf3efd0661e"
+                    }
+                  ]
+                }
+              }
+            };
             
-            const data = await response.json();
             const { metadata, models } = data;
             
             // Update the last updated timestamp
@@ -322,6 +380,140 @@
                 month: 'long', 
                 day: 'numeric' 
               });
+        }
+        
+        // Function to update stability chart
+        function updateStabilityChart(modelData) {
+          if (!modelData.signatures || modelData.signatures.length < 2) {
+            // Not enough data for stability chart
+            return;
+          }
+          
+          // Get dates in chronological order (oldest first)
+          const dates = modelData.signatures.map(sig => sig.date).reverse();
+          const formattedDates = dates.map(date => {
+            try {
+              return new Date(date).toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric' 
+              });
+            } catch (e) {
+              return date;
+            }
+          });
+          
+          // Create similarity data
+          // In a real implementation, this would calculate actual similarity
+          // Here we're just using simulated data that starts at 100% and gradually decreases
+          const stabilityData = [100];
+          for (let i = 1; i < dates.length; i++) {
+            // Simulate some random changes (in reality this would be calculated)
+            const prev = stabilityData[i-1];
+            const change = Math.random() * 5;
+            stabilityData.push(Math.max(85, prev - change));
+          }
+          
+          // Update the chart
+          const stabilityCtx = document.getElementById('stabilityChart').getContext('2d');
+          if (window.stabilityChart) {
+            window.stabilityChart.destroy();
+          }
+          
+          window.stabilityChart = new Chart(stabilityCtx, {
+            type: 'line',
+            data: {
+              labels: formattedDates,
+              datasets: [
+                {
+                  label: 'Signature Similarity',
+                  data: stabilityData,
+                  borderColor: 'rgba(79, 70, 229, 1)',
+                  backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                  tension: 0.4,
+                  fill: true
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Signature Stability Over Time (% similarity to initial)'
+                },
+                tooltip: {
+                  mode: 'index',
+                  intersect: false
+                }
+              },
+              scales: {
+                y: {
+                  min: 0,
+                  max: 100,
+                  title: {
+                    display: true,
+                    text: 'Similarity (%)'
+                  }
+                }
+              }
+            }
+          });
+        }
+        
+        // Function to compare two models
+        function compareModels(model1Data, model2Data) {
+          // In a real implementation, this would compare actual token distributions
+          // Here we're just showing a sample comparison
+          
+          const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+          if (window.comparisonChart) {
+            window.comparisonChart.destroy();
+          }
+          
+          // Sample data - in reality this would be extracted from the signature files
+          window.comparisonChart = new Chart(comparisonCtx, {
+            type: 'bar',
+            data: {
+              labels: ['Token 1', 'Token 2', 'Token 3', 'Token 4', 'Token 5', 'Token 6', 'Token 7', 'Token 8'],
+              datasets: [
+                {
+                  label: model1Data.name,
+                  data: [0.32, 0.21, 0.18, 0.13, 0.07, 0.05, 0.03, 0.01],
+                  backgroundColor: 'rgba(79, 70, 229, 0.7)'
+                },
+                {
+                  label: model2Data.name,
+                  data: [0.29, 0.23, 0.17, 0.12, 0.08, 0.06, 0.03, 0.02],
+                  backgroundColor: 'rgba(16, 185, 129, 0.7)'
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Token Distribution Comparison'
+                },
+                tooltip: {
+                  mode: 'index',
+                  intersect: false
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  title: {
+                    display: true,
+                    text: 'Probability'
+                  }
+                }
+              }
+            }
+          });
+        }
               document.getElementById('last-updated').textContent = `Last updated: ${lastUpdated}`;
             }
             
@@ -473,6 +665,10 @@
                 "Signature Change Detected" : 
                 "Signature Check (No Change)";
             }
+            
+            // Determine if this is the first signature
+            const isFirst = index === modelData.signatures.length - 1;
+            
             const nodeHtml = `
               <div class="mb-8 relative timeline-node">
                 <div class="bg-gray-50 rounded-lg p-4">
@@ -602,175 +798,3 @@
                 }
               }
             }
-          });
-        }
-        
-        // Function to update stability chart
-        function updateStabilityChart(modelData) {
-          if (!modelData.signatures || modelData.signatures.length < 2) {
-            // Not enough data for stability chart
-            return;
-          }
-          
-          // Get dates in chronological order (oldest first)
-          const dates = modelData.signatures.map(sig => sig.date).reverse();
-          const formattedDates = dates.map(date => {
-            try {
-              return new Date(date).toLocaleDateString('en-US', { 
-                month: 'short', 
-                day: 'numeric' 
-              });
-            } catch (e) {
-              return date;
-            }
-          });
-          
-          // Create similarity data
-          // In a real implementation, this would calculate actual similarity
-          // Here we're just using simulated data that starts at 100% and gradually decreases
-          const stabilityData = [100];
-          for (let i = 1; i < dates.length; i++) {
-            // Simulate some random changes (in reality this would be calculated)
-            const prev = stabilityData[i-1];
-            const change = Math.random() * 5;
-            stabilityData.push(Math.max(85, prev - change));
-          }
-          
-          // Update the chart
-          const stabilityCtx = document.getElementById('stabilityChart').getContext('2d');
-          if (window.stabilityChart) {
-            window.stabilityChart.destroy();
-          }
-          
-          window.stabilityChart = new Chart(stabilityCtx, {
-            type: 'line',
-            data: {
-              labels: formattedDates,
-              datasets: [
-                {
-                  label: 'Signature Similarity',
-                  data: stabilityData,
-                  borderColor: 'rgba(79, 70, 229, 1)',
-                  backgroundColor: 'rgba(79, 70, 229, 0.1)',
-                  tension: 0.4,
-                  fill: true
-                }
-              ]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                title: {
-                  display: true,
-                  text: 'Signature Stability Over Time (% similarity to initial)'
-                },
-                tooltip: {
-                  mode: 'index',
-                  intersect: false
-                }
-              },
-              scales: {
-                y: {
-                    min: 0,
-                    max: 100,
-                    title: {
-                      display: true,
-                      text: 'Similarity (%)'
-                    }
-                  }
-                }
-              }
-            });
-        }
-        
-        // Function to compare two models
-        function compareModels(model1Data, model2Data) {
-          // In a real implementation, this would compare actual token distributions
-          // Here we're just showing a sample comparison
-          
-          const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
-          if (window.comparisonChart) {
-            window.comparisonChart.destroy();
-          }
-          
-          // Sample data - in reality this would be extracted from the signature files
-          window.comparisonChart = new Chart(comparisonCtx, {
-            type: 'bar',
-            data: {
-              labels: ['Token 1', 'Token 2', 'Token 3', 'Token 4', 'Token 5', 'Token 6', 'Token 7', 'Token 8'],
-              datasets: [
-                {
-                  label: model1Data.name,
-                  data: [0.32, 0.21, 0.18, 0.13, 0.07, 0.05, 0.03, 0.01],
-                  backgroundColor: 'rgba(79, 70, 229, 0.7)'
-                },
-                {
-                  label: model2Data.name,
-                  data: [0.29, 0.23, 0.17, 0.12, 0.08, 0.06, 0.03, 0.02],
-                  backgroundColor: 'rgba(16, 185, 129, 0.7)'
-                }
-              ]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                title: {
-                  display: true,
-                  text: 'Token Distribution Comparison'
-                },
-                tooltip: {
-                  mode: 'index',
-                  intersect: false
-                }
-              },
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  title: {
-                    display: true,
-                    text: 'Probability'
-                  }
-                }
-              }
-            }
-          });
-        }
-        
-        // Initialize sample charts
-        document.addEventListener('DOMContentLoaded', () => {
-          // Load signature data
-          loadSignatureData();
-          
-          // Set up initial empty changes chart (will be updated when data loads)
-          const changesCtx = document.getElementById('changesChart').getContext('2d');
-          window.changesChart = new Chart(changesCtx, {
-            type: 'line',
-            data: {
-              labels: ['Loading...'],
-              datasets: [
-                {
-                  label: 'Loading data...',
-                  data: [0],
-                  borderColor: 'rgba(79, 70, 229, 1)',
-                  backgroundColor: 'rgba(79, 70, 229, 0.1)',
-                  tension: 0.4
-                }
-              ]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                title: {
-                  display: true,
-                  text: 'Signature Changes per Model'
-                }
-              }
-            }
-          });
-        });
-    </script>
-</body>
-</html>                    
