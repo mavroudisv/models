@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StampR AI - Signature Details</title>
+    <title>StampR - Signature Details</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖋️</text></svg>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" onerror="window.chartLoadError = true;"></script>
+    <script src="js/fetch-signatures.js"></script>
+    <script src="js/signature-details.js" defer></script>
 </head>
 <body class="bg-gray-50">
     <div id="loading-overlay" class="fixed inset-0 bg-white flex items-center justify-center z-50">
@@ -174,7 +177,6 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.1/chart.min.js"></script>
-    <script src="fetch-signatures.js"></script>
-    <script src="signature-details.js"></script>
+    <script src="js/signature-details.js" defer></script>
 </body>
 </html>

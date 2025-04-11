@@ -1,6 +1,30 @@
 // This file contains functions for fetching and processing signature data from the server
 // It's separated from the main app.js for better organization
 
+// Make functions globally available
+window.fetchSignatureFile = async function(filePath) {
+    try {
+        console.log('Fetching signature file:', filePath);
+        const response = await fetch(filePath, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('Successfully loaded signature file:', filePath);
+        return data;
+    } catch (error) {
+        console.error(`Error fetching signature file ${filePath}:`, error);
+        throw error;
+    }
+};
+
 // Function to fetch all signatures index
 async function fetchSignaturesIndex() {
     try {
@@ -28,30 +52,6 @@ async function fetchSignaturesIndex() {
             },
             models: {}
         };
-    }
-}
-
-// Function to fetch a specific signature file
-async function fetchSignatureFile(filePath) {
-    try {
-        console.log('Fetching signature file:', filePath);
-        const response = await fetch(filePath, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log('Successfully loaded signature file:', filePath);
-        return data;
-    } catch (error) {
-        console.error(`Error fetching signature file ${filePath}:`, error);
-        throw error;
     }
 }
 

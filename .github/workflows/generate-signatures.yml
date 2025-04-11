@@ -27,14 +27,9 @@ jobs:
           cd operations
           python generate.py
 
-      - name: Build
-        run: |
-          cd operations
-          python build.py
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: .
           publish_branch: gh-pages 
