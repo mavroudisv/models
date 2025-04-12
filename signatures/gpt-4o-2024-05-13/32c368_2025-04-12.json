@@ -2,9 +2,9 @@
   "metadata": {
     "model_name": "gpt-4o-2024-05-13",
     "tokenizer": "o200k_base",
-    "date": "2025-04-11_20-15-30",
+    "date": "2025-04-12_01-08-16",
     "request_country": "United States",
-    "distribution_hash": "28bf7bef90b7d6d669b705286b8758aa4f7112236179bb516769daf3efd0661e"
+    "distribution_hash": "32c368093bed5a141b4946b858e9ff4b744e1ac7fed2144bd076209015914240"
   },
   "configuration": {
     "target_position": 4,
@@ -17,19 +17,19 @@
   },
   "path_analysis": {
     "path_tokens": [
-      "lm",
-      "vb",
-      "vb",
-      "vb"
+      "\u043c",
+      "\u043a",
+      "\u043c",
+      "\u043a"
     ]
   },
   "distribution_results": {
     "total_tokens_collected": 100,
     "unique_tokens_collected": 1,
     "tokens": {
-      "vb": {
-        "token_string": "vb",
-        "token_id": 62408,
+      "\u043c": {
+        "token_string": "\u043c",
+        "token_id": 500,
         "count": 100,
         "probability": 1.0
       }
