@@ -6,9 +6,17 @@ from pathlib import Path
 
 def load_models():
     """Load the list of models from models.json"""
-    with open('models.json', 'r') as f:
-        data = json.load(f)
-        return data['models']
+    print("Current working directory:", os.getcwd())
+    print("Contents of current directory:", os.listdir('.'))
+    try:
+        with open('models.json', 'r') as f:
+            data = json.load(f)
+            print("Successfully loaded models.json")
+            print("Models to process:", data['models'])
+            return data['models']
+    except Exception as e:
+        print(f"Error loading models.json: {str(e)}")
+        raise
 
 def generate_signature(model_name):
     """Generate a signature for a specific model"""
@@ -26,6 +34,9 @@ def generate_signature(model_name):
         
         # Generate signature using the stampr_ai-collector
         print(f"Running collector for {model_name}...")
+        print("Current Python path:", os.environ.get('PYTHONPATH', ''))
+        print("Available Python modules:", subprocess.run(['python', '-c', 'import sys; print(sys.path)'], capture_output=True, text=True).stdout)
+        
         result = subprocess.run(
             ['python', '-m', 'stampr_ai_collector', '--model', model_name],
             capture_output=True,
@@ -103,6 +114,7 @@ def update_signatures_index(model_name, signature_path):
 def main():
     """Main function to generate signatures for all models"""
     try:
+        print("Starting main function...")
         # Load models to test
         models = load_models()
         print(f"Generating signatures for models: {', '.join(models)}")
