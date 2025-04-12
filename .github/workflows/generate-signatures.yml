@@ -36,11 +36,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r operations/requirements.txt
+          pip install -e git+https://${{ secrets.GH_PAT }}@github.com/mavroudisv/stampr_ai-collector.git#egg=stampr_ai_collector
+          pip list
 
       - name: Generate Signatures
         run: |
           cd operations
+          python -c "import stampr_ai_collector; print(stampr_ai_collector.__file__)"
           python generate.py
 
       - name: Setup Pages

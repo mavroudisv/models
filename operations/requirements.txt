@@ -1,1 +1,0 @@
-git+https://github.com/mavroudisv/stampr_ai-collector.git#egg=stampr_ai_collector 
