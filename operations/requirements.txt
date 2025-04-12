@@ -1,1 +1,1 @@
-git+https://${GH_PAT}@github.com/mavroudisv/stampr_ai-collector.git#egg=stampr_ai_collector
+git+https://github.com/mavroudisv/stampr_ai-collector.git#egg=stampr_ai_collector 
