@@ -1,1 +1,1 @@
-stampr_ai_collector>=0.1.0 
+stampr_ai_collector>=0.1.1  # Updated to include new hash function with OpenAI param 
