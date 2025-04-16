@@ -102,7 +102,7 @@ def update_signatures_index(model_name, signature_path):
         else:
             index = {
                 'metadata': {
-                    'last_updated': datetime.now().isoformat()
+                    'last_updated': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 },
                 'models': {}
             }
@@ -111,26 +111,53 @@ def update_signatures_index(model_name, signature_path):
         if 'models' not in index:
             index['models'] = {}
             
-        # Ensure the model's entry is a list
-        if model_name not in index['models']:
-            index['models'][model_name] = []
-        elif not isinstance(index['models'][model_name], list):
-            index['models'][model_name] = []
-            
-        # Add new signature
-        index['models'][model_name].append({
-            'file': signature_path,
-            'date': datetime.now().isoformat()
-        })
+        # Get signature hash from filename
+        signature_filename = os.path.basename(signature_path)
+        hash_part = signature_filename.split('_')[0]
         
-        # Sort signatures by date (newest first)
-        index['models'][model_name].sort(
-            key=lambda x: x['date'],
-            reverse=True
+        # Load the signature file to get the full hash
+        with open(os.path.join('..', signature_path), 'r') as f:
+            signature_data = json.load(f)
+            full_hash = signature_data['metadata']['distribution_hash']
+        
+        # Format the date from the filename
+        date_part = signature_filename.split('_')[1].split('.')[0]
+        
+        # Create or update model entry
+        if model_name not in index['models']:
+            index['models'][model_name] = {
+                'name': model_name,
+                'signatures': []
+            }
+        
+        # Add new signature
+        new_signature = {
+            'file': signature_path,
+            'date': date_part,
+            'hash': hash_part,
+            'full_hash': full_hash
+        }
+        
+        # Check if signature with same hash already exists for this date
+        signatures = index['models'][model_name]['signatures']
+        existing_sig_idx = next(
+            (i for i, sig in enumerate(signatures)
+             if sig['date'] == date_part and sig['hash'] == hash_part),
+            None
         )
         
+        if existing_sig_idx is not None:
+            # Replace existing signature
+            signatures[existing_sig_idx] = new_signature
+        else:
+            # Add new signature
+            signatures.append(new_signature)
+        
+        # Sort signatures by date (newest first)
+        signatures.sort(key=lambda x: x['date'], reverse=True)
+        
         # Update last_updated timestamp
-        index['metadata']['last_updated'] = datetime.now().isoformat()
+        index['metadata']['last_updated'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
         # Save the index
         with open(index_path, 'w') as f:
@@ -139,6 +166,7 @@ def update_signatures_index(model_name, signature_path):
             
     except Exception as e:
         log(f"Error updating signatures index: {str(e)}")
+        raise  # Re-raise the exception to ensure we know if this fails
 
 def main():
     """Main function to generate signatures for all models"""
