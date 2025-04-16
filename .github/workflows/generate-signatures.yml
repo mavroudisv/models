@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -45,6 +47,14 @@ jobs:
         run: |
           cd operations
           PYTHONPATH=$PYTHONPATH:$(pwd)/.. python generate.py --timeout 600
+
+      - name: Commit and Push Signatures
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add signatures/ signatures.json
+          git commit -m "Update signatures [skip ci]"
+          git push
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
