@@ -44,7 +44,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           cd operations
-          PYTHONPATH=$PYTHONPATH:$(pwd)/.. python generate.py
+          PYTHONPATH=$PYTHONPATH:$(pwd)/.. python generate.py --timeout 600
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
