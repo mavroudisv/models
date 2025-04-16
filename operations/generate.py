@@ -9,7 +9,6 @@ import argparse
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--timeout', type=int, default=300, help='Timeout in seconds for each model')
-    parser.add_argument('--verbose', action='store_true', help='Enable verbose output')
     return parser.parse_args()
 
 def log(message):
@@ -32,7 +31,7 @@ def load_models():
         log(f"Error loading models.json: {str(e)}")
         raise
 
-def generate_signature(model_name, timeout, verbose):
+def generate_signature(model_name, timeout):
     """Generate a signature for a specific model"""
     try:
         log(f"\nStarting signature generation for {model_name}...")
@@ -50,9 +49,7 @@ def generate_signature(model_name, timeout, verbose):
         log(f"Running collector for {model_name}...")
         log("Current Python path: " + os.environ.get('PYTHONPATH', ''))
         
-        cmd = ['python', '-m', 'stampr_ai_collector', '--model', model_name]
-        if verbose:
-            cmd.append('--verbose')
+        cmd = ['python', '-m', 'stampr_ai_collector', '--model', model_name, '--output-dir', model_dir]
             
         result = subprocess.run(
             cmd,
@@ -144,7 +141,6 @@ def main():
             
         log("Starting main function...")
         log(f"Timeout set to {args.timeout} seconds")
-        log(f"Verbose mode: {args.verbose}")
         
         # Load models to test
         models = load_models()
@@ -153,7 +149,7 @@ def main():
         # Generate signatures for each model
         for model in models:
             log(f"\nProcessing model: {model}")
-            success = generate_signature(model, args.timeout, args.verbose)
+            success = generate_signature(model, args.timeout)
             if not success:
                 log(f"Failed to generate signature for {model}")
             else:
