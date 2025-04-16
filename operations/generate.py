@@ -37,11 +37,12 @@ def generate_signature(model_name, timeout):
         log(f"\nStarting signature generation for {model_name}...")
         
         # Create signatures directory if it doesn't exist
-        os.makedirs('../signatures', exist_ok=True)
-        log("Created/verified signatures directory")
+        signatures_dir = os.path.join('..', 'signatures')
+        os.makedirs(signatures_dir, exist_ok=True)
+        log(f"Created/verified signatures directory: {signatures_dir}")
         
         # Create model directory if it doesn't exist
-        model_dir = f'../signatures/{model_name}'
+        model_dir = os.path.join(signatures_dir, model_name)
         os.makedirs(model_dir, exist_ok=True)
         log(f"Created/verified model directory: {model_dir}")
         
@@ -49,7 +50,11 @@ def generate_signature(model_name, timeout):
         log(f"Running collector for {model_name}...")
         log("Current Python path: " + os.environ.get('PYTHONPATH', ''))
         
-        cmd = ['python', '-m', 'stampr_ai_collector', '--model', model_name, '--output-dir', model_dir]
+        cmd = [
+            'python', '-m', 'stampr_ai_collector',
+            '--model', model_name,
+            '--output-dir', model_dir
+        ]
             
         result = subprocess.run(
             cmd,
