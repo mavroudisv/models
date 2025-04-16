@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "model_name": "gpt-4o",
+    "tokenizer": "o200k_base",
+    "date": "2025-04-16_21-17-51",
+    "request_country": "United States",
+    "distribution_hash": "64f35d195b6f19324494a10f5daa282541d905297f923eb278fae15edff01538",
+    "system_fingerprint": "fp_fa860cbac8"
+  },
+  "configuration": {
+    "target_position": 4,
+    "tokens_in": 10,
+    "tokens_out": 10,
+    "samples_per_position": 2,
+    "samples_for_distribution": 2,
+    "random_seed": 67899876,
+    "original_prompt": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+  },
+  "path_analysis": {
+    "path_tokens": [
+      "j",
+      "me",
+      "b",
+      "vc"
+    ]
+  },
+  "distribution_results": {
+    "total_tokens_collected": 2,
+    "unique_tokens_collected": 2,
+    "tokens": {
+      "v": {
+        "token_string": "v",
+        "token_id": 85,
+        "count": 1,
+        "probability": 0.5
+      },
+      "f": {
+        "token_string": "f",
+        "token_id": 69,
+        "count": 1,
+        "probability": 0.5
+      }
+    }
+  },
+  "api_parameters": {
+    "model": "gpt-4o",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Guess the plaintext of this cipher with key 5. Provide just the plaintext NOTHING ELSE."
+      },
+      {
+        "role": "user",
+        "content": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+      }
+    ],
+    "max_tokens": 10,
+    "logprobs": true,
+    "top_logprobs": 9,
+    "frequency_penalty": -2,
+    "presence_penalty": -2,
+    "stream": false,
+    "seed": 67899876,
+    "temperature": 0,
+    "response_format": {
+      "type": "text"
+    }
+  }
+}

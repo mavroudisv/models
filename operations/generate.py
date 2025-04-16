@@ -69,12 +69,19 @@ def generate_signature(model_name, timeout):
             log(result.stderr)
             return False
             
-        # The collector should output the path to the generated signature
-        signature_path = result.stdout.strip()
+        # Extract the signature file path from the output
+        signature_path = None
+        for line in result.stdout.split('\n'):
+            if 'Output file:' in line:
+                signature_path = line.split('Output file:')[-1].strip()
+                break
+                
         if not signature_path:
-            log(f"No signature path returned for {model_name}")
+            log(f"No signature path found in output for {model_name}")
             return False
             
+        # Make the path relative to the signatures directory
+        signature_path = os.path.relpath(signature_path, '..')
         log(f"Generated signature at: {signature_path}")
         
         # Update signatures.json
