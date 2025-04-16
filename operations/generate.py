@@ -102,8 +102,14 @@ def update_signatures_index(model_name, signature_path):
                 'models': {}
             }
         
-        # Update the index
+        # Ensure models is a dictionary
+        if 'models' not in index:
+            index['models'] = {}
+            
+        # Ensure the model's entry is a list
         if model_name not in index['models']:
+            index['models'][model_name] = []
+        elif not isinstance(index['models'][model_name], list):
             index['models'][model_name] = []
             
         # Add new signature
