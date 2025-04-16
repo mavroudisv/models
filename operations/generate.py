@@ -157,15 +157,21 @@ def update_signatures_index(model_name, signature_path):
                 # Add existing signatures
                 for sig in old_signatures:
                     if isinstance(sig, dict) and 'file' in sig:
-                        sig_filename = os.path.basename(sig['file'])
-                        sig_hash = sig_filename.split('_')[0]
-                        sig_date = sig_filename.split('_')[1].split('.')[0]
-                        index['models'][model_name]['signatures'].append({
-                            'file': sig['file'],
-                            'date': sig_date,
-                            'hash': sig_hash,
-                            'full_hash': sig.get('full_hash', '')
-                        })
+                        # Extract the actual file path from the log output
+                        file_content = sig['file']
+                        if 'Output file:' in file_content:
+                            actual_path = file_content.split('Output file:')[-1].strip()
+                            if actual_path.startswith('../'):
+                                actual_path = actual_path[3:]  # Remove '../' prefix
+                            sig_filename = os.path.basename(actual_path)
+                            sig_hash = sig_filename.split('_')[0]
+                            sig_date = sig_filename.split('_')[1].split('.')[0]
+                            index['models'][model_name]['signatures'].append({
+                                'file': actual_path,
+                                'date': sig_date,
+                                'hash': sig_hash,
+                                'full_hash': sig.get('full_hash', '')
+                            })
             
             # Add new signature
             signatures = index['models'][model_name]['signatures']
