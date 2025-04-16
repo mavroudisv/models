@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "model_name": "gpt-4o-2024-11-20",
+    "model_name": "gpt-4o",
     "tokenizer": "o200k_base",
-    "date": "2025-04-16_21-39-21",
+    "date": "2025-04-16_21-39-41",
     "request_country": "United States",
-    "distribution_hash": "5d8365baac704eb1e12e35361951f2a49c271c8019c6926620e8d616e1e84555",
-    "system_fingerprint": "fp_3bdddbcbe8"
+    "distribution_hash": "1de0ae900d6b32f40d772bcbdaa61d3c0d6608bab31af2afbb7e2abf685edf2e",
+    "system_fingerprint": "fp_22890b9c0a"
   },
   "configuration": {
     "target_position": 4,
@@ -18,26 +18,32 @@
   },
   "path_analysis": {
     "path_tokens": [
-      "Sorry",
-      ",",
-      " I",
-      " can't"
+      "j",
+      "me",
+      "b",
+      "vc"
     ]
   },
   "distribution_results": {
     "total_tokens_collected": 2,
-    "unique_tokens_collected": 1,
+    "unique_tokens_collected": 2,
     "tokens": {
-      " decrypt": {
-        "token_string": " decrypt",
-        "token_id": 81444,
-        "count": 2,
-        "probability": 1.0
+      "f": {
+        "token_string": "f",
+        "token_id": 69,
+        "count": 1,
+        "probability": 0.5
+      },
+      "v": {
+        "token_string": "v",
+        "token_id": 85,
+        "count": 1,
+        "probability": 0.5
       }
     }
   },
   "api_parameters": {
-    "model": "gpt-4o-2024-11-20",
+    "model": "gpt-4o",
     "messages": [
       {
         "role": "user",

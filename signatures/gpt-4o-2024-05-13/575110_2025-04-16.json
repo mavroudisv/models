@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "model_name": "gpt-4o-2024-11-20",
+    "model_name": "gpt-4o-2024-05-13",
     "tokenizer": "o200k_base",
-    "date": "2025-04-16_21-39-21",
+    "date": "2025-04-16_21-39-11",
     "request_country": "United States",
-    "distribution_hash": "5d8365baac704eb1e12e35361951f2a49c271c8019c6926620e8d616e1e84555",
-    "system_fingerprint": "fp_3bdddbcbe8"
+    "distribution_hash": "5751104813fa4aca6713853e5fd8eb80561dddf492c23ab979ef46d4a31de585",
+    "system_fingerprint": "fp_a9047283ac"
   },
   "configuration": {
     "target_position": 4,
@@ -18,26 +18,26 @@
   },
   "path_analysis": {
     "path_tokens": [
-      "Sorry",
-      ",",
-      " I",
-      " can't"
+      "\u043c",
+      "\u043a",
+      "\u043c",
+      "\u043a"
     ]
   },
   "distribution_results": {
     "total_tokens_collected": 2,
     "unique_tokens_collected": 1,
     "tokens": {
-      " decrypt": {
-        "token_string": " decrypt",
-        "token_id": 81444,
+      "\u043c": {
+        "token_string": "\u043c",
+        "token_id": 500,
         "count": 2,
         "probability": 1.0
       }
     }
   },
   "api_parameters": {
-    "model": "gpt-4o-2024-11-20",
+    "model": "gpt-4o-2024-05-13",
     "messages": [
       {
         "role": "user",
