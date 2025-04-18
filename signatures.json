@@ -1,11 +1,17 @@
 {
   "metadata": {
-    "last_updated": "2025-04-17 12:24:53"
+    "last_updated": "2025-04-18 01:00:14"
   },
   "models": {
     "gpt-4o-2024-05-13": {
       "name": "gpt-4o-2024-05-13",
       "signatures": [
+        {
+          "file": "signatures/gpt-4o-2024-05-13/4cbcdd_2025-04-18.json",
+          "date": "2025-04-18",
+          "hash": "4cbcdd",
+          "full_hash": "4cbcdd10c95801fa85fcd2ebfc4dd41aa7310c21d23e2f8b9ba72a48a5c3678b"
+        },
         {
           "file": "signatures/gpt-4o-2024-05-13/4cbcdd_2025-04-17.json",
           "date": "2025-04-17",
@@ -42,6 +48,12 @@
       "name": "gpt-4o-2024-11-20",
       "signatures": [
         {
+          "file": "signatures/gpt-4o-2024-11-20/5d8365_2025-04-18.json",
+          "date": "2025-04-18",
+          "hash": "5d8365",
+          "full_hash": "5d8365baac704eb1e12e35361951f2a49c271c8019c6926620e8d616e1e84555"
+        },
+        {
           "file": "signatures/gpt-4o-2024-11-20/5d8365_2025-04-17.json",
           "date": "2025-04-17",
           "hash": "5d8365",
@@ -58,6 +70,12 @@
     "gpt-4o": {
       "name": "gpt-4o",
       "signatures": [
+        {
+          "file": "signatures/gpt-4o/074ca4_2025-04-18.json",
+          "date": "2025-04-18",
+          "hash": "074ca4",
+          "full_hash": "074ca4fe6d2ed28bae1a3fd657fdff090d768608be81ac4a28365f94f5523813"
+        },
         {
           "file": "signatures/gpt-4o/cb9135_2025-04-17.json",
           "date": "2025-04-17",
