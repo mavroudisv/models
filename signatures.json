@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-04-18 01:00:14"
+    "last_updated": "2025-04-18 12:23:51"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -75,6 +75,12 @@
           "date": "2025-04-18",
           "hash": "074ca4",
           "full_hash": "074ca4fe6d2ed28bae1a3fd657fdff090d768608be81ac4a28365f94f5523813"
+        },
+        {
+          "file": "signatures/gpt-4o/d9e97d_2025-04-18.json",
+          "date": "2025-04-18",
+          "hash": "d9e97d",
+          "full_hash": "d9e97dd376b30b8cd2b4ce72093ab58cd714842aefc5a6d5cea9bfba900b04ee"
         },
         {
           "file": "signatures/gpt-4o/cb9135_2025-04-17.json",
