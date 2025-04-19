@@ -72,8 +72,8 @@ def generate_signature(model_name, timeout):
         
         cmd = [
             'python', '-m', 'stampr_ai_collector',
-            'pathfinder',
             '--config', config_path,
+            'pathfinder',
             '--output-dir', model_dir
         ]
             
