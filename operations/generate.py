@@ -5,6 +5,7 @@ from datetime import datetime
 from pathlib import Path
 import sys
 import argparse
+import yaml
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -46,13 +47,33 @@ def generate_signature(model_name, timeout):
         os.makedirs(model_dir, exist_ok=True)
         log(f"Created/verified model directory: {model_dir}")
         
+        # Create config file for the model
+        config_path = os.path.join('configs', f'config_{model_name}.yaml')
+        os.makedirs('configs', exist_ok=True)
+        
+        config = {
+            'model': model_name,
+            'target_position': 4,
+            'tokens_in': 10,
+            'tokens_out': 10,
+            'samples_per_position': 100,
+            'samples_for_distribution': 100,
+            'random_seed': 67899876,
+            'output_dir': model_dir
+        }
+        
+        with open(config_path, 'w') as f:
+            yaml.dump(config, f)
+        log(f"Created config file: {config_path}")
+        
         # Generate signature using the stampr_ai-collector
         log(f"Running collector for {model_name}...")
         log("Current Python path: " + os.environ.get('PYTHONPATH', ''))
         
         cmd = [
             'python', '-m', 'stampr_ai_collector',
-            '--model', model_name,
+            'pathfinder',
+            '--config', config_path,
             '--output-dir', model_dir
         ]
             
