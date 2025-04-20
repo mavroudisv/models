@@ -87,12 +87,34 @@ def generate_signature(model_name, timeout):
             log(result.stderr)
             return False
             
+        # Log the full output for debugging
+        log("Collector stdout:")
+        log(result.stdout)
+        log("Collector stderr:")
+        log(result.stderr)
+            
         # Extract the signature file path from the output
         signature_path = None
         for line in result.stdout.split('\n'):
             if 'Output file:' in line:
                 signature_path = line.split('Output file:')[-1].strip()
                 break
+            elif 'Signature saved to:' in line:
+                signature_path = line.split('Signature saved to:')[-1].strip()
+                break
+                
+        if not signature_path:
+            # Try to find the most recent JSON file in the output directory
+            try:
+                json_files = [f for f in os.listdir(model_dir) if f.endswith('.json')]
+                if json_files:
+                    # Sort by modification time, newest first
+                    json_files.sort(key=lambda x: os.path.getmtime(os.path.join(model_dir, x)), reverse=True)
+                    signature_path = os.path.join(model_dir, json_files[0])
+                    log(f"Found most recent signature file: {signature_path}")
+            except Exception as e:
+                log(f"Error finding signature file: {str(e)}")
+                return False
                 
         if not signature_path:
             log(f"No signature path found in output for {model_name}")
@@ -223,6 +245,59 @@ def update_signatures_index(model_name, signature_path):
         log(f"Error updating signatures index: {str(e)}")
         raise  # Re-raise the exception to ensure we know if this fails
 
+def clean_signatures_index():
+    """Remove entries from signatures.json for files that no longer exist"""
+    try:
+        log("Cleaning signatures index...")
+        index_path = '../signatures.json'
+        if not os.path.exists(index_path):
+            return
+            
+        with open(index_path, 'r') as f:
+            index = json.load(f)
+            
+        if 'models' not in index:
+            return
+            
+        # Track if we made any changes
+        changes_made = False
+            
+        # Check each model's signatures
+        for model_name in list(index['models'].keys()):
+            if not isinstance(index['models'][model_name], dict):
+                continue
+                
+            signatures = index['models'][model_name].get('signatures', [])
+            valid_signatures = []
+            
+            for sig in signatures:
+                if not isinstance(sig, dict):
+                    continue
+                    
+                file_path = os.path.join('..', sig.get('file', ''))
+                if os.path.exists(file_path):
+                    valid_signatures.append(sig)
+                else:
+                    log(f"Removing non-existent signature file from index: {sig.get('file', '')}")
+                    changes_made = True
+                    
+            if valid_signatures:
+                index['models'][model_name]['signatures'] = valid_signatures
+            else:
+                log(f"Removing model with no valid signatures: {model_name}")
+                del index['models'][model_name]
+                changes_made = True
+                
+        # Update the index file if changes were made
+        if changes_made:
+            index['metadata']['last_updated'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with open(index_path, 'w') as f:
+                json.dump(index, f, indent=2)
+            log("Signatures index cleaned successfully")
+            
+    except Exception as e:
+        log(f"Error cleaning signatures index: {str(e)}")
+
 def main():
     """Main function to generate signatures for all models"""
     try:
@@ -235,6 +310,9 @@ def main():
             
         log("Starting main function...")
         log(f"Timeout set to {args.timeout} seconds")
+        
+        # Clean up signatures index
+        clean_signatures_index()
         
         # Load models to test
         models = load_models()
