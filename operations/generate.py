@@ -48,7 +48,7 @@ def generate_signature(model_name, timeout):
         log(f"Created/verified model directory: {model_dir}")
         
         # Load config file for the model
-        config_path = os.path.join('configs', f'config_{model_name}.yaml')
+        config_path = os.path.join('../', 'configs', f'config_{model_name}.yaml')
         if not os.path.exists(config_path):
             log(f"Error: Config file not found at {config_path}")
             return False
