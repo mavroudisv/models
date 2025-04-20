@@ -46,7 +46,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           cd operations
-          PYTHONPATH=$PYTHONPATH:$(pwd)/.. python generate.py --timeout 600
+          PYTHONPATH=$PYTHONPATH:$(pwd)/.. python generate.py --timeout 3000
 
       - name: Commit and Push Signatures
         run: |
