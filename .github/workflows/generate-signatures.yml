@@ -54,6 +54,7 @@ jobs:
           git config --global user.email "action@github.com"
           git add signatures/ signatures.json
           git commit -m "Update signatures [skip ci]"
+          git pull --rebase origin main
           git push
 
       - name: Setup Pages
