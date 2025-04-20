@@ -2,7 +2,7 @@
   "metadata": {
     "model_name": "gpt-4o-2024-05-13",
     "tokenizer": "o200k_base",
-    "date": "2025-04-20_10-24-37",
+    "date": "2025-04-20_10-57-56",
     "request_country": "United States",
     "distribution_hash": "52a55feacb7b0bcffa364b4740d22e8bd8bb215836faec7f68f8e8e713ae48ca",
     "system_fingerprint": "fp_a9047283ac"
@@ -11,8 +11,8 @@
     "target_position": 4,
     "tokens_in": 10,
     "tokens_out": 10,
-    "samples_per_position": 10,
-    "samples_for_distribution": 10,
+    "samples_per_position": 100,
+    "samples_for_distribution": 100,
     "random_seed": null,
     "original_prompt": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
   },
@@ -25,20 +25,20 @@
     ]
   },
   "distribution_results": {
-    "total_tokens_collected": 10,
+    "total_tokens_collected": 100,
     "unique_tokens_collected": 2,
     "tokens": {
       "nt": {
         "token_string": "nt",
         "token_id": 578,
-        "count": 8,
-        "probability": 0.8
+        "count": 91,
+        "probability": 0.91
       },
       "x": {
         "token_string": "x",
         "token_id": 87,
-        "count": 2,
-        "probability": 0.2
+        "count": 9,
+        "probability": 0.09
       }
     }
   },
