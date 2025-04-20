@@ -1,8 +1,40 @@
 {
   "metadata": {
-    "last_updated": "2025-04-19 12:35:37"
+    "last_updated": "2025-04-20 10:27:36"
   },
   "models": {
-  
+    "gpt-4o-2024-05-13": {
+      "name": "gpt-4o-2024-05-13",
+      "signatures": [
+        {
+          "file": "signatures/gpt-4o-2024-05-13/52a55f_2025-04-20.json",
+          "date": "2025-04-20",
+          "hash": "52a55f",
+          "full_hash": "52a55feacb7b0bcffa364b4740d22e8bd8bb215836faec7f68f8e8e713ae48ca"
+        }
+      ]
+    },
+    "gpt-4o-2024-11-20": {
+      "name": "gpt-4o-2024-11-20",
+      "signatures": [
+        {
+          "file": "signatures/gpt-4o-2024-11-20/f7cd84_2025-04-20.json",
+          "date": "2025-04-20",
+          "hash": "f7cd84",
+          "full_hash": "f7cd8413f635c9fe91163dfce3ee97f31b41869cabf05a3eddd735175eee52ed"
+        }
+      ]
+    },
+    "gpt-4o": {
+      "name": "gpt-4o",
+      "signatures": [
+        {
+          "file": "signatures/gpt-4o/9efabb_2025-04-20.json",
+          "date": "2025-04-20",
+          "hash": "9efabb",
+          "full_hash": "9efabb51d359898f355278c5aaa522ce2433027e0503bf214b1c43e8489c371d"
+        }
+      ]
+    }
   }
 }
