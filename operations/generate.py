@@ -6,6 +6,8 @@ from pathlib import Path
 import sys
 import argparse
 import yaml
+import importlib.util
+import stampr_ai_collector
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -47,8 +49,10 @@ def generate_signature(model_name, timeout):
         os.makedirs(model_dir, exist_ok=True)
         log(f"Created/verified model directory: {model_dir}")
         
-        # Load config file for the model
-        config_path = os.path.join('../', 'configs', f'config_{model_name}.yaml')
+        # Get the collector package location
+        collector_path = os.path.dirname(stampr_ai_collector.__file__)
+        config_path = os.path.join(collector_path, 'configs', f'config_{model_name}.yaml')
+        
         if not os.path.exists(config_path):
             log(f"Error: Config file not found at {config_path}")
             return False
