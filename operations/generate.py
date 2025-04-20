@@ -68,56 +68,49 @@ def generate_signature(model_name, timeout):
         log(f"Running collector for {model_name}...")
         log("Current Python path: " + os.environ.get('PYTHONPATH', ''))
         
+        # Log directory permissions and contents
+        log(f"Output directory: {model_dir}")
+        log(f"Directory exists: {os.path.exists(model_dir)}")
+        log(f"Directory permissions: {oct(os.stat(model_dir).st_mode)[-3:]}")
+        log(f"Directory contents: {os.listdir(model_dir)}")
+        
         cmd = [
             'python', '-m', 'stampr_ai_collector',
             '--config', config_path,
             '--output-dir', model_dir
         ]
             
+        # Run collector without capturing output
         result = subprocess.run(
             cmd,
-            capture_output=True,
-            text=True,
             timeout=timeout
         )
         
         log(f"Collector completed with return code: {result.returncode}")
         if result.returncode != 0:
-            log(f"Error generating signature for {model_name}:")
-            log(result.stderr)
+            log(f"Error generating signature for {model_name}")
             return False
             
-        # Log the full output for debugging
-        log("Collector stdout:")
-        log(result.stdout)
-        log("Collector stderr:")
-        log(result.stderr)
+        # Log directory contents after collector run
+        log(f"Directory contents after collector run: {os.listdir(model_dir)}")
             
-        # Extract the signature file path from the output
-        signature_path = None
-        for line in result.stdout.split('\n'):
-            if 'Output file:' in line:
-                signature_path = line.split('Output file:')[-1].strip()
-                break
-            elif 'Signature saved to:' in line:
-                signature_path = line.split('Signature saved to:')[-1].strip()
-                break
-                
-        if not signature_path:
-            # Try to find the most recent JSON file in the output directory
-            try:
-                json_files = [f for f in os.listdir(model_dir) if f.endswith('.json')]
-                if json_files:
-                    # Sort by modification time, newest first
-                    json_files.sort(key=lambda x: os.path.getmtime(os.path.join(model_dir, x)), reverse=True)
-                    signature_path = os.path.join(model_dir, json_files[0])
-                    log(f"Found most recent signature file: {signature_path}")
-            except Exception as e:
-                log(f"Error finding signature file: {str(e)}")
+        # Look for the most recent JSON file in the output directory
+        try:
+            json_files = [f for f in os.listdir(model_dir) if f.endswith('.json')]
+            log(f"Found JSON files: {json_files}")
+            
+            if json_files:
+                # Sort by modification time, newest first
+                json_files.sort(key=lambda x: os.path.getmtime(os.path.join(model_dir, x)), reverse=True)
+                signature_path = os.path.join(model_dir, json_files[0])
+                log(f"Using signature file: {signature_path}")
+                log(f"File exists: {os.path.exists(signature_path)}")
+                log(f"File permissions: {oct(os.stat(signature_path).st_mode)[-3:]}")
+            else:
+                log(f"No JSON files found in {model_dir}")
                 return False
-                
-        if not signature_path:
-            log(f"No signature path found in output for {model_name}")
+        except Exception as e:
+            log(f"Error finding signature file: {str(e)}")
             return False
             
         # Make the path relative to the signatures directory
