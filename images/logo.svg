@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="1000" viewBox="0 0 1000 1000" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(100, 100) scale(1.2)">
+        <path d="M400 600 L600 600 L650 500 L350 500 Z" fill="#000000"/>
+        <path d="M450 300 L550 300 L600 500 L400 500 Z" fill="#000000"/>
+        <path d="M425 500 L575 500 L600 450 L400 450 Z" fill="#FFFFFF"/>
+        <path d="M350 500 L650 500 L625 525 L375 525 Z" fill="#FFFFFF"/>
+        <rect x="350" y="500" width="300" height="20" fill="#FF0000"/>
+        <rect x="350" y="550" width="300" height="20" fill="#FF0000"/>
+        <text x="400" y="525" font-family="Arial Black" font-size="120" fill="#000000">1337</text>
+    </g>
+</svg> 
