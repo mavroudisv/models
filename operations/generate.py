@@ -47,24 +47,18 @@ def generate_signature(model_name, timeout):
         os.makedirs(model_dir, exist_ok=True)
         log(f"Created/verified model directory: {model_dir}")
         
-        # Create config file for the model
+        # Load config file for the model
         config_path = os.path.join('configs', f'config_{model_name}.yaml')
-        os.makedirs('configs', exist_ok=True)
+        if not os.path.exists(config_path):
+            log(f"Error: Config file not found at {config_path}")
+            return False
+            
+        with open(config_path, 'r') as f:
+            config = yaml.safe_load(f)
+        log(f"Loaded config file: {config_path}")
         
-        config = {
-            'model': model_name,
-            'target_position': 4,
-            'tokens_in': 10,
-            'tokens_out': 10,
-            'samples_per_position': 100,
-            'samples_for_distribution': 100,
-            'random_seed': 67899876,
-            'output_dir': model_dir
-        }
-        
-        with open(config_path, 'w') as f:
-            yaml.dump(config, f)
-        log(f"Created config file: {config_path}")
+        # Update output directory in config
+        config['output_dir'] = model_dir
         
         # Generate signature using the stampr_ai-collector
         log(f"Running collector for {model_name}...")
