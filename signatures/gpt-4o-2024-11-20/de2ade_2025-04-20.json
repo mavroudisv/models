@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "model_name": "gpt-4o",
+    "model_name": "gpt-4o-2024-11-20",
     "tokenizer": "o200k_base",
-    "date": "2025-04-20_19-41-56",
+    "date": "2025-04-20_19-17-42",
     "request_country": "United States",
-    "distribution_hash": "9efabb51d359898f355278c5aaa522ce2433027e0503bf214b1c43e8489c371d",
-    "system_fingerprint": "fp_f7a584cf1f"
+    "distribution_hash": "de2ade40ff05bd5a9c9a342a6c1ce9c8217b1db3fab7f0012c1a413fd956f031",
+    "system_fingerprint": "fp_3bdddbcbe8"
   },
   "configuration": {
     "target_position": 4,
@@ -18,26 +18,44 @@
   },
   "path_analysis": {
     "path_tokens": [
-      "j",
-      "me",
-      "fc",
-      "vz"
+      "Gr",
+      "iv",
+      "alt",
+      "z"
     ]
   },
   "distribution_results": {
     "total_tokens_collected": 100,
-    "unique_tokens_collected": 1,
+    "unique_tokens_collected": 4,
     "tokens": {
-      "j": {
-        "token_string": "j",
-        "token_id": 73,
-        "count": 100,
-        "probability": 1.0
+      "!": {
+        "token_string": "!",
+        "token_id": 0,
+        "count": 22,
+        "probability": 0.22
+      },
+      " nex": {
+        "token_string": " nex",
+        "token_id": 92763,
+        "count": 12,
+        "probability": 0.12
+      },
+      " nop": {
+        "token_string": " nop",
+        "token_id": 110267,
+        "count": 65,
+        "probability": 0.65
+      },
+      " X": {
+        "token_string": " X",
+        "token_id": 2127,
+        "count": 1,
+        "probability": 0.01
       }
     }
   },
   "api_parameters": {
-    "model": "gpt-4o",
+    "model": "gpt-4o-2024-11-20",
     "temperature": 0.7,
     "top_p": 1.0,
     "max_tokens": 100,
@@ -53,7 +71,7 @@
     "messages": [
       {
         "role": "user",
-        "content": "Guess the plaintext of this cipher with key 5. Provide just the plaintext NOTHING ELSE."
+        "content": "Here is a random string. Generate your own now and provide it with NOTHING ELSE."
       },
       {
         "role": "user",
