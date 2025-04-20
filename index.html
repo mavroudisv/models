@@ -14,7 +14,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">StampR AI</h1>
+                    <h1 class="text-3xl font-bold text-gray-900">stampr_ai</h1>
                     <p class="text-gray-600">Model Signature Tracker</p>
                 </div>
                 <div>
@@ -28,7 +28,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex space-x-8">
                 <div class="nav-tab active py-4 px-1 text-gray-700 font-medium" data-tab="overview">Overview</div>
-                <div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="comparison">Model Comparison</div>
+                <!--<div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="comparison">Model Comparison</div>-->
                 <div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="history">Historical Data</div>
                 <div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="about">About StampR</div>
             </div>
@@ -182,34 +182,39 @@
                     <div class="px-6 py-4">
                         <h3 class="font-bold text-xl text-gray-800 mb-4">What is stampr_ai?</h3>
                         <p class="text-gray-700 mb-4">
-                            stampr_ai is a tool for AI model fingerprinting and comparison. Do you 
+                            stampr_ai is a powerful tool for model fingerprinting and comparison. It helps you track and verify model behavior over time by generating unique signatures based on token distributions.
                         </p>
                         <p class="text-gray-700 mb-4">
-                            This project provides utilities for generating and analyzing token distribution signatures from language models. These signatures can be used to:
+                            With stampr_ai, you can:
                         </p>
                         <ul class="list-disc pl-5 mb-4 text-gray-700">
-                            <li class="mb-2">Identify and compare different models</li>
-                            <li class="mb-2">Track model changes over time</li>
-                            <li class="mb-2">Detect potential issues in model behavior</li>
-                            <li class="mb-2">Verify the specific model version being used</li>
+                            <li class="mb-2">Generate unique fingerprints for language models</li>
+                            <li class="mb-2">Track model changes and updates over time</li>
+                            <li class="mb-2">Compare different model versions</li>
+                            <li class="mb-2">Verify model authenticity and consistency</li>
+                            <li class="mb-2">Monitor model behavior and detect anomalies</li>
                         </ul>
                         
                         <h3 class="font-bold text-xl text-gray-800 mb-4 mt-6">How It Works</h3>
                         <div class="bg-gray-50 p-4 rounded-lg mb-4">
                             <ol class="list-decimal pl-5 text-gray-700">
-                                <li class="mb-2"><strong>Pathfinding:</strong> The tool first constructs a "path" through the model by finding the most likely token at each position.</li>
-                                <li class="mb-2"><strong>Distribution Sampling:</strong> It then collects a distribution of tokens at a target position, requiring that tokens in earlier positions match the path.</li>
-                                <li class="mb-2"><strong>Signature Generation:</strong> The collected distribution is saved as a JSON file with metadata and a unique hash.</li>
+                                <li class="mb-2"><strong>Pathfinding:</strong> The tool constructs a unique path through the model by identifying the most likely tokens at each position.</li>
+                                <li class="mb-2"><strong>Distribution Analysis:</strong> It collects token distributions at specific positions, ensuring consistency with the established path.</li>
+                                <li class="mb-2"><strong>Signature Generation:</strong> The collected distributions are processed into a unique signature with metadata and a cryptographic hash.</li>
+                                <li class="mb-2"><strong>Continuous Monitoring:</strong> Signatures are generated regularly to track model stability and detect changes.</li>
                             </ol>
                         </div>
                         
                         <h3 class="font-bold text-xl text-gray-800 mb-4 mt-6">Resources</h3>
                         <div class="flex flex-col space-y-2">
-                            <a href="https://github.com/mavroudisv/stampr_ai-collector" class="text-indigo-600 hover:text-indigo-800">
+                            <a href="https://github.com/mavroudisv/stampr_ai" class="text-indigo-600 hover:text-indigo-800">
                                 GitHub Repository
                             </a>
-                            <a href="status.html" class="text-indigo-600 hover:text-indigo-800">
-                                View Simple Signature List
+                            <a href="https://github.com/mavroudisv/stampr_ai/blob/main/README.md" class="text-indigo-600 hover:text-indigo-800">
+                                Documentation
+                            </a>
+                            <a href="https://github.com/mavroudisv/stampr_ai-collector" class="text-indigo-600 hover:text-indigo-800">
+                                Collector Package
                             </a>
                         </div>
                     </div>
@@ -231,7 +236,7 @@
                 </div>
                 <div class="mt-8 md:mt-0 md:order-1">
                     <p class="text-center text-base text-gray-400">
-                        &copy; 2025 StampR AI. All rights reserved.
+                        &copy; 2025 stampr_ai. All rights reserved.
                     </p>
                 </div>
             </div>
