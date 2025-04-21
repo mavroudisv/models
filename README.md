@@ -8,7 +8,7 @@
 
 > Live Site: [https://mavroudisv.github.io/models/](https://mavroudisv.github.io/models/)
 
-stampr AI is a powerful tool for tracking and analyzing AI model signatures. It helps you monitor model behavior, detect changes, and ensure consistency across different versions and deployments.
+stampr AI is a powerful tool for tracking and analyzing AI model signatures. It helps you monitor model behavior, detect changes, and ensure consistency across different versions, deployments and providers.
 
 ## Components
 
@@ -70,9 +70,7 @@ models/
 ├── signatures.json      # Signature index file
 ├── index.html          # Main web interface
 ├── css/                # Stylesheets
-├── js/                 # JavaScript files
-└── .github/workflows/  # GitHub Actions workflows
-    └── generate-signatures.yml  # Automated signature generation
+└── js/                 # JavaScript files
 ```
 
 ## Contributing
@@ -80,19 +78,11 @@ models/
 We welcome contributions! Here's how you can help:
 
 1. **Report Issues**: Open an issue for bugs or feature requests
-2. **Add Models**: Help expand coverage by adding new models
-3. **Improve Tests**: Contribute new test cases or improve existing ones
-4. **Documentation**: Help improve our documentation
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+2. **Add Providers**: Help expand coverage by adding new providers
+3. **Add Models**: Help expand coverage by adding new models
+4. **Improve Tests**: Contribute new test cases or improve existing ones
+5. **Documentation**: Help improve our documentation
 
 ## Contact
 
 For questions or suggestions, please open an issue in the repository.
-
-## Acknowledgments
-
-- Thanks to all contributors who have helped improve this project
-- Special thanks to the open-source community for their tools and libraries 
