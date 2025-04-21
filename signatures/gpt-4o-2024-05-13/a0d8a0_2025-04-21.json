@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "model_name": "gpt-4o",
+    "model_name": "gpt-4o-2024-05-13",
     "tokenizer": "o200k_base",
-    "date": "2025-04-20_19-41-56",
+    "date": "2025-04-21_01-25-36",
     "request_country": "United States",
-    "distribution_hash": "9efabb51d359898f355278c5aaa522ce2433027e0503bf214b1c43e8489c371d",
-    "system_fingerprint": "fp_f7a584cf1f"
+    "distribution_hash": "a0d8a08b26bb1da2f209b31f8b95e7f02b98d6f08617c921a7c4ab2cff88ae28",
+    "system_fingerprint": "fp_a9047283ac"
   },
   "configuration": {
     "target_position": 4,
@@ -18,26 +18,44 @@
   },
   "path_analysis": {
     "path_tokens": [
-      "j",
-      "me",
-      "fc",
-      "vz"
+      "l",
+      "mk",
+      "x",
+      "gz"
     ]
   },
   "distribution_results": {
     "total_tokens_collected": 100,
-    "unique_tokens_collected": 1,
+    "unique_tokens_collected": 4,
     "tokens": {
-      "j": {
-        "token_string": "j",
-        "token_id": 73,
-        "count": 100,
-        "probability": 1.0
+      "x": {
+        "token_string": "x",
+        "token_id": 87,
+        "count": 20,
+        "probability": 0.2
+      },
+      "nt": {
+        "token_string": "nt",
+        "token_id": 578,
+        "count": 77,
+        "probability": 0.77
+      },
+      "me": {
+        "token_string": "me",
+        "token_id": 1047,
+        "count": 2,
+        "probability": 0.02
+      },
+      "nd": {
+        "token_string": "nd",
+        "token_id": 301,
+        "count": 1,
+        "probability": 0.01
       }
     }
   },
   "api_parameters": {
-    "model": "gpt-4o",
+    "model": "gpt-4o-2024-05-13",
     "temperature": 0.7,
     "top_p": 1.0,
     "max_tokens": 100,
