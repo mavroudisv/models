@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "model_name": "gpt-4o-2024-11-20",
+    "tokenizer": "o200k_base",
+    "date": "2025-04-21_01-32-57",
+    "request_country": "United States",
+    "distribution_hash": "b7c401fb3d73bb26927d600f44eaf5a4f175b6e75aebbbd54100a7f7bafc0d37",
+    "system_fingerprint": "fp_3bdddbcbe8"
+  },
+  "configuration": {
+    "target_position": 4,
+    "tokens_in": 10,
+    "tokens_out": 10,
+    "samples_per_position": 100,
+    "samples_for_distribution": 100,
+    "random_seed": null,
+    "original_prompt": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+  },
+  "path_analysis": {
+    "path_tokens": [
+      "Gr",
+      "iv",
+      "alt",
+      "z"
+    ]
+  },
+  "distribution_results": {
+    "total_tokens_collected": 100,
+    "unique_tokens_collected": 4,
+    "tokens": {
+      " nop": {
+        "token_string": " nop",
+        "token_id": 110267,
+        "count": 72,
+        "probability": 0.72
+      },
+      "!": {
+        "token_string": "!",
+        "token_id": 0,
+        "count": 13,
+        "probability": 0.13
+      },
+      " nex": {
+        "token_string": " nex",
+        "token_id": 92763,
+        "count": 13,
+        "probability": 0.13
+      },
+      " N": {
+        "token_string": " N",
+        "token_id": 478,
+        "count": 2,
+        "probability": 0.02
+      }
+    }
+  },
+  "api_parameters": {
+    "model": "gpt-4o-2024-11-20",
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_tokens": 100,
+    "frequency_penalty": -2,
+    "presence_penalty": -2,
+    "logprobs": true,
+    "top_logprobs": 9,
+    "stream": false,
+    "response_format": {
+      "type": "text"
+    },
+    "seed": 67899876,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Here is a random string. Generate your own now and provide it with NOTHING ELSE."
+      },
+      {
+        "role": "user",
+        "content": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+      }
+    ]
+  }
+}

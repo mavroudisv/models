@@ -1,0 +1,64 @@
+{
+  "metadata": {
+    "model_name": "gpt-4o",
+    "tokenizer": "o200k_base",
+    "date": "2025-04-21_01-55-51",
+    "request_country": "United States",
+    "distribution_hash": "9efabb51d359898f355278c5aaa522ce2433027e0503bf214b1c43e8489c371d",
+    "system_fingerprint": "fp_f7a584cf1f"
+  },
+  "configuration": {
+    "target_position": 4,
+    "tokens_in": 10,
+    "tokens_out": 10,
+    "samples_per_position": 100,
+    "samples_for_distribution": 100,
+    "random_seed": null,
+    "original_prompt": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+  },
+  "path_analysis": {
+    "path_tokens": [
+      "j",
+      "me",
+      "fc",
+      "vz"
+    ]
+  },
+  "distribution_results": {
+    "total_tokens_collected": 100,
+    "unique_tokens_collected": 1,
+    "tokens": {
+      "j": {
+        "token_string": "j",
+        "token_id": 73,
+        "count": 100,
+        "probability": 1.0
+      }
+    }
+  },
+  "api_parameters": {
+    "model": "gpt-4o",
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_tokens": 100,
+    "frequency_penalty": -2,
+    "presence_penalty": -2,
+    "logprobs": true,
+    "top_logprobs": 9,
+    "stream": false,
+    "response_format": {
+      "type": "text"
+    },
+    "seed": 67899876,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Guess the plaintext of this cipher with key 5. Provide just the plaintext NOTHING ELSE."
+      },
+      {
+        "role": "user",
+        "content": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+      }
+    ]
+  }
+}
