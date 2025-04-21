@@ -11,18 +11,6 @@
           "date": "2025-04-21",
           "hash": "a0d8a0",
           "full_hash": "a0d8a08b26bb1da2f209b31f8b95e7f02b98d6f08617c921a7c4ab2cff88ae28"
-        },
-        {
-          "file": "signatures/gpt-4o-2024-05-13/52a55f_2025-04-20.json",
-          "date": "2025-04-20",
-          "hash": "52a55f",
-          "full_hash": "52a55feacb7b0bcffa364b4740d22e8bd8bb215836faec7f68f8e8e713ae48ca"
-        },
-        {
-          "file": "signatures/gpt-4o-2024-05-13/a0d8a0_2025-04-20.json",
-          "date": "2025-04-20",
-          "hash": "a0d8a0",
-          "full_hash": "a0d8a08b26bb1da2f209b31f8b95e7f02b98d6f08617c921a7c4ab2cff88ae28"
         }
       ]
     },
@@ -34,18 +22,6 @@
           "date": "2025-04-21",
           "hash": "b7c401",
           "full_hash": "b7c401fb3d73bb26927d600f44eaf5a4f175b6e75aebbbd54100a7f7bafc0d37"
-        },
-        {
-          "file": "signatures/gpt-4o-2024-11-20/f7cd84_2025-04-20.json",
-          "date": "2025-04-20",
-          "hash": "f7cd84",
-          "full_hash": "f7cd8413f635c9fe91163dfce3ee97f31b41869cabf05a3eddd735175eee52ed"
-        },
-        {
-          "file": "signatures/gpt-4o-2024-11-20/de2ade_2025-04-20.json",
-          "date": "2025-04-20",
-          "hash": "de2ade",
-          "full_hash": "de2ade40ff05bd5a9c9a342a6c1ce9c8217b1db3fab7f0012c1a413fd956f031"
         }
       ]
     },
