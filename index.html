@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>stampr_ai - Model Signature Tracker</title>
-    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <title>stampr - Model Signature Tracker</title>
+    <link rel="icon" href="images/stampr.png" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.1/chart.min.js"></script>
     <link rel="stylesheet" href="css/styles.css">
@@ -14,9 +14,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">
-                    <img src="images/logo.svg" alt="stampr_ai logo" class="h-12 w-12">
+                    <img src="images/stampr.png" alt="stampr AI logo" class="h-14 w-14">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">stampr_ai</h1>
+                        <h1 class="text-3xl font-bold text-gray-900">stampr AI</h1>
                         <p class="text-gray-600">Model Signature Tracker</p>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="nav-tab active py-4 px-1 text-gray-700 font-medium" data-tab="overview">Overview</div>
                 <!--<div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="comparison">Model Comparison</div>-->
                 <div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="history">Historical Data</div>
-                <div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="about">About StampR</div>
+                <div class="nav-tab py-4 px-1 text-gray-500 font-medium" data-tab="about">About stampr AI</div>
             </div>
         </div>
     </nav>
@@ -180,43 +180,72 @@
         <!-- About Tab -->
         <div id="about" class="tab-content">
             <div class="mb-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">About stampr_ai</h2>
-                <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <div class="px-6 py-4">
-                        <h3 class="font-bold text-xl text-gray-800 mb-4">What is stampr_ai?</h3>
-                        <p class="text-gray-700 mb-4">
-                            stampr_ai is a powerful tool for model fingerprinting and comparison. It helps you track and verify model behavior over time by generating unique signatures based on token distributions.
-                        </p>
-                        <p class="text-gray-700 mb-4">
-                            With stampr_ai, you can:
-                        </p>
-                        <ul class="list-disc pl-5 mb-4 text-gray-700">
-                            <li class="mb-2">Generate unique fingerprints for language models</li>
-                            <li class="mb-2">Track model changes and updates over time</li>
-                            <li class="mb-2">Compare different model versions</li>
-                            <li class="mb-2">Verify model authenticity and consistency</li>
-                            <li class="mb-2">Monitor model behavior and detect anomalies</li>
-                        </ul>
-                        
-                        <h3 class="font-bold text-xl text-gray-800 mb-4 mt-6">How It Works</h3>
-                        <div class="bg-gray-50 p-4 rounded-lg mb-4">
-                            <ol class="list-decimal pl-5 text-gray-700">
-                                <li class="mb-2"><strong>Pathfinding:</strong> The tool constructs a unique path through the model by identifying the most likely tokens at each position.</li>
-                                <li class="mb-2"><strong>Distribution Analysis:</strong> It collects token distributions at specific positions, ensuring consistency with the established path.</li>
-                                <li class="mb-2"><strong>Signature Generation:</strong> The collected distributions are processed into a unique signature with metadata and a cryptographic hash.</li>
-                                <li class="mb-2"><strong>Continuous Monitoring:</strong> Signatures are generated regularly to track model stability and detect changes.</li>
-                            </ol>
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">About stampr AI</h2>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">What is stampr AI?</h3>
+                    <p class="text-gray-700 mb-4">
+                        stampr AI is a powerful tool for tracking and analyzing AI model signatures. It helps you monitor model behavior, detect changes, and ensure consistency across different versions and deployments.
+                    </p>
+                    
+                    <h3 class="font-bold text-xl text-gray-800 mb-4 mt-6">Components</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-2">Public Website</h4>
+                            <p class="text-gray-700 mb-2">This website provides:</p>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                <li>Visualization of current model signatures</li>
+                                <li>Historical tracking of model changes</li>
+                                <li>Change detection and analysis</li>
+                                <li>Distribution comparison tools</li>
+                                <li>Stability monitoring over time</li>
+                            </ul>
                         </div>
                         
-                        <h3 class="font-bold text-xl text-gray-800 mb-4 mt-6">Resources</h3>
-                        <div class="flex flex-col space-y-2">
-                            <a href="https://github.com/mavroudisv/stampr_ai" class="text-indigo-600 hover:text-indigo-800">
-                                GitHub Repository
-                            </a>
-                            <a href="https://github.com/mavroudisv/stampr_ai/blob/main/README.md" class="text-indigo-600 hover:text-indigo-800">
-                                Documentation
-                            </a>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-2">Verification Tool</h4>
+                            <p class="text-gray-700 mb-2">The public pip package allows you to verify model identities:</p>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-2">
+                                <pre class="text-sm"><code>pip install stampr-ai</code></pre>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <pre class="text-sm"><code>from stampr_ai import verify_model
+
+is_verified = verify_model(
+    model_name="gpt-4",
+    api_key="your-api-key"
+)</code></pre>
+                            </div>
                         </div>
+                    </div>
+                        
+                    <h3 class="font-bold text-xl text-gray-800 mb-4 mt-6">How It Works</h3>
+                    <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                        <ol class="list-decimal pl-5 text-gray-700">
+                            <li class="mb-2"><strong>Signature Generation:</strong> Our private collector generates unique signatures for AI models</li>
+                            <li class="mb-2"><strong>Public Verification:</strong> The pip tool compares models against our verified signatures</li>
+                            <li class="mb-2"><strong>Change Detection:</strong> The website tracks and displays model changes over time</li>
+                            <li class="mb-2"><strong>Distribution Analysis:</strong> Both tools analyze token distributions for consistency</li>
+                        </ol>
+                    </div>
+                    
+                    <h3 class="font-bold text-xl text-gray-800 mb-4 mt-6">Resources</h3>
+                    <div class="flex flex-col space-y-2">
+                        <a href="https://github.com/mavroudisv/stampr_ai" class="text-indigo-600 hover:text-indigo-800 flex items-center">
+                            <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                            </svg>
+                            GitHub Repository
+                        </a>
+                        <a href="https://github.com/mavroudisv/stampr_ai/blob/main/README.md" class="text-indigo-600 hover:text-indigo-800 flex items-center">
+                            <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                                <polyline points="10 9 9 9 8 9" />
+                            </svg>
+                            Documentation
+                        </a>
                     </div>
                 </div>
             </div>
@@ -227,7 +256,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex justify-center md:order-2">
-                    <a href="https://github.com/mavroudisv/stampr_ai-collector" class="text-gray-400 hover:text-gray-500">
+                    <a href="https://github.com/mavroudisv/stampr_ai" class="text-gray-400 hover:text-gray-500">
                         <span class="sr-only">GitHub</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
@@ -236,7 +265,7 @@
                 </div>
                 <div class="mt-8 md:mt-0 md:order-1">
                     <p class="text-center text-base text-gray-400">
-                        &copy; 2025 stampr_ai. All rights reserved.
+                        &copy; 2025 stampr. All rights reserved.
                     </p>
                 </div>
             </div>
