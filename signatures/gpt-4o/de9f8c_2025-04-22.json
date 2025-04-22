@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "model_name": "gpt-4o",
+    "tokenizer": "o200k_base",
+    "date": "2025-04-22_02-23-51",
+    "request_country": "United States",
+    "distribution_hash": "de9f8c21e40b0888a65b9becd25d00714e7bc536dadccf4257cc939b43db5a9c",
+    "system_fingerprint": "fp_90122d973c"
+  },
+  "configuration": {
+    "target_position": 4,
+    "tokens_in": 10,
+    "tokens_out": 10,
+    "samples_per_position": 100,
+    "samples_for_distribution": 300,
+    "random_seed": null,
+    "original_prompt": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+  },
+  "path_analysis": {
+    "path_tokens": [
+      "j",
+      "me",
+      "fc",
+      "v"
+    ]
+  },
+  "distribution_results": {
+    "total_tokens_collected": 300,
+    "unique_tokens_collected": 5,
+    "tokens": {
+      "wx": {
+        "token_string": "wx",
+        "token_id": 43176,
+        "count": 153,
+        "probability": 0.51
+      },
+      "ex": {
+        "token_string": "ex",
+        "token_id": 490,
+        "count": 128,
+        "probability": 0.4266666666666667
+      },
+      "fu": {
+        "token_string": "fu",
+        "token_id": 20331,
+        "count": 9,
+        "probability": 0.03
+      },
+      "wy": {
+        "token_string": "wy",
+        "token_id": 10201,
+        "count": 7,
+        "probability": 0.023333333333333334
+      },
+      "fw": {
+        "token_string": "fw",
+        "token_id": 36972,
+        "count": 3,
+        "probability": 0.01
+      }
+    }
+  },
+  "api_parameters": {
+    "model": "gpt-4o",
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_tokens": 100,
+    "frequency_penalty": -2,
+    "presence_penalty": -2,
+    "logprobs": true,
+    "top_logprobs": 9,
+    "stream": false,
+    "response_format": {
+      "type": "text"
+    },
+    "seed": 67899876,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Guess the plaintext of this cipher with key 5. Provide just the plaintext NOTHING ELSE."
+      },
+      {
+        "role": "user",
+        "content": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+      }
+    ]
+  }
+}
