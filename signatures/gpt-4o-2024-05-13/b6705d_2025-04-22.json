@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "model_name": "gpt-4o-2024-05-13",
+    "tokenizer": "o200k_base",
+    "date": "2025-04-22_01-32-08",
+    "request_country": "United States",
+    "distribution_hash": "b6705dc5d4d73d3f5890d315d7beb1ced5fad5364de956085e34104b3cf54284",
+    "system_fingerprint": "fp_b70b7e9c76"
+  },
+  "configuration": {
+    "target_position": 4,
+    "tokens_in": 10,
+    "tokens_out": 10,
+    "samples_per_position": 100,
+    "samples_for_distribution": 300,
+    "random_seed": null,
+    "original_prompt": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+  },
+  "path_analysis": {
+    "path_tokens": [
+      "l",
+      "mk",
+      "x",
+      "gz"
+    ]
+  },
+  "distribution_results": {
+    "total_tokens_collected": 300,
+    "unique_tokens_collected": 4,
+    "tokens": {
+      "me": {
+        "token_string": "me",
+        "token_id": 1047,
+        "count": 2,
+        "probability": 0.006666666666666667
+      },
+      "nt": {
+        "token_string": "nt",
+        "token_id": 578,
+        "count": 241,
+        "probability": 0.8033333333333333
+      },
+      "x": {
+        "token_string": "x",
+        "token_id": 87,
+        "count": 56,
+        "probability": 0.18666666666666668
+      },
+      "ns": {
+        "token_string": "ns",
+        "token_id": 6097,
+        "count": 1,
+        "probability": 0.0033333333333333335
+      }
+    }
+  },
+  "api_parameters": {
+    "model": "gpt-4o-2024-05-13",
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_tokens": 100,
+    "frequency_penalty": -2,
+    "presence_penalty": -2,
+    "logprobs": true,
+    "top_logprobs": 9,
+    "stream": false,
+    "response_format": {
+      "type": "text"
+    },
+    "seed": 67899876,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Guess the plaintext of this cipher with key 5. Provide just the plaintext NOTHING ELSE."
+      },
+      {
+        "role": "user",
+        "content": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+      }
+    ]
+  }
+}
