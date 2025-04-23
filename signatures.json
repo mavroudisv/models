@@ -1,11 +1,17 @@
 {
   "metadata": {
-    "last_updated": "2025-04-22 11:59:49"
+    "last_updated": "2025-04-23 01:43:31"
   },
   "models": {
     "gpt-4o-2024-05-13": {
       "name": "gpt-4o-2024-05-13",
       "signatures": [
+        {
+          "file": "signatures/gpt-4o-2024-05-13/ea8cb8_2025-04-23.json",
+          "date": "2025-04-23",
+          "hash": "ea8cb8",
+          "full_hash": "ea8cb88208b4473d84370daa2d5dd4c105b00bea455bfefc1c1ddf62f0ba90b3"
+        },
         {
           "file": "signatures/gpt-4o-2024-05-13/b6705d_2025-04-22.json",
           "date": "2025-04-22",
@@ -29,6 +35,12 @@
     "gpt-4o-2024-11-20": {
       "name": "gpt-4o-2024-11-20",
       "signatures": [
+        {
+          "file": "signatures/gpt-4o-2024-11-20/47364d_2025-04-23.json",
+          "date": "2025-04-23",
+          "hash": "47364d",
+          "full_hash": "47364d16d045054afe4d06ef090568d8007541f5684badde205e8014d52aa74b"
+        },
         {
           "file": "signatures/gpt-4o-2024-11-20/dd16cc_2025-04-22.json",
           "date": "2025-04-22",
