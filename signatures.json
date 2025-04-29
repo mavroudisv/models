@@ -1,16 +1,28 @@
 {
   "metadata": {
-    "last_updated": "2025-04-22 02:23:51"
+    "last_updated": "2025-04-23 13:29:08"
   },
   "models": {
     "gpt-4o-2024-05-13": {
       "name": "gpt-4o-2024-05-13",
       "signatures": [
         {
+          "file": "signatures/gpt-4o-2024-05-13/ea8cb8_2025-04-23.json",
+          "date": "2025-04-23",
+          "hash": "ea8cb8",
+          "full_hash": "ea8cb88208b4473d84370daa2d5dd4c105b00bea455bfefc1c1ddf62f0ba90b3"
+        },
+        {
           "file": "signatures/gpt-4o-2024-05-13/b6705d_2025-04-22.json",
           "date": "2025-04-22",
           "hash": "b6705d",
           "full_hash": "b6705dc5d4d73d3f5890d315d7beb1ced5fad5364de956085e34104b3cf54284"
+        },
+        {
+          "file": "signatures/gpt-4o-2024-05-13/ea8cb8_2025-04-22.json",
+          "date": "2025-04-22",
+          "hash": "ea8cb8",
+          "full_hash": "ea8cb88208b4473d84370daa2d5dd4c105b00bea455bfefc1c1ddf62f0ba90b3"
         },
         {
           "file": "signatures/gpt-4o-2024-05-13/a0d8a0_2025-04-21.json",
@@ -24,10 +36,28 @@
       "name": "gpt-4o-2024-11-20",
       "signatures": [
         {
+          "file": "signatures/gpt-4o-2024-11-20/47364d_2025-04-23.json",
+          "date": "2025-04-23",
+          "hash": "47364d",
+          "full_hash": "47364d16d045054afe4d06ef090568d8007541f5684badde205e8014d52aa74b"
+        },
+        {
+          "file": "signatures/gpt-4o-2024-11-20/0bb711_2025-04-23.json",
+          "date": "2025-04-23",
+          "hash": "0bb711",
+          "full_hash": "0bb7116d37da33310474e741735b1d935e7e0c8143be45cd56f33f22a421e9bd"
+        },
+        {
           "file": "signatures/gpt-4o-2024-11-20/dd16cc_2025-04-22.json",
           "date": "2025-04-22",
           "hash": "dd16cc",
           "full_hash": "dd16cc5ca484f7718293ccea52669e978ecd5047c5c3e08c4b1606cf4c43fe83"
+        },
+        {
+          "file": "signatures/gpt-4o-2024-11-20/521857_2025-04-22.json",
+          "date": "2025-04-22",
+          "hash": "521857",
+          "full_hash": "521857a90fc4169d7db6e0b17209483f0ce5e6dd7b4b7c66ca54338d2b06fb8b"
         },
         {
           "file": "signatures/gpt-4o-2024-11-20/b7c401_2025-04-21.json",
