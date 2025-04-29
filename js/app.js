@@ -212,11 +212,16 @@ function updateModelCards(models) {
             const stabilityClass = hasChanges ? "text-yellow-600" : "text-green-600";
             const stabilityText = hasChanges ? "Changed" : "Consistent";
             
+            // Set provider or default to empty string
+            const provider = modelData.provider || '';
+            const providerDisplay = provider ? `<div class="provider-tag">Provider: ${provider}</div>` : '';
+            
             const cardHtml = `
                 <div class="signature-card bg-white rounded-lg shadow overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-200 bg-indigo-50">
                         <div class="font-bold text-xl text-gray-800">${modelName}</div>
                         <div class="text-sm text-gray-600">Latest: ${formattedDate}</div>
+                        ${providerDisplay}
                     </div>
                     <div class="px-6 py-4">
                         <div class="flex justify-between mb-2">

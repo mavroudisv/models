@@ -159,6 +159,13 @@ def update_signatures_index(model_name, signature_path):
         with open(os.path.join('..', signature_path), 'r') as f:
             signature_data = json.load(f)
             full_hash = signature_data['metadata']['distribution_hash']
+            
+            # Extract provider if it exists in metadata or api_parameters
+            provider = None
+            if 'metadata' in signature_data and 'provider' in signature_data['metadata']:
+                provider = signature_data['metadata']['provider']
+            elif 'api_parameters' in signature_data and 'provider' in signature_data['api_parameters']:
+                provider = signature_data['api_parameters']['provider']
         
         # Format the date from the filename
         date_part = signature_filename.split('_')[1].split('.')[0]
@@ -178,6 +185,9 @@ def update_signatures_index(model_name, signature_path):
                 'name': model_name,
                 'signatures': [new_signature]
             }
+            # Add provider if available
+            if provider:
+                index['models'][model_name]['provider'] = provider
         else:
             # Check if it's old format (list) or new format (object)
             if isinstance(index['models'][model_name], list):
@@ -187,6 +197,10 @@ def update_signatures_index(model_name, signature_path):
                     'name': model_name,
                     'signatures': []
                 }
+                # Add provider if available
+                if provider:
+                    index['models'][model_name]['provider'] = provider
+                
                 # Add existing signatures
                 for sig in old_signatures:
                     if isinstance(sig, dict) and 'file' in sig:
@@ -209,34 +223,42 @@ def update_signatures_index(model_name, signature_path):
             # Add new signature
             signatures = index['models'][model_name]['signatures']
             
-            # Check if signature with same hash already exists for this date
-            existing_sig_idx = next(
-                (i for i, sig in enumerate(signatures)
-                 if sig['date'] == date_part and sig['hash'] == hash_part),
-                None
-            )
+            # If there's a new provider value, update it in the model data
+            if provider and (not 'provider' in index['models'][model_name] or 
+                             index['models'][model_name]['provider'] != provider):
+                index['models'][model_name]['provider'] = provider
             
-            if existing_sig_idx is not None:
-                # Replace existing signature
-                signatures[existing_sig_idx] = new_signature
+            # Check if we already have a signature with the same date and hash
+            existing_signature = next((sig for sig in signatures 
+                                     if sig['date'] == date_part and sig['hash'] == hash_part), None)
+            
+            if existing_signature:
+                log(f"Signature with same date and hash already exists, skipping: {signature_path}")
             else:
-                # Add new signature
-                signatures.append(new_signature)
-            
-            # Sort signatures by date (newest first)
-            signatures.sort(key=lambda x: x['date'], reverse=True)
-        
-        # Update last_updated timestamp
+                # Insert at appropriate position (most recent first)
+                insert_at = 0
+                for i, sig in enumerate(signatures):
+                    if sig['date'] < date_part:
+                        break
+                    if sig['date'] == date_part and sig['hash'] < hash_part:
+                        break
+                    insert_at = i + 1
+                
+                signatures.insert(insert_at, new_signature)
+                log(f"Added new signature at position {insert_at}")
+                
+        # Update the last updated timestamp
         index['metadata']['last_updated'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
-        # Save the index
+        # Write back to the index file
         with open(index_path, 'w') as f:
             json.dump(index, f, indent=2)
-        log("Signatures index updated successfully")
             
+        log(f"Updated signatures index with {model_name}")
+        return True
     except Exception as e:
         log(f"Error updating signatures index: {str(e)}")
-        raise  # Re-raise the exception to ensure we know if this fails
+        return False
 
 def clean_signatures_index():
     """Remove entries from signatures.json for files that no longer exist"""

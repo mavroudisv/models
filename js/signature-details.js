@@ -78,13 +78,23 @@ async function initSignatureDetailsPage() {
 function displaySignatureDetails(signatureData) {
     try {
         // Extract relevant information
-        const { metadata, configuration, path_analysis, distribution_results } = signatureData;
+        const { metadata, configuration, path_analysis, distribution_results, api_parameters } = signatureData;
         
         // Update page title
         document.title = `StampR - ${metadata.model_name} Signature Details`;
         
         // Set header information
         document.getElementById('model-name').textContent = metadata.model_name;
+        
+        // Add provider name if it exists (check both metadata and api_parameters)
+        const provider = metadata.provider || (api_parameters && api_parameters.provider);
+        if (provider) {
+            const providerElement = document.createElement('div');
+            providerElement.className = 'provider-tag';
+            providerElement.textContent = `Provider: ${provider}`;
+            document.getElementById('model-name').parentNode.appendChild(providerElement);
+        }
+        
         document.getElementById('signature-date').textContent = formatDate(metadata.date);
         
         // Display truncated hash at the top
