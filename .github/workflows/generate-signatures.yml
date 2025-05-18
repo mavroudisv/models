@@ -1,12 +1,12 @@
 name: Generate Signatures
 
-on:
-  schedule:
-    - cron: '0 */12 * * *'  # Run every 12 hours
-  workflow_dispatch:  # Allow manual triggering
-  push:
-    paths-ignore:
-      - '**'  # Ignore all paths on push
+# on:
+#   schedule:
+#     - cron: '0 */12 * * *'  # Run every 12 hours
+#   workflow_dispatch:  # Allow manual triggering
+#   push:
+#     paths-ignore:
+#       - '**'  # Ignore all paths on push
 
 permissions:
   contents: write
