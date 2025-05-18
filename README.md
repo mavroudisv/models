@@ -4,7 +4,7 @@
   <img src="images/stampr.png" alt="stampr AI logo" width="200">
 </div>
 
-[![GitHub Actions](https://github.com/mavroudisv/models/actions/workflows/generate-signatures.yml/badge.svg)](https://github.com/mavroudisv/models/actions/workflows/generate-signatures.yml)
+<!--[![GitHub Actions](https://github.com/mavroudisv/models/actions/workflows/generate-signatures.yml/badge.svg)](https://github.com/mavroudisv/models/actions/workflows/generate-signatures.yml)-->
 
 > Live Site: [https://mavroudisv.github.io/models/](https://mavroudisv.github.io/models/)
 
