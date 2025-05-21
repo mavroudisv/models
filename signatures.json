@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-21 22:00:57"
+    "last_updated": "2025-05-21 22:04:59"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -226,7 +226,7 @@
       "service_provider": "OpenAI"
     },
     "DeepInfra": {
-      "name": "DeepInfra",
+      "name": "meta-llama/llama-4-maverick-17b-128e-instruct",
       "signatures": [
         {
           "file": "signatures/openrouter/llama-4/DeepInfra/c28522_2025-05-21.json",
@@ -242,10 +242,11 @@
         }
       ],
       "provider": "Meta",
-      "service_provider": "OpenRouter/DeepInfra"
+      "service_provider": "OpenRouter/DeepInfra",
+      "creator": "Meta"
     },
     "Parasail": {
-      "name": "Parasail",
+      "name": "meta-llama/llama-4-maverick",
       "signatures": [
         {
           "file": "signatures/openrouter/llama-4/Parasail/66e9dc_2025-05-17.json",
@@ -264,7 +265,7 @@
       "service_provider": "openrouter"
     },
     "Novita": {
-      "name": "Novita",
+      "name": "meta-llama/llama-4-maverick-17b-128e-instruct",
       "signatures": [
         {
           "file": "signatures/openrouter/llama-4/Novita/bf6258_2025-05-18.json",
