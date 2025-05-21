@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-21 15:34:55"
+    "last_updated": "2025-05-21 15:38:12"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -125,6 +125,12 @@
       "name": "gpt-4o",
       "signatures": [
         {
+          "file": "signatures/openai/gpt-4o/ca881b_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "ca881b",
+          "full_hash": "ca881b"
+        },
+        {
           "file": "signatures/openai/gpt-4o/c0849a_2025-05-21.json",
           "date": "2025-05-21",
           "hash": "c0849a",
@@ -190,14 +196,7 @@
           "full_hash": ""
         }
       ],
-      "provider": {
-        "order": [
-          "DeepInfra"
-        ],
-        "allow_fallbacks": false,
-        "require_parameters": true,
-        "data_collection": "deny"
-      }
+      "provider": "deny"
     },
     "Parasail": {
       "name": "Parasail",
@@ -215,14 +214,7 @@
           "full_hash": ""
         }
       ],
-      "provider": {
-        "order": [
-          "Parasail"
-        ],
-        "allow_fallbacks": false,
-        "require_parameters": true,
-        "data_collection": "deny"
-      }
+      "provider": "deny"
     },
     "Novita": {
       "name": "Novita",
@@ -234,14 +226,7 @@
           "full_hash": ""
         }
       ],
-      "provider": {
-        "order": [
-          "Novita"
-        ],
-        "allow_fallbacks": false,
-        "require_parameters": true,
-        "data_collection": "deny"
-      }
+      "provider": "deny"
     }
   }
 }
