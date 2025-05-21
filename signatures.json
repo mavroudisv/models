@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-21 15:38:12"
+    "last_updated": "2025-05-21 15:42:58"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -196,7 +196,7 @@
           "full_hash": ""
         }
       ],
-      "provider": "deny"
+      "provider": "Unknown Provider"
     },
     "Parasail": {
       "name": "Parasail",
@@ -214,7 +214,7 @@
           "full_hash": ""
         }
       ],
-      "provider": "deny"
+      "provider": "Unknown Provider"
     },
     "Novita": {
       "name": "Novita",
@@ -226,7 +226,7 @@
           "full_hash": ""
         }
       ],
-      "provider": "deny"
+      "provider": "Unknown Provider"
     }
   }
 }
