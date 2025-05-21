@@ -8,7 +8,7 @@
 
 > Live Site: [https://mavroudisv.github.io/models/](https://mavroudisv.github.io/models/)
 
-stampr AI is a powerful tool for tracking and analyzing AI model signatures. It helps you monitor model behavior, detect changes, and ensure consistency across different versions, deployments and providers.
+stampr AI is a tool for tracking and analyzing AI model signatures. It helps you monitor model behavior, detect changes, and ensure consistency across different versions, deployments and providers.
 
 ## Components
 
@@ -18,7 +18,6 @@ The stampr AI website provides a comprehensive interface for:
 - **Model Signature Visualization**: View current signatures for all monitored models
 - **Historical Tracking**: Track how models change over time with detailed timelines
 - **Change Detection**: Identify when and how models are updated or modified
-- **Distribution Analysis**: Compare model behaviors and token distributions
 - **Stability Monitoring**: Monitor model stability through signature consistency
 
 ### Verification Tool
@@ -34,7 +33,7 @@ from stampr_ai import verify_model
 
 # Verify if a model matches its claimed identity
 is_verified = verify_model(
-    model_name="gpt-4",
+    model_name="gpt-4o",
     api_key="your-api-key"
 )
 
@@ -47,12 +46,10 @@ else:
 ## How It Works
 
 1. **Signature Generation**: Our private collector generates unique signatures for AI models
-2. **Public Verification**: The public pip tool compares a model's output against our verified signatures
-3. **Change Detection**: The website tracks and displays model changes over time
-4. **Distribution Analysis**: Both tools analyze token distributions to ensure model consistency
+2. **Change Detection**: The website tracks and displays model changes over time
+3. **Public Verification**: The public pip tool compares a model's output against our verified signatures
 
 ## Features
-
 - **Automated Signature Generation**: Automatically generates unique signatures for AI models
 - **Change Detection**: Identifies when and how models change over time
 - **Historical Tracking**: Maintains a complete history of model signatures
