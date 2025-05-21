@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-21 15:56:36"
+    "last_updated": "2025-05-21 16:01:00"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -48,7 +48,8 @@
           "hash": "a0d8a0",
           "full_hash": "a0d8a08b26bb1da2f209b31f8b95e7f02b98d6f08617c921a7c4ab2cff88ae28"
         }
-      ]
+      ],
+      "provider": "OpenAI"
     },
     "gpt-4o-2024-11-20": {
       "name": "gpt-4o-2024-11-20",
@@ -119,7 +120,8 @@
           "hash": "b7c401",
           "full_hash": "b7c401fb3d73bb26927d600f44eaf5a4f175b6e75aebbbd54100a7f7bafc0d37"
         }
-      ]
+      ],
+      "provider": "OpenAI"
     },
     "gpt-4o": {
       "name": "gpt-4o",
@@ -184,11 +186,18 @@
           "hash": "9efabb",
           "full_hash": "9efabb51d359898f355278c5aaa522ce2433027e0503bf214b1c43e8489c371d"
         }
-      ]
+      ],
+      "provider": "OpenAI"
     },
     "DeepInfra": {
       "name": "DeepInfra",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/c28522_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "c28522",
+          "full_hash": "c28522"
+        },
         {
           "file": "signatures/openrouter/llama-4/DeepInfra/bf6258_2025-05-21.json",
           "date": "2025-05-21",
@@ -196,7 +205,7 @@
           "full_hash": ""
         }
       ],
-      "provider": "Unknown Provider"
+      "provider": "Meta"
     },
     "Parasail": {
       "name": "Parasail",
@@ -214,7 +223,7 @@
           "full_hash": ""
         }
       ],
-      "provider": "Unknown Provider"
+      "provider": "Meta"
     },
     "Novita": {
       "name": "Novita",
@@ -226,7 +235,7 @@
           "full_hash": ""
         }
       ],
-      "provider": "Unknown Provider"
+      "provider": "Meta"
     }
   }
 }

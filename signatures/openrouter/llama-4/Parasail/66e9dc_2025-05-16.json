@@ -7,7 +7,8 @@
     "request_country": "United States",
     "signature_hash": "66e9dc535e0cbf43015e1d1bc6cc0063decb4c7de73ab89fc645b97185c70492",
     "system_fingerprint": null,
-    "distribution_hash": "66e9dc"
+    "distribution_hash": "66e9dc",
+    "provider": "Meta"
   },
   "configuration": {
     "target_position": 4,
@@ -72,13 +73,6 @@
     "cache_control": {
       "type": "ephemeral"
     },
-    "provider": {
-      "order": [
-        "Parasail"
-      ],
-      "allow_fallbacks": false,
-      "require_parameters": true,
-      "data_collection": "deny"
-    }
+    "provider": "Meta"
   }
 }

@@ -3,11 +3,12 @@
     "model_name": "meta-llama/llama-4-maverick",
     "service_provider": "openrouter",
     "tokenizer": "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
-    "date": "2025-05-21_15-55-21",
+    "date": "2025-05-21_16-00-40",
     "request_country": "United States",
     "signature_hash": "c285229e14cffefffb029b66aae6b1aed6841536b4591168706d3056b690ea4b",
     "system_fingerprint": null,
-    "distribution_hash": "c28522"
+    "distribution_hash": "c28522",
+    "provider": "Meta"
   },
   "configuration": {
     "target_position": 4,
@@ -74,13 +75,6 @@
     "cache_control": {
       "type": "ephemeral"
     },
-    "provider": {
-      "order": [
-        "DeepInfra"
-      ],
-      "allow_fallbacks": false,
-      "require_parameters": true,
-      "data_collection": "deny"
-    }
+    "provider": "Meta"
   }
 }
