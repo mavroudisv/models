@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "model_name": "gpt-4o-2024-11-20",
+    "service_provider": "openai",
+    "tokenizer": "o200k_base",
+    "date": "2025-05-21_09-34-08",
+    "request_country": "United States",
+    "signature_hash": "f39a44bbc363d1a308b9c27fa5046e072559c6e4b4ecaee040d9c19a5ed7f03c",
+    "system_fingerprint": "fp_96f3e2b0dc"
+  },
+  "configuration": {
+    "target_position": 4,
+    "tokens_in": 10,
+    "tokens_out": 10,
+    "samples_per_position": 20,
+    "samples_for_distribution": 500,
+    "seed": 67899876,
+    "original_prompt": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners",
+    "complete_messages": [
+      {
+        "role": "user",
+        "content": "Here is a random string. Generate your own now and provide it with NOTHING ELSE."
+      },
+      {
+        "role": "user",
+        "content": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+      }
+    ]
+  },
+  "path_analysis": {
+    "path_tokens": [
+      "Gr",
+      "iv",
+      "alt",
+      "z"
+    ]
+  },
+  "distribution_results": {
+    "total_tokens_collected": 500,
+    "unique_tokens_collected": 5,
+    "tokens": {
+      "!": {
+        "token_string": "!",
+        "token_id": 0,
+        "count": 328,
+        "probability": 0.656
+      },
+      " nex": {
+        "token_string": " nex",
+        "token_id": 92763,
+        "count": 36,
+        "probability": 0.072
+      },
+      " nop": {
+        "token_string": " nop",
+        "token_id": 110267,
+        "count": 98,
+        "probability": 0.196
+      },
+      " ": {
+        "token_string": " ",
+        "token_id": 220,
+        "count": 36,
+        "probability": 0.072
+      },
+      " N": {
+        "token_string": " N",
+        "token_id": 478,
+        "count": 2,
+        "probability": 0.004
+      }
+    }
+  },
+  "api_parameters": {
+    "model": "gpt-4o-2024-11-20",
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_tokens": 100,
+    "frequency_penalty": -2,
+    "presence_penalty": -2,
+    "logprobs": true,
+    "top_logprobs": 9,
+    "store": false,
+    "stream": false,
+    "response_format": {
+      "type": "text"
+    },
+    "seed": 67899876,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Here is a random string. Generate your own now and provide it with NOTHING ELSE."
+      },
+      {
+        "role": "user",
+        "content": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+      }
+    ]
+  }
+}
