@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-21 22:04:59"
+    "last_updated": "2025-05-21 22:13:44"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -223,7 +223,8 @@
       ],
       "provider": "OpenAI",
       "developer": "OpenAI",
-      "service_provider": "OpenAI"
+      "service_provider": "OpenAI",
+      "creator": "OpenAI"
     },
     "DeepInfra": {
       "name": "meta-llama/llama-4-maverick-17b-128e-instruct",
