@@ -6,7 +6,8 @@
     "date": "2025-05-20_02-08-26",
     "request_country": null,
     "signature_hash": "39fd1f3b54e27db4985931d820fabe9674a496926a115392ffc2b71e5207d1ae",
-    "system_fingerprint": "fp_a9047283ac"
+    "system_fingerprint": "fp_a9047283ac",
+    "distribution_hash": "39fd1f"
   },
   "configuration": {
     "target_position": 4,
