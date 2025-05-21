@@ -1,11 +1,29 @@
 {
   "metadata": {
-    "last_updated": "2025-04-23 13:29:08"
+    "last_updated": "2025-05-21 15:18:57"
   },
   "models": {
     "gpt-4o-2024-05-13": {
       "name": "gpt-4o-2024-05-13",
       "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o-2024-05-13/4e9089_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "4e9089",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-05-13/39fd1f_2025-05-20.json",
+          "date": "2025-05-20",
+          "hash": "39fd1f",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-05-13/f7b98d_2025-05-18.json",
+          "date": "2025-05-18",
+          "hash": "f7b98d",
+          "full_hash": ""
+        },
         {
           "file": "signatures/gpt-4o-2024-05-13/ea8cb8_2025-04-23.json",
           "date": "2025-04-23",
@@ -35,6 +53,42 @@
     "gpt-4o-2024-11-20": {
       "name": "gpt-4o-2024-11-20",
       "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/f39a44_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "f39a44",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/3d650a_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "3d650a",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/f05bcc_2025-05-18.json",
+          "date": "2025-05-18",
+          "hash": "f05bcc",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/3a617d_2025-05-18.json",
+          "date": "2025-05-18",
+          "hash": "3a617d",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/047e05_2025-05-18.json",
+          "date": "2025-05-18",
+          "hash": "047e05",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/043180_2025-05-18.json",
+          "date": "2025-05-18",
+          "hash": "043180",
+          "full_hash": ""
+        },
         {
           "file": "signatures/gpt-4o-2024-11-20/47364d_2025-04-23.json",
           "date": "2025-04-23",
@@ -71,6 +125,42 @@
       "name": "gpt-4o",
       "signatures": [
         {
+          "file": "signatures/openai/gpt-4o/c0849a_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "c0849a",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o/6d173a_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "6d173a",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o/421075_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "421075",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o/2fd9fc_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "2fd9fc",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o/2d69b9_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "2d69b9",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openai/gpt-4o/0dca14_2025-05-20.json",
+          "date": "2025-05-20",
+          "hash": "0dca14",
+          "full_hash": ""
+        },
+        {
           "file": "signatures/gpt-4o/de9f8c_2025-04-22.json",
           "date": "2025-04-22",
           "hash": "de9f8c",
@@ -89,6 +179,69 @@
           "full_hash": "9efabb51d359898f355278c5aaa522ce2433027e0503bf214b1c43e8489c371d"
         }
       ]
+    },
+    "DeepInfra": {
+      "name": "DeepInfra",
+      "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/bf6258_2025-05-21.json",
+          "date": "2025-05-21",
+          "hash": "bf6258",
+          "full_hash": ""
+        }
+      ],
+      "provider": {
+        "order": [
+          "DeepInfra"
+        ],
+        "allow_fallbacks": false,
+        "require_parameters": true,
+        "data_collection": "deny"
+      }
+    },
+    "Parasail": {
+      "name": "Parasail",
+      "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/66e9dc_2025-05-17.json",
+          "date": "2025-05-17",
+          "hash": "66e9dc",
+          "full_hash": ""
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/66e9dc_2025-05-16.json",
+          "date": "2025-05-16",
+          "hash": "66e9dc",
+          "full_hash": ""
+        }
+      ],
+      "provider": {
+        "order": [
+          "Parasail"
+        ],
+        "allow_fallbacks": false,
+        "require_parameters": true,
+        "data_collection": "deny"
+      }
+    },
+    "Novita": {
+      "name": "Novita",
+      "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/Novita/bf6258_2025-05-18.json",
+          "date": "2025-05-18",
+          "hash": "bf6258",
+          "full_hash": ""
+        }
+      ],
+      "provider": {
+        "order": [
+          "Novita"
+        ],
+        "allow_fallbacks": false,
+        "require_parameters": true,
+        "data_collection": "deny"
+      }
     }
   }
 }
