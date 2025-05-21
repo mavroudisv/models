@@ -6,9 +6,7 @@
     "date": "2025-05-21_08-21-46",
     "request_country": "United States",
     "signature_hash": "bf62585c6cd6dbec4d70390cefc29e7402c97dca6fac823ccf1f97d8f29905dc",
-    "system_fingerprint": null,
-    "distribution_hash": "bf6258",
-    "provider": "Meta"
+    "system_fingerprint": null
   },
   "configuration": {
     "target_position": 4,
@@ -75,6 +73,13 @@
     "cache_control": {
       "type": "ephemeral"
     },
-    "provider": "Meta"
+    "provider": {
+      "order": [
+        "DeepInfra"
+      ],
+      "allow_fallbacks": false,
+      "require_parameters": true,
+      "data_collection": "deny"
+    }
   }
 }

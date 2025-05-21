@@ -6,8 +6,7 @@
     "date": "2025-05-21_15-12-42",
     "request_country": "United States",
     "signature_hash": "2d69b9c3a74d6fad1376f896400f734d5069b28c8e99319a41d5c996895c2111",
-    "system_fingerprint": "fp_9bddfca6e2",
-    "distribution_hash": "2d69b9"
+    "system_fingerprint": "fp_9bddfca6e2"
   },
   "configuration": {
     "target_position": 4,

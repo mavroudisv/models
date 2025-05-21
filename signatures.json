@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-21 21:51:23"
+    "last_updated": "2025-05-21 21:58:11"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -235,7 +235,8 @@
           "full_hash": ""
         }
       ],
-      "provider": "Meta"
+      "provider": "Meta",
+      "service_provider": "OpenRouter/DeepInfra"
     },
     "Parasail": {
       "name": "Parasail",
@@ -253,7 +254,8 @@
           "full_hash": ""
         }
       ],
-      "provider": "Meta"
+      "provider": "Meta",
+      "service_provider": "openrouter"
     },
     "Novita": {
       "name": "Novita",
@@ -265,7 +267,8 @@
           "full_hash": ""
         }
       ],
-      "provider": "Meta"
+      "provider": "Meta",
+      "service_provider": "openrouter"
     }
   }
 }
