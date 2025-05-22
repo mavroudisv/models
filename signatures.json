@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-22 06:01:06"
+    "last_updated": "2025-05-22 07:00:58"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -130,6 +130,12 @@
     "gpt-4o": {
       "name": "gpt-4o",
       "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o/b8cb71_2025-05-22.json",
+          "date": "2025-05-22",
+          "hash": "b8cb71",
+          "full_hash": "b8cb71"
+        },
         {
           "file": "signatures/openai/gpt-4o/2fd9fc_2025-05-22.json",
           "date": "2025-05-22",
