@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-25 23:01:04"
+    "last_updated": "2025-05-26 00:01:36"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -130,6 +130,12 @@
     "gpt-4o": {
       "name": "gpt-4o",
       "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o/a6a575_2025-05-26.json",
+          "date": "2025-05-26",
+          "hash": "a6a575",
+          "full_hash": "a6a575"
+        },
         {
           "file": "signatures/openai/gpt-4o/f5cd54_2025-05-25.json",
           "date": "2025-05-25",
@@ -487,6 +493,12 @@
     "DeepInfra": {
       "name": "meta-llama/llama-4-maverick-17b-128e-instruct",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/c28522_2025-05-26.json",
+          "date": "2025-05-26",
+          "hash": "c28522",
+          "full_hash": "c28522"
+        },
         {
           "file": "signatures/openrouter/llama-4/DeepInfra/c28522_2025-05-25.json",
           "date": "2025-05-25",
