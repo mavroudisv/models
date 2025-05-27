@@ -84,7 +84,11 @@ function displaySignatureDetails(signatureData) {
         document.title = `StampR - ${metadata.model_name} Signature Details`;
         
         // Set header information
-        document.getElementById('model-name').textContent = metadata.model_name;
+        const modelNameEl = document.getElementById('model-name');
+        if (!modelNameEl) {
+            throw new Error('Element with id "model-name" not found');
+        }
+        modelNameEl.textContent = metadata.model_name;
         
         // Add provider name if it exists (check both metadata and api_parameters)
         const provider = metadata.provider || (api_parameters && api_parameters.provider);
@@ -92,7 +96,7 @@ function displaySignatureDetails(signatureData) {
             const providerElement = document.createElement('div');
             providerElement.className = 'provider-tag';
             providerElement.textContent = `Provider: ${provider}`;
-            document.getElementById('model-name').parentNode.appendChild(providerElement);
+            modelNameEl.parentNode.appendChild(providerElement);
         }
         
         // Add creator if it exists
@@ -101,7 +105,7 @@ function displaySignatureDetails(signatureData) {
             const creatorElement = document.createElement('div');
             creatorElement.className = 'provider-tag';
             creatorElement.textContent = `Developer: ${creator}`;
-            document.getElementById('model-name').parentNode.appendChild(creatorElement);
+            modelNameEl.parentNode.appendChild(creatorElement);
         }
         
         // Add service provider if it exists
@@ -110,62 +114,79 @@ function displaySignatureDetails(signatureData) {
             const serviceProviderElement = document.createElement('div');
             serviceProviderElement.className = 'provider-tag';
             serviceProviderElement.textContent = `Provider: ${serviceProvider}`;
-            document.getElementById('model-name').parentNode.appendChild(serviceProviderElement);
+            modelNameEl.parentNode.appendChild(serviceProviderElement);
         }
         
-        document.getElementById('signature-date').textContent = formatDate(metadata.date);
+        const signatureDateEl = document.getElementById('signature-date');
+        if (!signatureDateEl) {
+            throw new Error('Element with id "signature-date" not found');
+        }
+        signatureDateEl.textContent = formatDate(metadata.date);
         
         // Display truncated hash at the top
         const hash = metadata.distribution_hash;
         const truncatedHash = hash.substring(0, 8) + '...' + hash.substring(hash.length - 8);
-        document.getElementById('signature-hash').textContent = truncatedHash;
+        const signatureHashEl = document.getElementById('signature-hash');
+        if (!signatureHashEl) {
+            throw new Error('Element with id "signature-hash" not found');
+        }
+        signatureHashEl.textContent = truncatedHash;
         
         // Add copy functionality for the full hash
         const copyButton = document.getElementById('copy-hash');
-        copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(hash).then(() => {
-                // Show a temporary tooltip
-                const tooltip = document.createElement('div');
-                tooltip.className = 'absolute bg-gray-800 text-white text-xs rounded py-1 px-2';
-                tooltip.textContent = 'Copied!';
-                tooltip.style.top = '-25px';
-                tooltip.style.left = '50%';
-                tooltip.style.transform = 'translateX(-50%)';
-                copyButton.appendChild(tooltip);
-                
-                setTimeout(() => {
-                    tooltip.remove();
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy hash:', err);
+        if (copyButton) {
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(hash).then(() => {
+                    // Show a temporary tooltip
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'absolute bg-gray-800 text-white text-xs rounded py-1 px-2';
+                    tooltip.textContent = 'Copied!';
+                    tooltip.style.top = '-25px';
+                    tooltip.style.left = '50%';
+                    tooltip.style.transform = 'translateX(-50%)';
+                    copyButton.appendChild(tooltip);
+                    
+                    setTimeout(() => {
+                        tooltip.remove();
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy hash:', err);
+                });
             });
-        });
+        }
         
         // Set metadata section
         const metadataList = document.getElementById('metadata-list');
-        metadataList.innerHTML = '';
-        
-        Object.entries(metadata).forEach(([key, value]) => {
-            if (key === 'distribution_hash') {
-                // Format the full hash with line breaks every 32 characters
-                const formattedHash = value.match(/.{1,32}/g).join('\n');
-                metadataList.appendChild(createListItem(key, formattedHash));
-            } else {
-                metadataList.appendChild(createListItem(key, value));
-            }
-        });
+        if (metadataList) {
+            metadataList.innerHTML = '';
+            
+            Object.entries(metadata).forEach(([key, value]) => {
+                if (key === 'distribution_hash') {
+                    // Format the full hash with line breaks every 32 characters
+                    const formattedHash = value.match(/.{1,32}/g).join('\n');
+                    metadataList.appendChild(createListItem(key, formattedHash));
+                } else {
+                    metadataList.appendChild(createListItem(key, value));
+                }
+            });
+        }
         
         // Set configuration section
         const configList = document.getElementById('config-list');
-        configList.innerHTML = '';
-        
-        Object.entries(configuration).forEach(([key, value]) => {
-            configList.appendChild(createListItem(key, value));
-        });
+        if (configList) {
+            configList.innerHTML = '';
+            
+            Object.entries(configuration).forEach(([key, value]) => {
+                configList.appendChild(createListItem(key, value));
+            });
+        }
         
         // Set path analysis
-        const pathTokens = path_analysis.path_tokens.join(' → ');
-        document.getElementById('path-tokens').textContent = pathTokens;
+        const pathTokensEl = document.getElementById('path-tokens');
+        if (pathTokensEl && path_analysis && path_analysis.path_tokens) {
+            const pathTokens = path_analysis.path_tokens.join(' → ');
+            pathTokensEl.textContent = pathTokens;
+        }
         
         // Create distribution chart
         createDistributionChart(distribution_results);
@@ -208,14 +229,20 @@ function createDistributionChart(distributionResults) {
         const data = tokenArray.map(token => token.probability);
         
         // Create the chart
-        const ctx = document.getElementById('distribution-chart').getContext('2d');
+        const ctx = document.getElementById('distribution-chart');
+        if (!ctx) {
+            console.warn('Distribution chart canvas not found');
+            return;
+        }
+        
+        const chartContext = ctx.getContext('2d');
         
         // Check if chart already exists and destroy it
         if (window.distributionChart) {
             window.distributionChart.destroy();
         }
         
-        window.distributionChart = new Chart(ctx, {
+        window.distributionChart = new Chart(chartContext, {
             type: 'bar',
             data: {
                 labels: labels,
@@ -272,17 +299,39 @@ function createDistributionChart(distributionResults) {
 
 // Function to create token table
 function createTokenTable(distributionResults) {
+    if (!distributionResults) {
+        console.warn('No distribution results provided to createTokenTable');
+        return;
+    }
+    
     const { tokens, total_tokens_collected, unique_tokens_collected } = distributionResults;
     
     // Update summary statistics
-    document.getElementById('total-tokens').textContent = total_tokens_collected;
-    document.getElementById('unique-tokens').textContent = unique_tokens_collected;
+    const totalTokensEl = document.getElementById('total-tokens');
+    if (totalTokensEl) {
+        totalTokensEl.textContent = total_tokens_collected;
+    }
+    
+    const uniqueTokensEl = document.getElementById('unique-tokens');
+    if (uniqueTokensEl) {
+        uniqueTokensEl.textContent = unique_tokens_collected;
+    }
     
     // Convert tokens object to array and sort by probability
+    if (!tokens) {
+        console.warn('No tokens data available');
+        return;
+    }
+    
     const tokenArray = Object.values(tokens).sort((a, b) => b.probability - a.probability);
     
     // Get table body
     const tableBody = document.getElementById('token-table-body');
+    if (!tableBody) {
+        console.warn('Token table body element not found');
+        return;
+    }
+    
     tableBody.innerHTML = '';
     
     // Add rows for each token
