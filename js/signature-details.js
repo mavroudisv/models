@@ -239,16 +239,16 @@ function displaySignatureDetails(signatureData) {
             console.log('Service provider element added:', providerInfo.service_provider);
         }
         
-        // Add legacy provider if it exists and is different from the others
-        if (providerInfo.provider && 
-            providerInfo.provider !== providerInfo.creator && 
-            providerInfo.provider !== providerInfo.service_provider) {
-            const providerElement = document.createElement('div');
-            providerElement.className = 'provider-tag';
-            providerElement.textContent = `Provider: ${providerInfo.provider}`;
-            modelNameEl.parentNode.appendChild(providerElement);
-            console.log('Legacy provider element added:', providerInfo.provider);
-        }
+        // // Add legacy provider if it exists and is different from the others
+        // if (providerInfo.provider && 
+        //     providerInfo.provider !== providerInfo.creator && 
+        //     providerInfo.provider !== providerInfo.service_provider) {
+        //     const providerElement = document.createElement('div');
+        //     providerElement.className = 'provider-tag';
+        //     providerElement.textContent = `Provider: ${providerInfo.provider}`;
+        //     modelNameEl.parentNode.appendChild(providerElement);
+        //     console.log('Legacy provider element added:', providerInfo.provider);
+        // }
         
         console.log('Looking for element with id "signature-date"');
         const signatureDateEl = document.getElementById('signature-date');
