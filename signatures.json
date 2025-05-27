@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-27 14:01:59"
+    "last_updated": "2025-05-27 15:01:27"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -589,6 +589,12 @@
     "DeepInfra": {
       "name": "meta-llama/llama-4-maverick-17b-128e-instruct",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/ecf4a1_2025-05-27.json",
+          "date": "2025-05-27",
+          "hash": "ecf4a1",
+          "full_hash": "ecf4a1"
+        },
         {
           "file": "signatures/openrouter/llama-4/DeepInfra/c28522_2025-05-27.json",
           "date": "2025-05-27",
