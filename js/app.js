@@ -209,7 +209,7 @@ function updateModelCards(models) {
                 ? `Changed on ${formattedDate}` 
                 : "No changes detected";
                 
-            const stabilityClass = hasChanges ? "text-yellow-600" : "text-green-600";
+            const stabilityClass = hasChanges ? "status-changed" : "status-consistent";
             const stabilityText = hasChanges ? "Changed" : "Consistent";
             
             // Get service provider information with fallback to legacy provider
@@ -218,28 +218,31 @@ function updateModelCards(models) {
             
             const cardHtml = `
                 <div class="signature-card bg-white rounded-lg shadow overflow-hidden">
-                    <div class="px-6 py-4 border-b border-gray-200 bg-indigo-50">
-                        <div class="font-bold text-xl text-gray-800">${modelName}</div>
-                        <div class="text-sm text-gray-600">Latest: ${formattedDate}</div>
+                    <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-indigo-50 to-purple-50">
+                        <div class="font-bold text-xl text-gray-800 mb-1">${modelName}</div>
+                        <div class="text-sm text-gray-600 mb-2">Latest: ${formattedDate}</div>
                         ${providerDisplay}
                     </div>
-                    <div class="px-6 py-4">
-                        <div class="flex justify-between mb-2">
-                            <span class="text-gray-700">Hash:</span>
-                            <span class="font-mono text-gray-600">${latestSignature.hash}</span>
+                    <div class="px-6 py-4 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700 font-medium">Hash:</span>
+                            <span class="hash-display font-mono text-gray-600">${latestSignature.hash}</span>
                         </div>
-                        <div class="flex justify-between mb-2">
-                            <span class="text-gray-700">Stability:</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700 font-medium">Stability:</span>
                             <span class="${stabilityClass}">${stabilityText}</span>
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-700">Changes:</span>
-                            <span class="text-gray-600">${changeStatus}</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700 font-medium">Changes:</span>
+                            <span class="text-gray-600 text-sm">${changeStatus}</span>
                         </div>
                     </div>
-                    <div class="px-6 py-3 bg-gray-50">
-                        <a href="signature-details.html?file=${latestSignature.file}" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
-                            View details →
+                    <div class="px-6 py-3 bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-100">
+                        <a href="signature-details.html?file=${latestSignature.file}" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium flex items-center group transition-colors">
+                            View details 
+                            <svg class="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -252,8 +255,14 @@ function updateModelCards(models) {
     // If no models were added, show a message
     if (modelCards.innerHTML === '') {
         modelCards.innerHTML = `
-            <div class="col-span-3 bg-white rounded-lg shadow p-6 text-center">
-                <p class="text-gray-600">No model signatures available.</p>
+            <div class="col-span-3 bg-white rounded-lg shadow-lg p-8 text-center">
+                <div class="mb-4">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">No Model Signatures</h3>
+                <p class="text-gray-600">No model signatures are currently available.</p>
             </div>
         `;
     }

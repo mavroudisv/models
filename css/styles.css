@@ -1,10 +1,453 @@
-body {
-    font-family: 'Inter', sans-serif;
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* CSS Variables for consistent theming */
+:root {
+    --primary-50: #eef2ff;
+    --primary-100: #e0e7ff;
+    --primary-500: #6366f1;
+    --primary-600: #4f46e5;
+    --primary-700: #4338ca;
+    --primary-800: #3730a3;
+    --primary-900: #312e81;
+    
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    
+    --success-50: #ecfdf5;
+    --success-500: #10b981;
+    --success-600: #059669;
+    
+    --warning-50: #fffbeb;
+    --warning-500: #f59e0b;
+    --warning-600: #d97706;
+    
+    --error-50: #fef2f2;
+    --error-500: #ef4444;
+    --error-600: #dc2626;
+    
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    --border-radius-sm: 0.375rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 0.75rem;
+    --border-radius-xl: 1rem;
 }
 
+/* Base styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--primary-50) 100%);
+    min-height: 100vh;
+    line-height: 1.6;
+    color: var(--gray-800);
+}
+
+/* Enhanced header with gradient */
+header {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(10px);
+}
+
+header h1 {
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+/* Logo animation */
+header img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+header img:hover {
+    transform: scale(1.05) rotate(5deg);
+    filter: drop-shadow(0 4px 8px rgba(79, 70, 229, 0.2));
+}
+
+/* Install command styling */
+.install-command {
+    background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+    border: 1px solid var(--gray-700);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.install-command::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.install-command:hover::before {
+    left: 100%;
+}
+
+.install-command:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Enhanced navigation */
+nav {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.nav-tab {
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
+    transition: width 0.3s ease;
+}
+
+.nav-tab:hover::after,
+.nav-tab.active::after {
+    width: 100%;
+}
+
+.nav-tab.active {
+    color: var(--primary-600);
+    font-weight: 600;
+}
+
+/* Enhanced model cards */
 .signature-card {
-    transition: transform 0.2s ease-in-out;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.signature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-500), var(--primary-600), var(--primary-700));
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .signature-card:hover {
-    transform
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-200);
+}
+
+.signature-card:hover::before {
+    opacity: 1;
+}
+
+/* Provider tags */
+.provider-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
+    color: var(--primary-700);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--primary-200);
+    margin-top: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.provider-tag:hover {
+    background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-200) 100%);
+    transform: scale(1.05);
+}
+
+/* Status indicators */
+.status-changed {
+    color: var(--warning-600);
+    font-weight: 600;
+}
+
+.status-consistent {
+    color: var(--success-600);
+    font-weight: 600;
+}
+
+.status-error {
+    color: var(--error-600);
+    font-weight: 600;
+}
+
+/* Hash display */
+.hash-display {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--gray-100);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.875rem;
+    border: 1px solid var(--gray-200);
+    transition: all 0.2s ease;
+}
+
+.hash-display:hover {
+    background: var(--gray-200);
+    transform: scale(1.02);
+}
+
+/* Enhanced buttons */
+button, .btn {
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: var(--border-radius-md);
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover, .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+    border: 1px solid var(--primary-600);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+}
+
+/* Enhanced form elements */
+select, input {
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius-md);
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    background: white;
+}
+
+select:hover, input:hover {
+    border-color: var(--gray-400);
+}
+
+/* Chart containers */
+.chart-container {
+    position: relative;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--border-radius-lg);
+    padding: 1rem;
+    backdrop-filter: blur(5px);
+}
+
+/* Timeline enhancements */
+.history-timeline {
+    position: relative;
+}
+
+.history-timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary-500), var(--primary-300));
+}
+
+.timeline-node {
+    position: relative;
+}
+
+.timeline-node::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 1rem;
+    width: 12px;
+    height: 12px;
+    background: var(--primary-500);
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: var(--shadow-md);
+    z-index: 10;
+}
+
+.timeline-node:hover::before {
+    background: var(--primary-600);
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+}
+
+/* Enhanced content sections */
+.tab-content {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading states */
+.loading {
+    background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Enhanced tables */
+table {
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+table th {
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+table tr:hover {
+    background: var(--primary-50);
+    transition: background-color 0.2s ease;
+}
+
+/* Enhanced footer */
+footer {
+    background: linear-gradient(135deg, #ffffff 0%, var(--gray-50) 100%);
+    border-top: 1px solid var(--gray-200);
+}
+
+footer a {
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    transform: translateY(-2px);
+    color: var(--primary-600);
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+    .signature-card {
+        margin-bottom: 1rem;
+    }
+    
+    .nav-tab {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .install-command {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary-400), var(--primary-600));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--primary-500), var(--primary-700));
+}
