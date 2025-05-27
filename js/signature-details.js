@@ -95,6 +95,24 @@ function displaySignatureDetails(signatureData) {
             document.getElementById('model-name').parentNode.appendChild(providerElement);
         }
         
+        // Add creator if it exists
+        const creator = metadata.creator || (api_parameters && api_parameters.creator);
+        if (creator) {
+            const creatorElement = document.createElement('div');
+            creatorElement.className = 'provider-tag';
+            creatorElement.textContent = `Developer: ${creator}`;
+            document.getElementById('model-name').parentNode.appendChild(creatorElement);
+        }
+        
+        // Add service provider if it exists
+        const serviceProvider = metadata.service_provider || (api_parameters && api_parameters.service_provider);
+        if (serviceProvider) {
+            const serviceProviderElement = document.createElement('div');
+            serviceProviderElement.className = 'provider-tag';
+            serviceProviderElement.textContent = `Provider: ${serviceProvider}`;
+            document.getElementById('model-name').parentNode.appendChild(serviceProviderElement);
+        }
+        
         document.getElementById('signature-date').textContent = formatDate(metadata.date);
         
         // Display truncated hash at the top
