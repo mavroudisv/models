@@ -212,9 +212,9 @@ function updateModelCards(models) {
             const stabilityClass = hasChanges ? "text-yellow-600" : "text-green-600";
             const stabilityText = hasChanges ? "Changed" : "Consistent";
             
-            // Set provider or default to empty string
-            const provider = modelData.provider || '';
-            const providerDisplay = provider ? `<div class="provider-tag">Provider: ${provider}</div>` : '';
+            // Get service provider information with fallback to legacy provider
+            const serviceProvider = modelData.service_provider || modelData.provider || '';
+            const providerDisplay = serviceProvider ? `<div class="provider-tag">${serviceProvider}</div>` : '';
             
             const cardHtml = `
                 <div class="signature-card bg-white rounded-lg shadow overflow-hidden">
