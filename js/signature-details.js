@@ -1,10 +1,39 @@
 // This file contains functions for viewing detailed information about individual signatures
 
+// Add immediate logging to verify console is working
+console.log('=== SIGNATURE DETAILS SCRIPT LOADED ===');
+console.log('Timestamp:', new Date().toISOString());
+console.log('User agent:', navigator.userAgent);
+
+// Global error handler to catch any uncaught errors
+window.addEventListener('error', function(event) {
+    console.error('=== GLOBAL ERROR CAUGHT ===');
+    console.error('Error:', event.error);
+    console.error('Message:', event.message);
+    console.error('Filename:', event.filename);
+    console.error('Line:', event.lineno);
+    console.error('Column:', event.colno);
+    console.error('Stack:', event.error?.stack);
+    console.error('Event:', event);
+});
+
+// Global unhandled promise rejection handler
+window.addEventListener('unhandledrejection', function(event) {
+    console.error('=== UNHANDLED PROMISE REJECTION ===');
+    console.error('Reason:', event.reason);
+    console.error('Promise:', event.promise);
+});
+
 // Function to hide loading overlay
 function hideLoadingOverlay() {
+    console.log('hideLoadingOverlay called');
     const overlay = document.getElementById('loading-overlay');
+    console.log('Loading overlay element:', overlay);
     if (overlay) {
         overlay.style.display = 'none';
+        console.log('Loading overlay hidden');
+    } else {
+        console.warn('Loading overlay element not found');
     }
 }
 
@@ -202,11 +231,13 @@ function displaySignatureDetails(signatureData) {
         }
         
         // Display truncated hash at the top
-        if (!metadata.distribution_hash) {
-            throw new Error('No distribution_hash found in metadata');
+        const hash = metadata.distribution_hash || metadata.signature_hash;
+        if (!hash) {
+            console.warn('No distribution_hash or signature_hash found in metadata');
+            console.log('Available metadata keys:', Object.keys(metadata));
+            throw new Error('No hash found in metadata (checked both distribution_hash and signature_hash)');
         }
         
-        const hash = metadata.distribution_hash;
         const truncatedHash = hash.substring(0, 8) + '...' + hash.substring(hash.length - 8);
         
         console.log('Looking for element with id "signature-hash"');
@@ -255,7 +286,7 @@ function displaySignatureDetails(signatureData) {
             metadataList.innerHTML = '';
             
             Object.entries(metadata).forEach(([key, value]) => {
-                if (key === 'distribution_hash') {
+                if (key === 'distribution_hash' || key === 'signature_hash') {
                     // Format the full hash with line breaks every 32 characters
                     const formattedHash = value.match(/.{1,32}/g).join('\n');
                     metadataList.appendChild(createListItem(key, formattedHash));
@@ -509,7 +540,7 @@ function createListItem(key, value) {
     const valueSpan = document.createElement('span');
     valueSpan.className = 'text-gray-900 font-medium';
     
-    if (key === 'distribution_hash') {
+    if (key === 'distribution_hash' || key === 'signature_hash') {
         valueSpan.className += ' break-all whitespace-pre-wrap font-mono text-sm';
         // Format the hash with line breaks every 32 characters
         const formattedHash = value.match(/.{1,32}/g).join('\n');
