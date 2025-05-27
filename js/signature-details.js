@@ -2,8 +2,18 @@
 
 // Add immediate logging to verify console is working
 console.log('=== SIGNATURE DETAILS SCRIPT LOADED ===');
+console.log('Script Version: 2.0 - Updated for hash field compatibility');
 console.log('Timestamp:', new Date().toISOString());
 console.log('User agent:', navigator.userAgent);
+
+// Force console to be visible and add an alert to confirm script loading
+if (typeof window !== 'undefined') {
+    console.log('Window object available, script running in browser');
+    // Add a temporary alert to confirm the updated script is loading
+    setTimeout(() => {
+        console.log('=== SCRIPT FULLY LOADED AND READY ===');
+    }, 100);
+}
 
 // Global error handler to catch any uncaught errors
 window.addEventListener('error', function(event) {
@@ -180,37 +190,64 @@ function displaySignatureDetails(signatureData) {
         modelNameEl.textContent = metadata.model_name;
         console.log('Model name set successfully');
         
-        // Add provider name if it exists (check both metadata and api_parameters)
-        const provider = metadata.provider || (api_parameters && api_parameters.provider);
-        console.log('Provider found:', provider);
-        if (provider) {
-            const providerElement = document.createElement('div');
-            providerElement.className = 'provider-tag';
-            providerElement.textContent = `Provider: ${provider}`;
-            modelNameEl.parentNode.appendChild(providerElement);
-            console.log('Provider element added');
+        // Clear any existing provider tags to prevent duplicates
+        const existingTags = modelNameEl.parentNode.querySelectorAll('.provider-tag');
+        existingTags.forEach(tag => tag.remove());
+        console.log('Cleared existing provider tags');
+        
+        // Helper function to safely extract string value
+        function getStringValue(value) {
+            if (typeof value === 'string') {
+                return value;
+            } else if (typeof value === 'object' && value !== null) {
+                // If it's an object, try to extract a meaningful string
+                if (value.name) return value.name;
+                if (value.provider) return value.provider;
+                if (value.toString && value.toString() !== '[object Object]') {
+                    return value.toString();
+                }
+                console.warn('Object value found but cannot extract string:', value);
+                return null;
+            }
+            return value ? String(value) : null;
         }
         
-        // Add creator if it exists
-        const creator = metadata.creator || (api_parameters && api_parameters.creator);
-        console.log('Creator found:', creator);
-        if (creator) {
+        // Collect all provider information
+        const providerInfo = {
+            provider: getStringValue(metadata.provider) || getStringValue(api_parameters?.provider),
+            creator: getStringValue(metadata.creator) || getStringValue(api_parameters?.creator),
+            service_provider: getStringValue(metadata.service_provider) || getStringValue(api_parameters?.service_provider)
+        };
+        
+        console.log('Provider info extracted:', providerInfo);
+        
+        // Add creator/developer if it exists
+        if (providerInfo.creator) {
             const creatorElement = document.createElement('div');
             creatorElement.className = 'provider-tag';
-            creatorElement.textContent = `Developer: ${creator}`;
+            creatorElement.textContent = `Developer: ${providerInfo.creator}`;
             modelNameEl.parentNode.appendChild(creatorElement);
-            console.log('Creator element added');
+            console.log('Creator element added:', providerInfo.creator);
         }
         
-        // Add service provider if it exists
-        const serviceProvider = metadata.service_provider || (api_parameters && api_parameters.service_provider);
-        console.log('Service provider found:', serviceProvider);
-        if (serviceProvider) {
+        // Add service provider if it exists and is different from creator
+        if (providerInfo.service_provider && providerInfo.service_provider !== providerInfo.creator) {
             const serviceProviderElement = document.createElement('div');
             serviceProviderElement.className = 'provider-tag';
-            serviceProviderElement.textContent = `Provider: ${serviceProvider}`;
+            serviceProviderElement.textContent = `Provider: ${providerInfo.service_provider}`;
             modelNameEl.parentNode.appendChild(serviceProviderElement);
-            console.log('Service provider element added');
+            console.log('Service provider element added:', providerInfo.service_provider);
+        }
+        
+        // Add legacy provider if it exists and is different from the others
+        if (providerInfo.provider && 
+            providerInfo.provider !== providerInfo.creator && 
+            providerInfo.provider !== providerInfo.service_provider) {
+            const providerElement = document.createElement('div');
+            providerElement.className = 'provider-tag';
+            providerElement.textContent = `Provider: ${providerInfo.provider}`;
+            modelNameEl.parentNode.appendChild(providerElement);
+            console.log('Legacy provider element added:', providerInfo.provider);
         }
         
         console.log('Looking for element with id "signature-date"');
@@ -610,4 +647,49 @@ function showError(message) {
 }
 
 // Initialize the page when the DOM is loaded
-document.addEventListener('DOMContentLoaded', initSignatureDetailsPage);
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== DOM CONTENT LOADED EVENT FIRED ===');
+    
+    // Immediate DOM check
+    const requiredElements = [
+        'model-name',
+        'signature-date', 
+        'signature-hash',
+        'metadata-list',
+        'config-list',
+        'path-tokens',
+        'total-tokens',
+        'unique-tokens',
+        'token-table-body',
+        'distribution-chart'
+    ];
+    
+    console.log('Checking for required DOM elements...');
+    const missingElements = [];
+    const foundElements = [];
+    
+    requiredElements.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            foundElements.push(id);
+        } else {
+            missingElements.push(id);
+        }
+    });
+    
+    console.log('Found elements:', foundElements);
+    console.log('Missing elements:', missingElements);
+    
+    if (missingElements.length > 0) {
+        console.error('CRITICAL: Missing required DOM elements:', missingElements);
+        console.log('Current page HTML structure check:');
+        console.log('Document title:', document.title);
+        console.log('Body exists:', !!document.body);
+        console.log('All elements with IDs:', Array.from(document.querySelectorAll('[id]')).map(el => el.id));
+    } else {
+        console.log('✅ All required DOM elements found');
+    }
+    
+    // Now call the original initialization
+    initSignatureDetailsPage();
+});
