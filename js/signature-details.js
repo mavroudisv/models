@@ -44,96 +44,186 @@ function waitForChartJS() {
 
 // Function to initialize the details page
 async function initSignatureDetailsPage() {
+    console.log('=== Starting initSignatureDetailsPage ===');
+    console.log('Document ready state:', document.readyState);
+    console.log('Current URL:', window.location.href);
+    
     showLoadingOverlay();
     
     try {
+        console.log('Waiting for Chart.js to load...');
         // Wait for Chart.js to load
         await waitForChartJS();
+        console.log('Chart.js loaded successfully');
         
         // Get signature file path from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
         const signatureFile = urlParams.get('file');
+        console.log('URL parameters:', Object.fromEntries(urlParams.entries()));
+        console.log('Signature file parameter:', signatureFile);
         
         if (!signatureFile) {
-            throw new Error('No signature file specified');
+            throw new Error('No signature file specified in URL parameters');
         }
         
         console.log('Loading signature file:', signatureFile);
         // Fetch the signature data using the fetchSignatureFile function
         const signatureData = await fetchSignatureFile(signatureFile);
-        console.log('Signature data loaded:', signatureData);
+        console.log('Signature data loaded successfully:', signatureData);
+        
+        // Check if DOM is ready
+        console.log('Checking DOM readiness...');
+        console.log('Document body exists:', !!document.body);
+        console.log('Document head exists:', !!document.head);
+        console.log('Signature details container exists:', !!document.getElementById('signature-details'));
         
         // Display the signature data
+        console.log('Calling displaySignatureDetails...');
         displaySignatureDetails(signatureData);
         
     } catch (error) {
-        console.error('Error loading signature:', error);
+        console.error('Error in initSignatureDetailsPage:', error);
+        console.error('Error stack:', error.stack);
+        console.error('Error details:', {
+            name: error.name,
+            message: error.message,
+            fileName: error.fileName,
+            lineNumber: error.lineNumber,
+            columnNumber: error.columnNumber
+        });
         showError(`Error loading signature: ${error.message}`);
     } finally {
+        console.log('Hiding loading overlay...');
         hideLoadingOverlay();
+        console.log('=== initSignatureDetailsPage completed ===');
     }
 }
 
 // Function to display signature details
 function displaySignatureDetails(signatureData) {
     try {
-        // Extract relevant information
+        console.log('Starting displaySignatureDetails with data:', signatureData);
+        
+        // Validate input data
+        if (!signatureData) {
+            throw new Error('No signature data provided');
+        }
+        
+        // Extract relevant information with validation
         const { metadata, configuration, path_analysis, distribution_results, api_parameters } = signatureData;
+        
+        if (!metadata) {
+            throw new Error('No metadata found in signature data');
+        }
+        
+        console.log('Metadata:', metadata);
+        console.log('Configuration:', configuration);
+        console.log('Path analysis:', path_analysis);
+        console.log('Distribution results:', distribution_results);
+        console.log('API parameters:', api_parameters);
+        
+        // Check if model_name exists
+        if (!metadata.model_name) {
+            throw new Error('No model_name found in metadata');
+        }
         
         // Update page title
         document.title = `StampR - ${metadata.model_name} Signature Details`;
+        console.log('Updated page title');
         
-        // Set header information
+        // Set header information with detailed logging
+        console.log('Looking for element with id "model-name"');
         const modelNameEl = document.getElementById('model-name');
+        console.log('model-name element:', modelNameEl);
+        
         if (!modelNameEl) {
-            throw new Error('Element with id "model-name" not found');
+            // Log all elements with IDs for debugging
+            const allElementsWithIds = document.querySelectorAll('[id]');
+            console.log('All elements with IDs found on page:', Array.from(allElementsWithIds).map(el => ({
+                id: el.id,
+                tagName: el.tagName,
+                className: el.className
+            })));
+            throw new Error('Element with id "model-name" not found. Check if the HTML page loaded correctly.');
         }
+        
+        console.log('Setting model name to:', metadata.model_name);
         modelNameEl.textContent = metadata.model_name;
+        console.log('Model name set successfully');
         
         // Add provider name if it exists (check both metadata and api_parameters)
         const provider = metadata.provider || (api_parameters && api_parameters.provider);
+        console.log('Provider found:', provider);
         if (provider) {
             const providerElement = document.createElement('div');
             providerElement.className = 'provider-tag';
             providerElement.textContent = `Provider: ${provider}`;
             modelNameEl.parentNode.appendChild(providerElement);
+            console.log('Provider element added');
         }
         
         // Add creator if it exists
         const creator = metadata.creator || (api_parameters && api_parameters.creator);
+        console.log('Creator found:', creator);
         if (creator) {
             const creatorElement = document.createElement('div');
             creatorElement.className = 'provider-tag';
             creatorElement.textContent = `Developer: ${creator}`;
             modelNameEl.parentNode.appendChild(creatorElement);
+            console.log('Creator element added');
         }
         
         // Add service provider if it exists
         const serviceProvider = metadata.service_provider || (api_parameters && api_parameters.service_provider);
+        console.log('Service provider found:', serviceProvider);
         if (serviceProvider) {
             const serviceProviderElement = document.createElement('div');
             serviceProviderElement.className = 'provider-tag';
             serviceProviderElement.textContent = `Provider: ${serviceProvider}`;
             modelNameEl.parentNode.appendChild(serviceProviderElement);
+            console.log('Service provider element added');
         }
         
+        console.log('Looking for element with id "signature-date"');
         const signatureDateEl = document.getElementById('signature-date');
+        console.log('signature-date element:', signatureDateEl);
+        
         if (!signatureDateEl) {
-            throw new Error('Element with id "signature-date" not found');
+            throw new Error('Element with id "signature-date" not found. Check if the HTML page loaded correctly.');
         }
-        signatureDateEl.textContent = formatDate(metadata.date);
+        
+        if (!metadata.date) {
+            console.warn('No date found in metadata');
+            signatureDateEl.textContent = 'Date not available';
+        } else {
+            console.log('Setting signature date to:', metadata.date);
+            signatureDateEl.textContent = formatDate(metadata.date);
+            console.log('Signature date set successfully');
+        }
         
         // Display truncated hash at the top
+        if (!metadata.distribution_hash) {
+            throw new Error('No distribution_hash found in metadata');
+        }
+        
         const hash = metadata.distribution_hash;
         const truncatedHash = hash.substring(0, 8) + '...' + hash.substring(hash.length - 8);
+        
+        console.log('Looking for element with id "signature-hash"');
         const signatureHashEl = document.getElementById('signature-hash');
+        console.log('signature-hash element:', signatureHashEl);
+        
         if (!signatureHashEl) {
-            throw new Error('Element with id "signature-hash" not found');
+            throw new Error('Element with id "signature-hash" not found. Check if the HTML page loaded correctly.');
         }
+        
+        console.log('Setting signature hash to:', truncatedHash);
         signatureHashEl.textContent = truncatedHash;
+        console.log('Signature hash set successfully');
         
         // Add copy functionality for the full hash
         const copyButton = document.getElementById('copy-hash');
+        console.log('copy-hash button:', copyButton);
         if (copyButton) {
             copyButton.addEventListener('click', () => {
                 navigator.clipboard.writeText(hash).then(() => {
@@ -153,10 +243,14 @@ function displaySignatureDetails(signatureData) {
                     console.error('Failed to copy hash:', err);
                 });
             });
+            console.log('Copy button event listener added');
         }
         
         // Set metadata section
+        console.log('Looking for element with id "metadata-list"');
         const metadataList = document.getElementById('metadata-list');
+        console.log('metadata-list element:', metadataList);
+        
         if (metadataList) {
             metadataList.innerHTML = '';
             
@@ -169,32 +263,62 @@ function displaySignatureDetails(signatureData) {
                     metadataList.appendChild(createListItem(key, value));
                 }
             });
+            console.log('Metadata list populated');
+        } else {
+            console.warn('metadata-list element not found');
         }
         
         // Set configuration section
+        console.log('Looking for element with id "config-list"');
         const configList = document.getElementById('config-list');
-        if (configList) {
+        console.log('config-list element:', configList);
+        
+        if (configList && configuration) {
             configList.innerHTML = '';
             
             Object.entries(configuration).forEach(([key, value]) => {
                 configList.appendChild(createListItem(key, value));
             });
+            console.log('Configuration list populated');
+        } else {
+            if (!configList) console.warn('config-list element not found');
+            if (!configuration) console.warn('No configuration data available');
         }
         
         // Set path analysis
+        console.log('Looking for element with id "path-tokens"');
         const pathTokensEl = document.getElementById('path-tokens');
+        console.log('path-tokens element:', pathTokensEl);
+        
         if (pathTokensEl && path_analysis && path_analysis.path_tokens) {
             const pathTokens = path_analysis.path_tokens.join(' → ');
             pathTokensEl.textContent = pathTokens;
+            console.log('Path tokens set successfully');
+        } else {
+            if (!pathTokensEl) console.warn('path-tokens element not found');
+            if (!path_analysis) console.warn('No path analysis data available');
+            if (!path_analysis?.path_tokens) console.warn('No path tokens in path analysis data');
         }
         
         // Create distribution chart
+        console.log('Creating distribution chart...');
         createDistributionChart(distribution_results);
         
         // Fill token table
+        console.log('Creating token table...');
         createTokenTable(distribution_results);
+        
+        console.log('displaySignatureDetails completed successfully');
+        
     } catch (error) {
-        console.error('Error displaying signature details:', error);
+        console.error('Error in displaySignatureDetails:', error);
+        console.error('Error stack:', error.stack);
+        console.error('Current document state:', {
+            readyState: document.readyState,
+            title: document.title,
+            body: document.body ? 'exists' : 'missing',
+            head: document.head ? 'exists' : 'missing'
+        });
         showError(`Error displaying signature details: ${error.message}`);
     }
 }
