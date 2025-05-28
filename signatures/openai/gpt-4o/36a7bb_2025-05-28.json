@@ -1,10 +1,11 @@
 {
   "metadata": {
     "model_name": "gpt-4o",
+    "model_short_name": "gpt-4o",
     "service_provider": "OpenAI",
     "creator": "OpenAI",
     "tokenizer": "o200k_base",
-    "date": "2025-05-28_10-01-02",
+    "date": "2025-05-28_11-55-37",
     "request_country": "United States",
     "signature_hash": "36a7bb5630a508745b3240603b69677159e90204185af63ebb376963e6eed324",
     "system_fingerprint": "fp_07871e2ad8"
