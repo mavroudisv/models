@@ -610,6 +610,33 @@ function formatValue(value) {
         return '-';
     }
     
+    // Handle arrays (like messages)
+    if (Array.isArray(value)) {
+        // Special handling for messages array
+        if (value.length > 0 && value[0].role && value[0].content) {
+            return value.map((msg, index) => {
+                const roleLabel = msg.role === 'user' ? 'User' : msg.role === 'assistant' ? 'Assistant' : msg.role;
+                return `[${index + 1}] ${roleLabel}: ${msg.content}`;
+            }).join(' | ');
+        }
+        // General array handling
+        return value.map(item => 
+            typeof item === 'object' ? JSON.stringify(item) : String(item)
+        ).join(', ');
+    }
+    
+    // Handle objects
+    if (typeof value === 'object') {
+        // For response_format and similar simple objects
+        if (Object.keys(value).length <= 3) {
+            return Object.entries(value)
+                .map(([key, val]) => `${key}: ${val}`)
+                .join(', ');
+        }
+        // For complex objects, use JSON formatting
+        return JSON.stringify(value);
+    }
+    
     return String(value);
 }
 
