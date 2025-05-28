@@ -424,7 +424,7 @@ function updateChangesChart(models) {
     try {
         // Check if Chart.js is loaded
         if (typeof Chart === 'undefined') {
-            console.error('Chart.js is not loaded');
+            console.warn('Chart.js is not loaded, skipping changes chart');
             return;
         }
         
@@ -544,89 +544,99 @@ function updateChangesChart(models) {
 
 // Function to update stability chart
 function updateStabilityChart(modelData) {
-    const stabilityCtx = document.getElementById('stabilityChart');
-    if (!stabilityCtx) {
-        console.warn('Stability chart canvas not found');
-        return;
-    }
-    
-    if (!modelData.signatures || modelData.signatures.length < 2) {
-        // Not enough data for stability chart
-        console.log('Not enough data for stability chart');
-        return;
-    }
-    
-    // Get dates in chronological order (oldest first)
-    const dates = modelData.signatures.map(sig => sig.date).reverse();
-    const formattedDates = dates.map(date => {
-        try {
-            return new Date(date).toLocaleDateString('en-US', { 
-                month: 'short', 
-                day: 'numeric' 
-            });
-        } catch (e) {
-            return date;
+    try {
+        // Check if Chart.js is loaded
+        if (typeof Chart === 'undefined') {
+            console.warn('Chart.js is not loaded, skipping stability chart');
+            return;
         }
-    });
-    
-    // Create similarity data
-    // In a real implementation, this would calculate actual similarity
-    // Here we're just using simulated data that starts at 100% and gradually decreases
-    const stabilityData = [100];
-    for (let i = 1; i < dates.length; i++) {
-        // Simulate some random changes (in reality this would be calculated)
-        const prev = stabilityData[i-1];
-        const change = Math.random() * 5;
-        stabilityData.push(Math.max(85, prev - change));
-    }
-    
-    // Update the chart
-    if (stabilityChart) {
-        stabilityChart.destroy();
-    }
-    
-    stabilityChart = new Chart(stabilityCtx.getContext('2d'), {
-        type: 'line',
-        data: {
-            labels: formattedDates,
-            datasets: [
-                {
-                    label: 'Signature Similarity',
-                    data: stabilityData,
-                    borderColor: 'rgba(79, 70, 229, 1)',
-                    backgroundColor: 'rgba(79, 70, 229, 0.1)',
-                    tension: 0.4,
-                    fill: true
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Signature Stability Over Time (% similarity to initial)'
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false
-                }
+        
+        const stabilityCtx = document.getElementById('stabilityChart');
+        if (!stabilityCtx) {
+            console.warn('Stability chart canvas not found');
+            return;
+        }
+        
+        if (!modelData.signatures || modelData.signatures.length < 2) {
+            // Not enough data for stability chart
+            console.log('Not enough data for stability chart');
+            return;
+        }
+        
+        // Get dates in chronological order (oldest first)
+        const dates = modelData.signatures.map(sig => sig.date).reverse();
+        const formattedDates = dates.map(date => {
+            try {
+                return new Date(date).toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+            } catch (e) {
+                return date;
+            }
+        });
+        
+        // Create similarity data
+        // In a real implementation, this would calculate actual similarity
+        // Here we're just using simulated data that starts at 100% and gradually decreases
+        const stabilityData = [100];
+        for (let i = 1; i < dates.length; i++) {
+            // Simulate some random changes (in reality this would be calculated)
+            const prev = stabilityData[i-1];
+            const change = Math.random() * 5;
+            stabilityData.push(Math.max(85, prev - change));
+        }
+        
+        // Update the chart
+        if (stabilityChart) {
+            stabilityChart.destroy();
+        }
+        
+        stabilityChart = new Chart(stabilityCtx.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: formattedDates,
+                datasets: [
+                    {
+                        label: 'Signature Similarity',
+                        data: stabilityData,
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
             },
-            scales: {
-                y: {
-                    min: 0,
-                    max: 100,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
                     title: {
                         display: true,
-                        text: 'Similarity (%)'
+                        text: 'Signature Stability Over Time (% similarity to initial)'
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Similarity (%)'
+                        }
                     }
                 }
             }
-        }
-    });
-    
-    console.log('Stability chart updated');
+        });
+        
+        console.log('Stability chart updated');
+    } catch (error) {
+        console.error('Error updating stability chart:', error);
+    }
 }
 
 // Function to compare two models

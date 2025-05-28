@@ -298,39 +298,36 @@ select:hover, input:hover {
     position: relative;
     min-height: 300px;
     background: yellow; /* Very obvious background for debugging */
-    padding-left: 3rem;
-}
-
-.history-timeline::before {
-    content: '';
-    position: absolute;
-    left: 1rem;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: red;
-    display: block;
+    border-left: 5px solid red; /* Simple border line */
+    padding-left: 2rem;
+    margin-left: 1rem;
 }
 
 .timeline-node {
     position: relative;
     background: lightblue; /* Make timeline nodes obvious */
     margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
 }
 
 .timeline-node::before {
-    content: '';
+    content: '●';
     position: absolute;
-    left: -2.25rem;
+    left: -2rem;
     top: 1rem;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     background: blue;
+    color: white;
     border: 3px solid white;
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
     z-index: 10;
-    display: block;
 }
 
 .timeline-node:hover::before {
