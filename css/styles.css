@@ -293,51 +293,57 @@ select:hover, input:hover {
     backdrop-filter: blur(5px);
 }
 
-/* Timeline enhancements */
+/* Timeline enhancements - Centered Approach */
 .history-timeline {
     position: relative;
     min-height: 200px;
-    padding-left: 2rem;
-    margin-left: 1rem;
-    background: transparent !important;
+    /* padding-left is now handled by Tailwind's pl-12 (3rem) on the HTML element */
+    margin-left: 1rem; /* Optional: if you want overall left margin for the component */
+    background: transparent;
 }
 
-.history-timeline::before {
+.history-timeline::before { /* The Vertical Line */
     content: '';
     position: absolute;
-    left: -0.5rem;
+    /* Position line in the middle of the 3rem padding (pl-12 from Tailwind) */
+    left: 1.5rem;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background: linear-gradient(180deg, var(--primary-500), var(--primary-300));
-    border-radius: 1px;
+    width: 1px;
+    background: #d1d5db; /* Subtle gray line */
+    transform: translateX(-50%); /* Center the 1px line itself */
+    z-index: 1;
 }
 
 .timeline-node {
     position: relative;
     margin-bottom: 2rem;
-    padding: 0;
+    padding: 0; /* Nodes themselves don't need padding here */
 }
 
-.timeline-node::before {
+.timeline-node::before { /* The Dot */
     content: '';
     position: absolute;
+    /* Align with the line: parent padding is 3rem, line is at 1.5rem from parent edge.
+       Node content starts at 3rem from parent edge.
+       So, dot needs to be 1.5rem to the left of node's content start. */
     left: -1.5rem;
-    top: 1rem;
-    width: 12px;
-    height: 12px;
-    background: var(--primary-500);
-    border: 3px solid white;
+    top: 1rem; /* Align with text content (assuming 1rem top padding in text block) */
+    width: 10px;
+    height: 10px;
+    background: #6366f1; /* Main dot color */
+    border: 2px solid white;
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transform: translateX(-50%); /* Center the dot on its defined 'left' position */
     z-index: 10;
 }
 
 .timeline-node:hover::before {
-    background: var(--primary-600);
-    transform: scale(1.2);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    background: #4f46e5; /* Darker on hover */
+    transform: translateX(-50%) scale(1.1); /* Maintain centering during hover */
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
 }
 
 /* Enhanced content sections */
