@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "last_updated": "2025-05-28 12:10:33"
+    "last_updated": "2025-05-28 12:16:38"
   },
   "models": {
-    "llama_4_maverick_17b_128e_instruct-openrouter_deepinfra": {
+    "llama4_17b-deepinfra": {
       "model_name": "meta-llama/llama-4-maverick-17b-128e-instruct",
-      "model_short_name": "llama-4-maverick-17b-128e-instruct",
+      "model_short_name": "Llama4_17b",
       "creator": "Meta",
       "service_provider": "OpenRouter/DeepInfra",
       "signatures": [
