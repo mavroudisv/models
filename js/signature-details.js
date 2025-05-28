@@ -1,19 +1,19 @@
 // This file contains functions for viewing detailed information about individual signatures
 
 // Add immediate logging to verify console is working
-console.log('=== SIGNATURE DETAILS SCRIPT LOADED ===');
-console.log('Script Version: 2.0 - Updated for hash field compatibility');
-console.log('Timestamp:', new Date().toISOString());
-console.log('User agent:', navigator.userAgent);
+// console.log('=== SIGNATURE DETAILS SCRIPT LOADED ===');
+// console.log('Script Version: 2.0 - Updated for hash field compatibility');
+// console.log('Timestamp:', new Date().toISOString());
+// console.log('User agent:', navigator.userAgent);
 
-// Force console to be visible and add an alert to confirm script loading
-if (typeof window !== 'undefined') {
-    console.log('Window object available, script running in browser');
-    // Add a temporary alert to confirm the updated script is loading
-    setTimeout(() => {
-        console.log('=== SCRIPT FULLY LOADED AND READY ===');
-    }, 100);
-}
+// // Force console to be visible and add an alert to confirm script loading
+// if (typeof window !== 'undefined') {
+//     console.log('Window object available, script running in browser');
+//     // Add a temporary alert to confirm the updated script is loading
+//     setTimeout(() => {
+//         console.log('=== SCRIPT FULLY LOADED AND READY ===');
+//     }, 100);
+// }
 
 // Global error handler to catch any uncaught errors
 window.addEventListener('error', function(event) {
