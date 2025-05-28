@@ -297,12 +297,25 @@ select:hover, input:hover {
 .history-timeline {
     position: relative;
     min-height: 300px;
-    border-left: 4px solid #ff0000;
-    margin-left: 2rem;
+    background: yellow; /* Very obvious background for debugging */
+    padding-left: 3rem;
+}
+
+.history-timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: red;
+    display: block;
 }
 
 .timeline-node {
     position: relative;
+    background: lightblue; /* Make timeline nodes obvious */
+    margin-bottom: 2rem;
 }
 
 .timeline-node::before {
@@ -312,15 +325,16 @@ select:hover, input:hover {
     top: 1rem;
     width: 16px;
     height: 16px;
-    background: #0000ff;
+    background: blue;
     border: 3px solid white;
     border-radius: 50%;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     z-index: 10;
+    display: block;
 }
 
 .timeline-node:hover::before {
-    background: var(--primary-600);
+    background: darkblue;
     transform: scale(1.2);
     transition: all 0.3s ease;
 }
