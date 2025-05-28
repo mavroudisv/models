@@ -198,8 +198,8 @@ function displaySignatureDetails(combinedData) {
         console.log('Model key:', modelKey);
         console.log('Model info:', modelInfo);
         
-        // Use the model key as the display name (e.g., "llama4_17b-deepinfra")
-        const displayName = modelKey;
+        // Use the model_short_name as the display name (e.g., "Llama4_17b")
+        const displayName = modelInfo.model_short_name || modelKey;
         
         // Update page title
         document.title = `StampR - ${displayName} Signature Details`;

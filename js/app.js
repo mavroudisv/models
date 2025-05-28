@@ -188,8 +188,8 @@ function updateModelCards(models) {
         if (modelData.signatures && modelData.signatures.length > 0) {
             const latestSignature = modelData.signatures[0]; // First one is most recent
             
-            // Use the model key as the display name (e.g., "llama4_17b-deepinfra")
-            const displayName = modelKey;
+            // Use the model_short_name as the display name (e.g., "Llama4_17b")
+            const displayName = modelData.model_short_name || modelKey;
             
             let formattedDate;
             try {
@@ -285,8 +285,8 @@ function updateModelCards(models) {
 // Function to update model selectors
 function updateModelSelectors(models) {
     const modelOptions = Object.entries(models).map(([modelKey, modelData]) => {
-        // Use the model key as the display name
-        const displayName = modelKey;
+        // Use the model_short_name as the display name
+        const displayName = modelData.model_short_name || modelKey;
         return `<option value="${modelKey}">${displayName}</option>`;
     }).join('');
     
@@ -470,8 +470,8 @@ function updateChangesChart(models) {
             const color = colors.default[index % colors.default.length];
             const bgColor = color.replace('1)', '0.1)');
             
-            // Use model key as the display name
-            const displayName = modelKey;
+            // Use model_short_name as the display name
+            const displayName = models[modelKey].model_short_name || modelKey;
             
             // Create data points - 1 if there was a change on that date, 0 otherwise
             const data = sortedDates.map(date => dates[date] || 0);
