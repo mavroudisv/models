@@ -401,8 +401,13 @@ function updateHistoryTimeline(modelData) {
         timelineEl.innerHTML += nodeHtml;
     });
     
-    // Update stability chart
-    updateStabilityChart(modelData);
+    // Update stability chart (only if canvas exists)
+    const stabilityCanvas = document.getElementById('stabilityChart');
+    if (stabilityCanvas) {
+        updateStabilityChart(modelData);
+    } else {
+        console.log('Stability chart canvas not found - skipping chart update');
+    }
     
     console.log('History timeline updated');
 }

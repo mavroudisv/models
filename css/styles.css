@@ -299,6 +299,7 @@ select:hover, input:hover {
     min-height: 200px;
     padding-left: 2rem;
     margin-left: 1rem;
+    background: transparent !important;
 }
 
 .history-timeline::before {
