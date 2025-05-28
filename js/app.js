@@ -5,6 +5,23 @@ let stabilityChart = null;
 
 // Initialize application on DOM content loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, checking Chart.js availability...');
+    
+    // Check Chart.js immediately
+    if (typeof Chart !== 'undefined') {
+        console.log('Chart.js is available:', Chart.version);
+    } else {
+        console.error('Chart.js is NOT available');
+        // Try to load it manually
+        setTimeout(() => {
+            if (typeof Chart !== 'undefined') {
+                console.log('Chart.js loaded after delay:', Chart.version);
+            } else {
+                console.error('Chart.js still not available after delay');
+            }
+        }, 1000);
+    }
+    
     // Hide all tab contents except the active one
     document.querySelectorAll('.tab-content').forEach(content => {
         if (!content.classList.contains('active')) {
@@ -18,8 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load signature data
     loadSignatureData();
     
-    // Set up initial empty charts
-    initializeCharts();
+    // Set up initial empty charts (only if Chart.js is available)
+    setTimeout(() => {
+        initializeCharts();
+    }, 500); // Give Chart.js time to load
 });
 
 // Fix for tab navigation
