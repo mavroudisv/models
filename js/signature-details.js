@@ -321,18 +321,18 @@ function displaySignatureDetails(combinedData) {
             
             // First add model information from the index
             metadataList.appendChild(createListItem('model_key', modelKey));
-            if (modelInfo.model_name) {
-                metadataList.appendChild(createListItem('full_model_name', modelInfo.model_name));
-            }
-            if (modelInfo.model_short_name) {
-                metadataList.appendChild(createListItem('model_short_name', modelInfo.model_short_name));
-            }
-            if (modelInfo.creator) {
-                metadataList.appendChild(createListItem('creator', modelInfo.creator));
-            }
-            if (modelInfo.service_provider) {
-                metadataList.appendChild(createListItem('service_provider', modelInfo.service_provider));
-            }
+            // if (modelInfo.model_name) {
+            //     metadataList.appendChild(createListItem('full_model_name', modelInfo.model_name));
+            // }
+            // if (modelInfo.model_short_name) {
+            //     metadataList.appendChild(createListItem('model_short_name', modelInfo.model_short_name));
+            // }
+            // if (modelInfo.creator) {
+            //     metadataList.appendChild(createListItem('creator', modelInfo.creator));
+            // }
+            // if (modelInfo.service_provider) {
+            //     metadataList.appendChild(createListItem('service_provider', modelInfo.service_provider));
+            // }
             
             // Then add signature metadata
             Object.entries(metadata).forEach(([key, value]) => {
