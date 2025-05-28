@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-28 10:01:09"
+    "last_updated": "2025-05-28 11:13:52"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -666,6 +666,12 @@
           "date": "2025-05-28",
           "hash": "c28522",
           "full_hash": "c28522"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/bf6258_2025-05-28.json",
+          "date": "2025-05-28",
+          "hash": "bf6258",
+          "full_hash": "bf6258"
         },
         {
           "file": "signatures/openrouter/llama-4/DeepInfra/ecf4a1_2025-05-27.json",
