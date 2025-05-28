@@ -296,19 +296,9 @@ select:hover, input:hover {
 /* Timeline enhancements */
 .history-timeline {
     position: relative;
-    min-height: 200px;
-}
-
-.history-timeline::before {
-    content: '';
-    position: absolute;
-    left: -2.5rem;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--primary-500);
-    border-radius: 2px;
-    z-index: 1;
+    min-height: 300px;
+    border-left: 4px solid #ff0000;
+    margin-left: 2rem;
 }
 
 .timeline-node {
@@ -318,11 +308,11 @@ select:hover, input:hover {
 .timeline-node::before {
     content: '';
     position: absolute;
-    left: -3rem;
+    left: -2.25rem;
     top: 1rem;
-    width: 14px;
-    height: 14px;
-    background: var(--primary-500);
+    width: 16px;
+    height: 16px;
+    background: #0000ff;
     border: 3px solid white;
     border-radius: 50%;
     box-shadow: var(--shadow-md);
