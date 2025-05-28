@@ -1,36 +1,35 @@
 {
   "metadata": {
-    "last_updated": "2025-05-28 12:08:08"
+    "last_updated": "2025-05-28 12:10:33"
   },
   "models": {
-    "gpt-4o": {
-      "name": "gpt-4o",
-      "signatures": [
-        {
-          "file": "signatures/openai/gpt-4o/2d69b9_2025-05-28.json",
-          "date": "2025-05-28",
-          "hash": "2d69b9",
-          "full_hash": "2d69b9"
-        }
-      ],
-      "provider": "OpenAI",
-      "developer": "OpenAI",
-      "service_provider": "OpenAI",
-      "creator": "OpenAI"
-    },
-    "DeepInfra": {
-      "name": "meta-llama/llama-4-maverick-17b-128e-instruct",
+    "llama_4_maverick_17b_128e_instruct-openrouter_deepinfra": {
+      "model_name": "meta-llama/llama-4-maverick-17b-128e-instruct",
+      "model_short_name": "llama-4-maverick-17b-128e-instruct",
+      "creator": "Meta",
+      "service_provider": "OpenRouter/DeepInfra",
       "signatures": [
         {
           "file": "signatures/openrouter/llama-4/DeepInfra/c28522_2025-05-28.json",
           "date": "2025-05-28",
           "hash": "c28522",
-          "full_hash": "c28522"
+          "full_hash": "c285229e14cffefffb029b66aae6b1aed6841536b4591168706d3056b690ea4b"
         }
-      ],
-      "provider": "Meta",
-      "service_provider": "OpenRouter/DeepInfra",
-      "creator": "Meta"
+      ]
+    },
+    "gpt_4o-openai": {
+      "model_name": "gpt-4o",
+      "model_short_name": "gpt-4o",
+      "creator": "OpenAI",
+      "service_provider": "OpenAI",
+      "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o/36a7bb_2025-05-28.json",
+          "date": "2025-05-28",
+          "hash": "36a7bb",
+          "full_hash": "36a7bb5630a508745b3240603b69677159e90204185af63ebb376963e6eed324"
+        }
+      ]
     }
   }
 }
