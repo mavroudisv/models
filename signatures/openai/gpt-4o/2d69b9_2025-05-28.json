@@ -1,13 +1,14 @@
 {
   "metadata": {
     "model_name": "gpt-4o",
+    "model_short_name": "gpt-4o",
     "service_provider": "OpenAI",
     "creator": "OpenAI",
     "tokenizer": "o200k_base",
-    "date": "2025-05-22_07-00-50",
+    "date": "2025-05-28_12-08-00",
     "request_country": "United States",
-    "signature_hash": "b8cb7142417dd03ed7efa050f115c3d14a089b368a65dd5e56e24c8a6f5eec95",
-    "system_fingerprint": "fp_76544d79cb"
+    "signature_hash": "2d69b9c3a74d6fad1376f896400f734d5069b28c8e99319a41d5c996895c2111",
+    "system_fingerprint": "fp_9bddfca6e2"
   },
   "configuration": {
     "target_position": 4,
@@ -32,17 +33,17 @@
     "path_tokens": [
       "j",
       "me",
-      "b",
-      "vl"
+      "fz",
+      "ex"
     ]
   },
   "distribution_results": {
     "total_tokens_collected": 1,
     "unique_tokens_collected": 1,
     "tokens": {
-      "wf": {
-        "token_string": "wf",
-        "token_id": 80804,
+      "v": {
+        "token_string": "v",
+        "token_id": 85,
         "count": 1,
         "probability": 1.0
       }
