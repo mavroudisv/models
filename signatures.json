@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-28 16:00:56"
+    "last_updated": "2025-05-28 17:00:59"
   },
   "models": {
     "llama4_17b-deepinfra": {
@@ -28,6 +28,12 @@
           "date": "2025-05-28",
           "hash": "f5cd54",
           "full_hash": "f5cd54fa22af25ecd32966a7bef9972f8cbdcf7db3d04feb4d8330d252e1ad91"
+        },
+        {
+          "file": "signatures/openai/gpt-4o/e7f392_2025-05-28.json",
+          "date": "2025-05-28",
+          "hash": "e7f392",
+          "full_hash": "e7f3923e4a265f1e90d5422ef55f9d70c549876c7f5acb0240bc704f2a12068e"
         },
         {
           "file": "signatures/openai/gpt-4o/36a7bb_2025-05-28.json",
