@@ -95,40 +95,9 @@ function initializeCharts() {
             return;
         }
         
-        // Initialize changes chart
-        const changesCtx = document.getElementById('changesChart');
-        if (changesCtx) {
-            changesChart = new Chart(changesCtx.getContext('2d'), {
-                type: 'line',
-                data: {
-                    labels: ['Loading...'],
-                    datasets: [
-                        {
-                            label: 'Loading data...',
-                            data: [0],
-                            borderColor: 'rgba(79, 70, 229, 1)',
-                            backgroundColor: 'rgba(79, 70, 229, 0.1)',
-                            tension: 0.4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Signature Changes per Model'
-                        }
-                    }
-                }
-            });
-            console.log('Changes chart initialized');
-        } else {
-            console.warn('Changes chart canvas not found');
-        }
+        // Note: changesChart initialization removed since canvas doesn't exist in HTML
+        // The comparisonChart and stabilityChart are initialized when needed
         
-        // Initialize other charts when their containers are visible
         console.log('Charts initialization complete');
     } catch (error) {
         console.error('Error initializing charts:', error);
@@ -168,8 +137,8 @@ async function loadSignatureData() {
         // Update the model selectors in comparison and history tabs
         updateModelSelectors(models);
         
-        // Update charts with model data
-        updateChangesChart(models);
+        // Update charts with model data - commented out since changesChart canvas doesn't exist
+        // updateChangesChart(models);
         
         // Set up event listeners
         setupEventListeners(models);
