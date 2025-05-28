@@ -105,10 +105,41 @@ async function initSignatureDetailsPage() {
             throw new Error('No signature file specified in URL parameters');
         }
         
+        // First, load the signatures index to get model information
+        console.log('Loading signatures index...');
+        const signaturesIndex = await fetchSignaturesIndex();
+        console.log('Signatures index loaded successfully');
+        
+        // Find which model this signature belongs to
+        let modelKey = null;
+        let modelData = null;
+        
+        for (const [key, data] of Object.entries(signaturesIndex.models)) {
+            const matchingSignature = data.signatures.find(sig => sig.file === signatureFile);
+            if (matchingSignature) {
+                modelKey = key;
+                modelData = data;
+                break;
+            }
+        }
+        
+        if (!modelKey || !modelData) {
+            throw new Error(`Could not find model information for signature file: ${signatureFile}`);
+        }
+        
+        console.log('Found model:', modelKey, modelData);
+        
+        // Now load the individual signature file
         console.log('Loading signature file:', signatureFile);
-        // Fetch the signature data using the fetchSignatureFile function
         const signatureData = await fetchSignatureFile(signatureFile);
         console.log('Signature data loaded successfully:', signatureData);
+        
+        // Combine the model information with signature data
+        const combinedData = {
+            ...signatureData,
+            modelKey: modelKey,
+            modelInfo: modelData
+        };
         
         // Check if DOM is ready
         console.log('Checking DOM readiness...');
@@ -118,7 +149,7 @@ async function initSignatureDetailsPage() {
         
         // Display the signature data
         console.log('Calling displaySignatureDetails...');
-        displaySignatureDetails(signatureData);
+        displaySignatureDetails(combinedData);
         
     } catch (error) {
         console.error('Error in initSignatureDetailsPage:', error);
@@ -139,20 +170,24 @@ async function initSignatureDetailsPage() {
 }
 
 // Function to display signature details
-function displaySignatureDetails(signatureData) {
+function displaySignatureDetails(combinedData) {
     try {
-        console.log('Starting displaySignatureDetails with data:', signatureData);
+        console.log('Starting displaySignatureDetails with data:', combinedData);
         
         // Validate input data
-        if (!signatureData) {
+        if (!combinedData) {
             throw new Error('No signature data provided');
         }
         
         // Extract relevant information with validation
-        const { metadata, configuration, path_analysis, distribution_results, api_parameters } = signatureData;
+        const { metadata, configuration, path_analysis, distribution_results, api_parameters, modelKey, modelInfo } = combinedData;
         
         if (!metadata) {
             throw new Error('No metadata found in signature data');
+        }
+        
+        if (!modelKey || !modelInfo) {
+            throw new Error('No model information found');
         }
         
         console.log('Metadata:', metadata);
@@ -160,14 +195,14 @@ function displaySignatureDetails(signatureData) {
         console.log('Path analysis:', path_analysis);
         console.log('Distribution results:', distribution_results);
         console.log('API parameters:', api_parameters);
+        console.log('Model key:', modelKey);
+        console.log('Model info:', modelInfo);
         
-        // Check if model_name exists
-        if (!metadata.model_name) {
-            throw new Error('No model_name found in metadata');
-        }
+        // Use the model key as the display name (e.g., "llama4_17b-deepinfra")
+        const displayName = modelKey;
         
         // Update page title
-        document.title = `StampR - ${metadata.model_name} Signature Details`;
+        document.title = `StampR - ${displayName} Signature Details`;
         console.log('Updated page title');
         
         // Set header information with detailed logging
@@ -186,8 +221,8 @@ function displaySignatureDetails(signatureData) {
             throw new Error('Element with id "model-name" not found. Check if the HTML page loaded correctly.');
         }
         
-        console.log('Setting model name to:', metadata.model_name);
-        modelNameEl.textContent = metadata.model_name;
+        console.log('Setting model name to:', displayName);
+        modelNameEl.textContent = displayName;
         console.log('Model name set successfully');
         
         // Clear any existing provider tags to prevent duplicates
@@ -195,60 +230,22 @@ function displaySignatureDetails(signatureData) {
         existingTags.forEach(tag => tag.remove());
         console.log('Cleared existing provider tags');
         
-        // Helper function to safely extract string value
-        function getStringValue(value) {
-            if (typeof value === 'string') {
-                return value;
-            } else if (typeof value === 'object' && value !== null) {
-                // If it's an object, try to extract a meaningful string
-                if (value.name) return value.name;
-                if (value.provider) return value.provider;
-                if (value.toString && value.toString() !== '[object Object]') {
-                    return value.toString();
-                }
-                console.warn('Object value found but cannot extract string:', value);
-                return null;
-            }
-            return value ? String(value) : null;
-        }
-        
-        // Collect all provider information
-        const providerInfo = {
-            provider: getStringValue(metadata.provider) || getStringValue(api_parameters?.provider),
-            creator: getStringValue(metadata.creator) || getStringValue(api_parameters?.creator),
-            service_provider: getStringValue(metadata.service_provider) || getStringValue(api_parameters?.service_provider)
-        };
-        
-        console.log('Provider info extracted:', providerInfo);
-        
-        // Add creator/developer if it exists
-        if (providerInfo.creator) {
+        // Add creator and service provider information from model info
+        if (modelInfo.creator) {
             const creatorElement = document.createElement('div');
             creatorElement.className = 'provider-tag';
-            creatorElement.textContent = `Developer: ${providerInfo.creator}`;
+            creatorElement.textContent = `Developer: ${modelInfo.creator}`;
             modelNameEl.parentNode.appendChild(creatorElement);
-            console.log('Creator element added:', providerInfo.creator);
+            console.log('Creator element added:', modelInfo.creator);
         }
         
-        // Add service provider if it exists and is different from creator
-        if (providerInfo.service_provider && providerInfo.service_provider !== providerInfo.creator) {
+        if (modelInfo.service_provider && modelInfo.service_provider !== modelInfo.creator) {
             const serviceProviderElement = document.createElement('div');
             serviceProviderElement.className = 'provider-tag';
-            serviceProviderElement.textContent = `Provider: ${providerInfo.service_provider}`;
+            serviceProviderElement.textContent = `Provider: ${modelInfo.service_provider}`;
             modelNameEl.parentNode.appendChild(serviceProviderElement);
-            console.log('Service provider element added:', providerInfo.service_provider);
+            console.log('Service provider element added:', modelInfo.service_provider);
         }
-        
-        // // Add legacy provider if it exists and is different from the others
-        // if (providerInfo.provider && 
-        //     providerInfo.provider !== providerInfo.creator && 
-        //     providerInfo.provider !== providerInfo.service_provider) {
-        //     const providerElement = document.createElement('div');
-        //     providerElement.className = 'provider-tag';
-        //     providerElement.textContent = `Provider: ${providerInfo.provider}`;
-        //     modelNameEl.parentNode.appendChild(providerElement);
-        //     console.log('Legacy provider element added:', providerInfo.provider);
-        // }
         
         console.log('Looking for element with id "signature-date"');
         const signatureDateEl = document.getElementById('signature-date');
@@ -322,6 +319,22 @@ function displaySignatureDetails(signatureData) {
         if (metadataList) {
             metadataList.innerHTML = '';
             
+            // First add model information from the index
+            metadataList.appendChild(createListItem('model_key', modelKey));
+            if (modelInfo.model_name) {
+                metadataList.appendChild(createListItem('full_model_name', modelInfo.model_name));
+            }
+            if (modelInfo.model_short_name) {
+                metadataList.appendChild(createListItem('model_short_name', modelInfo.model_short_name));
+            }
+            if (modelInfo.creator) {
+                metadataList.appendChild(createListItem('creator', modelInfo.creator));
+            }
+            if (modelInfo.service_provider) {
+                metadataList.appendChild(createListItem('service_provider', modelInfo.service_provider));
+            }
+            
+            // Then add signature metadata
             Object.entries(metadata).forEach(([key, value]) => {
                 if (key === 'distribution_hash' || key === 'signature_hash') {
                     // Format the full hash with line breaks every 32 characters

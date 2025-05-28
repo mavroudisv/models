@@ -184,9 +184,12 @@ function updateModelCards(models) {
     console.log('Updating model cards');
     
     // Add cards for each model
-    for (const [modelName, modelData] of Object.entries(models)) {
+    for (const [modelKey, modelData] of Object.entries(models)) {
         if (modelData.signatures && modelData.signatures.length > 0) {
             const latestSignature = modelData.signatures[0]; // First one is most recent
+            
+            // Use the model key as the display name (e.g., "llama4_17b-deepinfra")
+            const displayName = modelKey;
             
             let formattedDate;
             try {
@@ -212,14 +215,23 @@ function updateModelCards(models) {
             const stabilityClass = hasChanges ? "status-changed" : "status-consistent";
             const stabilityText = hasChanges ? "Changed" : "Consistent";
             
-            // Get service provider information with fallback to legacy provider
-            const serviceProvider = modelData.service_provider || modelData.provider || '';
-            const providerDisplay = serviceProvider ? `<div class="provider-tag">${serviceProvider}</div>` : '';
+            // Get creator and service provider from model level data
+            let providerDisplay = '';
+            if (modelData.creator || modelData.service_provider) {
+                const parts = [];
+                if (modelData.creator) parts.push(`Developer: ${modelData.creator}`);
+                if (modelData.service_provider && modelData.service_provider !== modelData.creator) {
+                    parts.push(`Provider: ${modelData.service_provider}`);
+                }
+                if (parts.length > 0) {
+                    providerDisplay = `<div class="provider-tag">${parts.join(' | ')}</div>`;
+                }
+            }
             
             const cardHtml = `
                 <div class="signature-card bg-white rounded-lg shadow overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-indigo-50 to-purple-50">
-                        <div class="font-bold text-xl text-gray-800 mb-1">${modelName}</div>
+                        <div class="font-bold text-xl text-gray-800 mb-1">${displayName}</div>
                         <div class="text-sm text-gray-600 mb-2">Latest: ${formattedDate}</div>
                         ${providerDisplay}
                     </div>
@@ -272,9 +284,11 @@ function updateModelCards(models) {
 
 // Function to update model selectors
 function updateModelSelectors(models) {
-    const modelOptions = Object.keys(models).map(name => 
-        `<option value="${name}">${name}</option>`
-    ).join('');
+    const modelOptions = Object.entries(models).map(([modelKey, modelData]) => {
+        // Use the model key as the display name
+        const displayName = modelKey;
+        return `<option value="${modelKey}">${displayName}</option>`;
+    }).join('');
     
     // Update all select elements with model options
     document.querySelectorAll('select').forEach(select => {
@@ -435,15 +449,15 @@ function updateChangesChart(models) {
         };
         
         // Collect dates and changes
-        Object.entries(models).forEach(([modelName, modelData], index) => {
+        Object.entries(models).forEach(([modelKey, modelData], index) => {
             if (modelData.signatures && modelData.signatures.length > 0) {
-                modelDates[modelName] = {};
+                modelDates[modelKey] = {};
                 
                 // Record all signature dates
                 modelData.signatures.forEach(sig => {
                     allDates.add(sig.date);
                     // Record a change on this date
-                    modelDates[modelName][sig.date] = 1;
+                    modelDates[modelKey][sig.date] = 1;
                 });
             }
         });
@@ -452,15 +466,18 @@ function updateChangesChart(models) {
         const sortedDates = Array.from(allDates).sort();
         
         // Create datasets for the chart
-        const datasets = Object.entries(modelDates).map(([modelName, dates], index) => {
+        const datasets = Object.entries(modelDates).map(([modelKey, dates], index) => {
             const color = colors.default[index % colors.default.length];
             const bgColor = color.replace('1)', '0.1)');
+            
+            // Use model key as the display name
+            const displayName = modelKey;
             
             // Create data points - 1 if there was a change on that date, 0 otherwise
             const data = sortedDates.map(date => dates[date] || 0);
             
             return {
-                label: modelName,
+                label: displayName,
                 data: data,
                 borderColor: color,
                 backgroundColor: bgColor,
@@ -618,6 +635,11 @@ function compareModels(model1Data, model2Data) {
     const sig1 = model1Data.signatures[0];
     const sig2 = model2Data.signatures[0];
     
+    // Use model keys for display (these should be passed as parameters)
+    // For now, we'll use the model_short_name or fallback to a generic name
+    const model1DisplayName = model1Data.model_short_name || 'Model 1';
+    const model2DisplayName = model2Data.model_short_name || 'Model 2';
+    
     // Update the comparison chart with token distribution data
     const comparisonCtx = document.getElementById('comparisonChart');
     if (!comparisonCtx) {
@@ -635,12 +657,12 @@ function compareModels(model1Data, model2Data) {
             labels: ['Token 1', 'Token 2', 'Token 3', 'Token 4', 'Token 5', 'Token 6', 'Token 7', 'Token 8'],
             datasets: [
                 {
-                    label: model1Data.name,
+                    label: model1DisplayName,
                     data: [0.32, 0.21, 0.18, 0.13, 0.07, 0.05, 0.03, 0.01],
                     backgroundColor: 'rgba(79, 70, 229, 0.7)'
                 },
                 {
-                    label: model2Data.name,
+                    label: model2DisplayName,
                     data: [0.29, 0.23, 0.17, 0.12, 0.08, 0.06, 0.03, 0.02],
                     backgroundColor: 'rgba(16, 185, 129, 0.7)'
                 }
@@ -685,6 +707,10 @@ function updateSimilarityMatrix(model1Data, model2Data) {
         return;
     }
     
+    // Use model_short_name for display
+    const model1DisplayName = model1Data.model_short_name || 'Model 1';
+    const model2DisplayName = model2Data.model_short_name || 'Model 2';
+    
     // Clear existing table content
     tableEl.innerHTML = '';
     
@@ -696,7 +722,7 @@ function updateSimilarityMatrix(model1Data, model2Data) {
     headerRow.appendChild(createTableCell('Model', 'th', 'px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'));
     
     // Add model name cells
-    [model1Data.name, model2Data.name].forEach(modelName => {
+    [model1DisplayName, model2DisplayName].forEach(modelName => {
         headerRow.appendChild(createTableCell(modelName, 'th', 'px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'));
     });
     
@@ -708,19 +734,20 @@ function updateSimilarityMatrix(model1Data, model2Data) {
     tbody.className = 'bg-white divide-y divide-gray-200';
     
     // Add rows for each model
-    [model1Data, model2Data].forEach(rowModel => {
+    [model1Data, model2Data].forEach((rowModel, rowIndex) => {
         const row = document.createElement('tr');
+        const rowDisplayName = rowModel.model_short_name || `Model ${rowIndex + 1}`;
         
         // Add model name cell
-        row.appendChild(createTableCell(rowModel.name, 'td', 'px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'));
+        row.appendChild(createTableCell(rowDisplayName, 'td', 'px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'));
         
         // Add similarity cells (1.0 for self, calculated value for others)
-        [model1Data, model2Data].forEach(colModel => {
-            const similarity = rowModel.name === colModel.name ? 
+        [model1Data, model2Data].forEach((colModel, colIndex) => {
+            const similarity = rowIndex === colIndex ? 
                 '1.0' : 
                 (0.85 + Math.random() * 0.1).toFixed(2); // Simulated similarity 0.85-0.95
             
-            const cellClass = rowModel.name === colModel.name ? 
+            const cellClass = rowIndex === colIndex ? 
                 'px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold' : 
                 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
                 
