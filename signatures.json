@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-27 22:02:08"
+    "last_updated": "2025-05-28 08:00:58"
   },
   "models": {
     "gpt-4o-2024-05-13": {
@@ -130,6 +130,42 @@
     "gpt-4o": {
       "name": "gpt-4o",
       "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o/fffbb2_2025-05-28.json",
+          "date": "2025-05-28",
+          "hash": "fffbb2",
+          "full_hash": "fffbb2"
+        },
+        {
+          "file": "signatures/openai/gpt-4o/c7988f_2025-05-28.json",
+          "date": "2025-05-28",
+          "hash": "c7988f",
+          "full_hash": "c7988f"
+        },
+        {
+          "file": "signatures/openai/gpt-4o/c2a93e_2025-05-28.json",
+          "date": "2025-05-28",
+          "hash": "c2a93e",
+          "full_hash": "c2a93e"
+        },
+        {
+          "file": "signatures/openai/gpt-4o/c0849a_2025-05-28.json",
+          "date": "2025-05-28",
+          "hash": "c0849a",
+          "full_hash": "c0849a"
+        },
+        {
+          "file": "signatures/openai/gpt-4o/9c5410_2025-05-28.json",
+          "date": "2025-05-28",
+          "hash": "9c5410",
+          "full_hash": "9c5410"
+        },
+        {
+          "file": "signatures/openai/gpt-4o/36a7bb_2025-05-28.json",
+          "date": "2025-05-28",
+          "hash": "36a7bb",
+          "full_hash": "36a7bb"
+        },
         {
           "file": "signatures/openai/gpt-4o/fb78e8_2025-05-27.json",
           "date": "2025-05-27",
@@ -619,6 +655,12 @@
     "DeepInfra": {
       "name": "meta-llama/llama-4-maverick-17b-128e-instruct",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/c28522_2025-05-28.json",
+          "date": "2025-05-28",
+          "hash": "c28522",
+          "full_hash": "c28522"
+        },
         {
           "file": "signatures/openrouter/llama-4/DeepInfra/ecf4a1_2025-05-27.json",
           "date": "2025-05-27",

@@ -4,10 +4,10 @@
     "service_provider": "OpenAI",
     "creator": "OpenAI",
     "tokenizer": "o200k_base",
-    "date": "2025-05-27_23-00-58",
+    "date": "2025-05-28_04-01-01",
     "request_country": "United States",
-    "signature_hash": "f0ba9dac5481dfd7357fde7758913dc3fe587176fbaffb0a290f6257103e8238",
-    "system_fingerprint": "fp_76544d79cb"
+    "signature_hash": "9c5410cfeb935dd29d32a598273b57c5b720255c15d79deb1f54299c9a1020a3",
+    "system_fingerprint": "fp_f5bdcc3276"
   },
   "configuration": {
     "target_position": 4,
@@ -32,8 +32,8 @@
     "path_tokens": [
       "j",
       "me",
-      "fc",
-      "ve"
+      "fz",
+      "ex"
     ]
   },
   "distribution_results": {
