@@ -1,11 +1,11 @@
 {
   "metadata": {
     "model_name": "meta-llama/llama-4-maverick-17b-128e-instruct",
-    "model_short_name": "llama-4-maverick-17b-128e-instruct",
+    "model_short_name": "Llama4_17b",
     "service_provider": "OpenRouter/DeepInfra",
     "creator": "Meta",
     "tokenizer": "meta-llama/Llama-4-Maverick-17B-128E-Instruct",
-    "date": "2025-05-28_11-15-34",
+    "date": "2025-05-28_12-15-53",
     "request_country": "United States",
     "signature_hash": "c285229e14cffefffb029b66aae6b1aed6841536b4591168706d3056b690ea4b",
     "system_fingerprint": null
