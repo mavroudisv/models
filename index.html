@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>stampr - Model Signature Tracker</title>
+    <title>stampr - Blackbox Model Signatures</title>
     <link rel="icon" href="images/stampr.png" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -182,7 +182,7 @@
                     <div class="mb-8">
                         <h3 class="text-xl font-semibold text-gray-800 mb-3">What is stampr AI?</h3>
                         <p class="text-gray-700 mb-4 leading-relaxed">
-                            stampr AI is a powerful tool for tracking and analyzing AI model signatures. It helps you monitor model behavior, detect changes, and ensure consistency across different versions and deployments.
+                            stampr_AI is a tool for extracting and tracking AI model signatures in a blackbox manner. It monitors model behavior, detects changes, and ensures consistency across different providers.
                         </p>
                     </div>
                     
@@ -193,15 +193,13 @@
                                 <svg class="h-5 w-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                 </svg>
-                                Public Website
+                                Web Tracker
                             </h4>
-                            <p class="text-gray-700 mb-3">This website provides:</p>
+                            <p class="text-gray-700 mb-3">This tracker page provides:</p>
                             <ul class="list-disc pl-5 space-y-2 text-gray-700">
                                 <li>Visualization of current model signatures</li>
                                 <li>Historical tracking of model changes</li>
-                                <li>Change detection and analysis</li>
-                                <li>Distribution comparison tools</li>
-                                <li>Stability monitoring over time</li>
+                                <li>Change detection and notifications (soon!)</li>
                             </ul>
                         </div>
                         
@@ -232,9 +230,7 @@ is_verified = verify_model(
                         <ol class="list-decimal pl-5 text-gray-700 space-y-3">
                             <li><strong class="text-gray-800">Signature Generation:</strong> Our private collector generates unique signatures for AI models</li>
                             <li><strong class="text-gray-800">Public Verification:</strong> The pip tool compares models against our verified signatures</li>
-                            <li><strong class="text-gray-800">Change Detection:</strong> The website tracks and displays model changes over time</li>
-                            <li><strong class="text-gray-800">Distribution Analysis:</strong> Both tools analyze token distributions for consistency</li>
-                        </ol>
+                            <li><strong class="text-gray-800">Change Detection:</strong> The website tracks and displays model changes over time</li>                        </ol>
                     </div>
                     
                     <h3 class="font-bold text-xl text-gray-800 mb-6 mt-10">Resources</h3>

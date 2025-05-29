@@ -1,4 +1,4 @@
-# stampr AI - Model Signature Tracker
+# stampr AI - Blackbox Model Signatures
 
 <div align="center">
   <img src="images/stampr.png" alt="stampr AI logo" width="200">
