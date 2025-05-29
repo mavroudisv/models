@@ -5,17 +5,17 @@
     "service_provider": "OpenAI",
     "creator": "OpenAI",
     "tokenizer": "o200k_base",
-    "date": "2025-05-28_16-00-50",
+    "date": "2025-05-29_04-51-38",
     "request_country": "United States",
-    "signature_hash": "36a7bb5630a508745b3240603b69677159e90204185af63ebb376963e6eed324",
-    "system_fingerprint": "fp_07871e2ad8"
+    "signature_hash": "8755908db5160e9ad67c0a5633d091a047c3489453f1297f77488e9b1d88eb3d",
+    "system_fingerprint": "fp_a288987b44"
   },
   "configuration": {
     "target_position": 4,
     "tokens_in": 10,
     "tokens_out": 10,
-    "samples_per_position": 1,
-    "samples_for_distribution": 1,
+    "samples_per_position": 20,
+    "samples_for_distribution": 500,
     "seed": 67899876,
     "original_prompt": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners",
     "complete_messages": [
@@ -38,14 +38,20 @@
     ]
   },
   "distribution_results": {
-    "total_tokens_collected": 1,
-    "unique_tokens_collected": 1,
+    "total_tokens_collected": 500,
+    "unique_tokens_collected": 2,
     "tokens": {
       "j": {
         "token_string": "j",
         "token_id": 73,
-        "count": 1,
-        "probability": 1.0
+        "count": 471,
+        "probability": 0.942
+      },
+      "v": {
+        "token_string": "v",
+        "token_id": 85,
+        "count": 29,
+        "probability": 0.058
       }
     }
   },
