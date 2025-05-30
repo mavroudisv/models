@@ -174,25 +174,64 @@ function updateModelCards(models) {
     // Add cards for each model
     for (const [modelKey, modelData] of Object.entries(models)) {
         if (modelData.signatures && modelData.signatures.length > 0) {
-            const latestSignature = modelData.signatures[0]; // First one is most recent
+            // Sort signatures by date/time (most recent first)
+            const sortedSignatures = [...modelData.signatures].sort((a, b) => {
+                // Parse dates - handle both date-only and date_time formats
+                const parseDate = (dateStr) => {
+                    if (dateStr.includes('_')) {
+                        // Format: "2025-05-30_02-16-25"
+                        const [datePart, timePart] = dateStr.split('_');
+                        const [year, month, day] = datePart.split('-');
+                        const [hour, minute, second] = timePart.split('-');
+                        return new Date(year, month - 1, day, hour, minute, second);
+                    } else {
+                        // Format: "2025-05-30" - treat as end of day for proper sorting
+                        return new Date(dateStr + 'T23:59:59');
+                    }
+                };
+                
+                const dateA = parseDate(a.date);
+                const dateB = parseDate(b.date);
+                return dateB - dateA; // Most recent first
+            });
+            
+            const latestSignature = sortedSignatures[0]; // First one is most recent after sorting
             
             // Use the model_short_name as the display name (e.g., "Llama4_17b")
             const displayName = modelData.model_short_name || modelKey;
             
             let formattedDate;
             try {
-                formattedDate = new Date(latestSignature.date).toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                });
+                const dateStr = latestSignature.date;
+                if (dateStr.includes('_')) {
+                    // Format: "2025-05-30_02-16-25"
+                    const [datePart, timePart] = dateStr.split('_');
+                    const [year, month, day] = datePart.split('-');
+                    const [hour, minute] = timePart.split('-');
+                    const date = new Date(year, month - 1, day, hour, minute);
+                    formattedDate = date.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    }) + ' at ' + date.toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                } else {
+                    // Format: "2025-05-30"
+                    formattedDate = new Date(dateStr).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    });
+                }
             } catch (e) {
                 formattedDate = latestSignature.date;
             }
             
             // Calculate if there's been any changes
-            const hasMultipleSignatures = modelData.signatures.length > 1;
-            const hasChanges = hasMultipleSignatures && modelData.signatures.some(sig => 
+            const hasMultipleSignatures = sortedSignatures.length > 1;
+            const hasChanges = hasMultipleSignatures && sortedSignatures.some(sig => 
                 sig.hash !== latestSignature.hash
             );
             
@@ -347,34 +386,73 @@ function updateHistoryTimeline(modelData) {
         return;
     }
     
+    // Sort signatures by date/time (most recent first)
+    const sortedSignatures = [...modelData.signatures].sort((a, b) => {
+        // Parse dates - handle both date-only and date_time formats
+        const parseDate = (dateStr) => {
+            if (dateStr.includes('_')) {
+                // Format: "2025-05-30_02-16-25"
+                const [datePart, timePart] = dateStr.split('_');
+                const [year, month, day] = datePart.split('-');
+                const [hour, minute, second] = timePart.split('-');
+                return new Date(year, month - 1, day, hour, minute, second);
+            } else {
+                // Format: "2025-05-30" - treat as end of day for proper sorting
+                return new Date(dateStr + 'T23:59:59');
+            }
+        };
+        
+        const dateA = parseDate(a.date);
+        const dateB = parseDate(b.date);
+        return dateB - dateA; // Most recent first
+    });
+    
     // Generate timeline nodes for each signature
-    modelData.signatures.forEach((signature, index) => {
+    sortedSignatures.forEach((signature, index) => {
         let formattedDate;
         try {
-            formattedDate = new Date(signature.date).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
+            const dateStr = signature.date;
+            if (dateStr.includes('_')) {
+                // Format: "2025-05-30_02-16-25"
+                const [datePart, timePart] = dateStr.split('_');
+                const [year, month, day] = datePart.split('-');
+                const [hour, minute] = timePart.split('-');
+                const date = new Date(year, month - 1, day, hour, minute);
+                formattedDate = date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                }) + ' at ' + date.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } else {
+                // Format: "2025-05-30"
+                formattedDate = new Date(dateStr).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+            }
         } catch (e) {
             formattedDate = signature.date;
         }
         
         // Determine event title
         let eventTitle;
-        if (index === modelData.signatures.length - 1) {
+        if (index === sortedSignatures.length - 1) {
             eventTitle = "Baseline Signature";
         } else {
-            // Compare current hash with previous hash
+            // Compare current hash with previous hash (since array is sorted most recent first)
             const currentHash = signature.hash;
-            const previousHash = modelData.signatures[index + 1].hash; // +1 because we're going backwards in time
+            const previousHash = sortedSignatures[index + 1].hash; // +1 because we're going backwards in time
             eventTitle = currentHash !== previousHash ? 
                 "Signature Change Detected" : 
                 "Signature Check (No Change)";
         }
         
         // Determine if this is the first signature
-        const isFirst = index === modelData.signatures.length - 1;
+        const isFirst = index === sortedSignatures.length - 1;
         
         const nodeHtml = `
             <div class="mb-8 relative timeline-node">
