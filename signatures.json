@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-30 02:16:38"
+    "last_updated": "2025-05-30 04:14:43"
   },
   "models": {
     "llama4_17b-deepinfra": {
@@ -9,6 +9,12 @@
       "creator": "Meta",
       "service_provider": "OpenRouter/DeepInfra",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/483b50_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "483b50",
+          "full_hash": "483b50dfc3f2a9c4b3aaefe232672b3fde7ce9f010119ffe059baa3bd96a27b7"
+        },
         {
           "file": "signatures/openrouter/llama-4/DeepInfra/e78e92_2025-05-29.json",
           "date": "2025-05-29",
@@ -30,6 +36,12 @@
       "service_provider": "OpenRouter/Parasail",
       "signatures": [
         {
+          "file": "signatures/openrouter/llama-4/Parasail/8b36e7_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "8b36e7",
+          "full_hash": "8b36e78e5c6b5588cbf5e560313f4244fc1339e10034a50d0b8c1d3f027145a2"
+        },
+        {
           "file": "signatures/openrouter/llama-4/Parasail/183337_2025-05-30.json",
           "date": "2025-05-30",
           "hash": "183337",
@@ -49,6 +61,12 @@
       "creator": "Meta",
       "service_provider": "OpenRouter/Novita",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/Novita/51871e_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "51871e",
+          "full_hash": "51871e635e520a49c89af0e3122c7c14e7394225dc0acae9f30654e8bcfdb93a"
+        },
         {
           "file": "signatures/openrouter/llama-4/Novita/6cd559_2025-05-29.json",
           "date": "2025-05-29",
@@ -70,6 +88,12 @@
       "service_provider": "OpenRouter/NCompass",
       "signatures": [
         {
+          "file": "signatures/openrouter/llama-4/NCompass/5dfece_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "5dfece",
+          "full_hash": "5dfece48ec6d372aedc124a169557f5a6a908c4c6881efd9da5514e1e6b11cf9"
+        },
+        {
           "file": "signatures/openrouter/llama-4/NCompass/89cf78_2025-05-29.json",
           "date": "2025-05-29",
           "hash": "89cf78",
@@ -89,6 +113,12 @@
       "creator": "OpenAI",
       "service_provider": "OpenAI",
       "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o-2024-05-13/09cd68_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "09cd68",
+          "full_hash": "09cd68d903d0c1025c5cea954cfb3ed01c1601c4a2f6064e69c467d02d6ce746"
+        },
         {
           "file": "signatures/openai/gpt-4o-2024-05-13/d9f13f_2025-05-29.json",
           "date": "2025-05-29",
@@ -116,6 +146,12 @@
           "full_hash": "f94f13aaf4663bef422c862916463e133dd3a7868ecb33c842e8d863e5764024"
         },
         {
+          "file": "signatures/openai/gpt-4o/b43390_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "b43390",
+          "full_hash": "b433906aea5842f6ad379b844116dd01e4bb5f610f95d42f73c79dc6df68b914"
+        },
+        {
           "file": "signatures/openai/gpt-4o/22cb0a_2025-05-29.json",
           "date": "2025-05-29",
           "hash": "22cb0a",
@@ -129,6 +165,12 @@
       "creator": "OpenAI",
       "service_provider": "OpenAI",
       "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/39c6b6_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "39c6b6",
+          "full_hash": "39c6b6251b41542c216fe78c479d4390f83f423597f0f12a383a1deba17b66e6"
+        },
         {
           "file": "signatures/openai/gpt-4o-2024-11-20/bdc670_2025-05-29.json",
           "date": "2025-05-29",
