@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-30 09:34:14"
+    "last_updated": "2025-05-30 13:25:06"
   },
   "models": {
     "llama4_17b-deepinfra": {
@@ -9,6 +9,12 @@
       "creator": "Meta",
       "service_provider": "OpenRouter/DeepInfra",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/00d55d_2025-05-30_12-51-14.json",
+          "date": "2025-05-30_12-51-14",
+          "hash": "00d55d",
+          "full_hash": "00d55d15bb65625c27248d2d681d6dcdda3d57fda171d45b61872753e80a6214"
+        },
         {
           "file": "signatures/openrouter/llama-4/DeepInfra/64812b_2025-05-30.json",
           "date": "2025-05-30",
@@ -42,6 +48,12 @@
       "service_provider": "OpenRouter/Parasail",
       "signatures": [
         {
+          "file": "signatures/openrouter/llama-4/Parasail/66e9dc_2025-05-30_13-16-09.json",
+          "date": "2025-05-30_13-16-09",
+          "hash": "66e9dc",
+          "full_hash": "66e9dc535e0cbf43015e1d1bc6cc0063decb4c7de73ab89fc645b97185c70492"
+        },
+        {
           "file": "signatures/openrouter/llama-4/Parasail/8b36e7_2025-05-30.json",
           "date": "2025-05-30",
           "hash": "8b36e7",
@@ -74,6 +86,12 @@
       "service_provider": "OpenRouter/Novita",
       "signatures": [
         {
+          "file": "signatures/openrouter/llama-4/Novita/5deac6_2025-05-30_13-24-47.json",
+          "date": "2025-05-30_13-24-47",
+          "hash": "5deac6",
+          "full_hash": "5deac6d35d739bd9dfe4b718124399e5bd992e321a6e1c2c669566af8f74205a"
+        },
+        {
           "file": "signatures/openrouter/llama-4/Novita/51871e_2025-05-30.json",
           "date": "2025-05-30",
           "hash": "51871e",
@@ -105,6 +123,12 @@
       "creator": "Meta",
       "service_provider": "OpenRouter/NCompass",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/15e6b8_2025-05-30_13-03-30.json",
+          "date": "2025-05-30_13-03-30",
+          "hash": "15e6b8",
+          "full_hash": "15e6b8ce627f194195205380b92f2857d40be43d311b5be879daecddfa5568aa"
+        },
         {
           "file": "signatures/openrouter/llama-4/NCompass/5dfece_2025-05-30.json",
           "date": "2025-05-30",
