@@ -259,7 +259,17 @@
                                 <pre class="text-sm text-green-400 font-mono"><code>from stampr_ai import verify_model
 
 is_verified = verify_model(
-    model_name="gpt-4",
+    model_name="gpt-4o",
+    api_key="your-api-key"
+)</code></pre>
+                            </div>
+ 
+                            <p class="text-gray-700 mb-3"></br>You can also verify models by their signature:</p>
+                            <div class="bg-gray-900 p-4 rounded-lg overflow-x-auto">
+                                <pre class="text-sm text-green-400 font-mono"><code>from stampr_ai import verify_model
+
+is_verified = verify_model(
+    model_name="a6b32e", # OpenAI GPT-4o model on May 1, 2025
     api_key="your-api-key"
 )</code></pre>
                             </div>
