@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-30 18:39:30"
+    "last_updated": "2025-05-31 02:10:22"
   },
   "models": {
     "llama4_17b-deepinfra": {
@@ -269,6 +269,12 @@
       "creator": "Meta",
       "service_provider": "OpenRouter/Lambda",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/Lambda/690709_2025-05-31_02-10-20.json",
+          "date": "2025-05-31_02-10-20",
+          "hash": "690709",
+          "full_hash": "6907095f5d94adbffc9470a73838172cfea5b201fe714862c991691400c53273"
+        },
         {
           "file": "signatures/openrouter/llama-4/Lambda/33487c_2025-05-30_18-39-25.json",
           "date": "2025-05-30_18-39-25",
