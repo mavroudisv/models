@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-31 02:10:22"
+    "last_updated": "2025-05-31 10:33:01"
   },
   "models": {
     "llama4_17b-deepinfra": {
@@ -9,6 +9,12 @@
       "creator": "Meta",
       "service_provider": "OpenRouter/DeepInfra",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/483b50_2025-05-31_09-48-25.json",
+          "date": "2025-05-31_09-48-25",
+          "hash": "483b50",
+          "full_hash": "483b50dfc3f2a9c4b3aaefe232672b3fde7ce9f010119ffe059baa3bd96a27b7"
+        },
         {
           "file": "signatures/openrouter/llama-4/DeepInfra/483b50_2025-05-30_14-11-02.json",
           "date": "2025-05-30_14-11-02",
@@ -54,6 +60,12 @@
       "service_provider": "OpenRouter/Parasail",
       "signatures": [
         {
+          "file": "signatures/openrouter/llama-4/Parasail/8a1291_2025-05-31_10-32-58.json",
+          "date": "2025-05-31_10-32-58",
+          "hash": "8a1291",
+          "full_hash": "8a12913e6ae9e1913be2605328552e43136a5593f0e610fa066a677af5f6a706"
+        },
+        {
           "file": "signatures/openrouter/llama-4/Parasail/45b722_2025-05-30_14-41-07.json",
           "date": "2025-05-30_14-41-07",
           "hash": "45b722",
@@ -98,6 +110,12 @@
       "service_provider": "OpenRouter/Novita",
       "signatures": [
         {
+          "file": "signatures/openrouter/llama-4/Novita/4b58f0_2025-05-31_10-22-20.json",
+          "date": "2025-05-31_10-22-20",
+          "hash": "4b58f0",
+          "full_hash": "4b58f080283fde30e7e17b1440a12a8d23ea0eeac6a97d68e593987a0f5cfe2f"
+        },
+        {
           "file": "signatures/openrouter/llama-4/Novita/4a37ce_2025-05-30_14-37-35.json",
           "date": "2025-05-30_14-37-35",
           "hash": "4a37ce",
@@ -141,6 +159,12 @@
       "creator": "Meta",
       "service_provider": "OpenRouter/NCompass",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/597c9f_2025-05-31_10-08-28.json",
+          "date": "2025-05-31_10-08-28",
+          "hash": "597c9f",
+          "full_hash": "597c9fd0117a14677d28763369e4f58342a9398da3acfb84aed07e7b2a44f643"
+        },
         {
           "file": "signatures/openrouter/llama-4/NCompass/4f8966_2025-05-30_14-22-20.json",
           "date": "2025-05-30_14-22-20",
@@ -269,6 +293,12 @@
       "creator": "Meta",
       "service_provider": "OpenRouter/Lambda",
       "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/Lambda/b8ec09_2025-05-31_09-58-46.json",
+          "date": "2025-05-31_09-58-46",
+          "hash": "b8ec09",
+          "full_hash": "b8ec098a312e46a98b233247001211d05dd621560400fbe55fb05b46b141097d"
+        },
         {
           "file": "signatures/openrouter/llama-4/Lambda/690709_2025-05-31_02-10-20.json",
           "date": "2025-05-31_02-10-20",
