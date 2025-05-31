@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tab Navigation with more robust handling and debugging
     initTabNavigation();
     
+    // Initialize search functionality
+    initSearchFunctionality();
+    
     // Load signature data
     loadSignatureData();
     
@@ -82,6 +85,83 @@ function initTabNavigation() {
             }
         });
     });
+}
+
+// Initialize search functionality
+function initSearchFunctionality() {
+    const searchInput = document.getElementById('search-input');
+    if (!searchInput) {
+        console.warn('Search input not found');
+        return;
+    }
+    
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        filterModelCards(query);
+    });
+    
+    console.log('Search functionality initialized');
+}
+
+// Filter model cards based on search query
+function filterModelCards(query) {
+    const modelCards = document.querySelectorAll('.signature-card');
+    
+    modelCards.forEach(card => {
+        if (!query) {
+            // Show all cards if query is empty
+            card.style.display = 'block';
+            return;
+        }
+        
+        // Get the model name from the card
+        const modelNameElement = card.querySelector('.font-bold.text-xl');
+        const modelName = modelNameElement ? modelNameElement.textContent.toLowerCase() : '';
+        
+        // Get provider information if it exists
+        const providerElement = card.querySelector('.provider-tag');
+        const providerText = providerElement ? providerElement.textContent.toLowerCase() : '';
+        
+        // Get hash information
+        const hashElement = card.querySelector('.hash-display');
+        const hashText = hashElement ? hashElement.textContent.toLowerCase() : '';
+        
+        // Check if query matches model name, provider, or hash
+        const matches = modelName.includes(query) || 
+                       providerText.includes(query) || 
+                       hashText.includes(query);
+        
+        card.style.display = matches ? 'block' : 'none';
+    });
+    
+    // Check if any cards are visible
+    const visibleCards = document.querySelectorAll('.signature-card[style*="block"], .signature-card:not([style*="none"])');
+    const modelCardsContainer = document.getElementById('model-cards');
+    
+    if (visibleCards.length === 0 && query && modelCardsContainer) {
+        // Show "no results" message if no cards match
+        const existingNoResults = modelCardsContainer.querySelector('.no-search-results');
+        if (!existingNoResults) {
+            const noResultsHtml = `
+                <div class="no-search-results col-span-3 bg-white rounded-lg shadow p-6 text-center">
+                    <div class="mb-4">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">No models found</h3>
+                    <p class="text-gray-600">No models match your search query "${query}".</p>
+                </div>
+            `;
+            modelCardsContainer.insertAdjacentHTML('afterbegin', noResultsHtml);
+        }
+    } else {
+        // Remove "no results" message if cards are visible
+        const noResultsElement = modelCardsContainer?.querySelector('.no-search-results');
+        if (noResultsElement) {
+            noResultsElement.remove();
+        }
+    }
 }
 
 // Initialize empty charts
