@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "last_updated": "2025-05-31 16:18:05"
+  },
+  "models": {
+    "llama4_17b-deepinfra": {
+      "model_name": "meta-llama/llama-4-maverick-17b-128e-instruct",
+      "model_short_name": "Llama4_17b",
+      "creator": "Meta",
+      "service_provider": "OpenRouter/DeepInfra",
+      "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/e06e68_2025-05-31_16-17-23.json",
+          "date": "2025-05-31_16-17-23",
+          "hash": "e06e68",
+          "full_hash": "e06e68b4ed12bffc98ff92f4f53e8acb626a78d4ef3e36980e73288e6f074c90"
+        }
+      ]
+    }
+  }
+}
