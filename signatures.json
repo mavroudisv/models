@@ -1,0 +1,383 @@
+{
+  "metadata": {
+    "last_updated": "2025-05-31 14:18:20"
+  },
+  "models": {
+    "llama4_17b-deepinfra": {
+      "model_name": "meta-llama/llama-4-maverick-17b-128e-instruct",
+      "model_short_name": "Llama4_17b",
+      "creator": "Meta",
+      "service_provider": "OpenRouter/DeepInfra",
+      "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/e7fcd8_2025-05-31_14-12-42.json",
+          "date": "2025-05-31_14-12-42",
+          "hash": "e7fcd8",
+          "full_hash": "e7fcd856c1dd05fdc4fc4b5c5b16066e8b2284fc6a50ccb243cd9f6b4f00ae03"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/e7fcd8_2025-05-31_13-15-19.json",
+          "date": "2025-05-31_13-15-19",
+          "hash": "e7fcd8",
+          "full_hash": "e7fcd856c1dd05fdc4fc4b5c5b16066e8b2284fc6a50ccb243cd9f6b4f00ae03"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/2c5cc5_2025-05-31_10-48-43.json",
+          "date": "2025-05-31_10-48-43",
+          "hash": "2c5cc5",
+          "full_hash": "2c5cc586c67380f03f919e6a1b0c46f91b00a67b11777fa9df2a2d996814aa4e"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/483b50_2025-05-31_09-48-25.json",
+          "date": "2025-05-31_09-48-25",
+          "hash": "483b50",
+          "full_hash": "483b50dfc3f2a9c4b3aaefe232672b3fde7ce9f010119ffe059baa3bd96a27b7"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/483b50_2025-05-30_14-11-02.json",
+          "date": "2025-05-30_14-11-02",
+          "hash": "483b50",
+          "full_hash": "483b50dfc3f2a9c4b3aaefe232672b3fde7ce9f010119ffe059baa3bd96a27b7"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/00d55d_2025-05-30_12-51-14.json",
+          "date": "2025-05-30_12-51-14",
+          "hash": "00d55d",
+          "full_hash": "00d55d15bb65625c27248d2d681d6dcdda3d57fda171d45b61872753e80a6214"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/64812b_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "64812b",
+          "full_hash": "64812b968f5af91b1e0571e826a66f8581d608369fb7cf11bab26d36f2dcf139"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/483b50_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "483b50",
+          "full_hash": "483b50dfc3f2a9c4b3aaefe232672b3fde7ce9f010119ffe059baa3bd96a27b7"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/e78e92_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "e78e92",
+          "full_hash": "e78e922d849b0a7b87829036f374af9edc086edcfd4f0d136ef19e6609da67a9"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/DeepInfra/64812b_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "64812b",
+          "full_hash": "64812b968f5af91b1e0571e826a66f8581d608369fb7cf11bab26d36f2dcf139"
+        }
+      ]
+    },
+    "llama4_17b-parasail": {
+      "model_name": "meta-llama/llama-4-maverick-17b-128e-instruct",
+      "model_short_name": "Llama4_17b",
+      "creator": "Meta",
+      "service_provider": "OpenRouter/Parasail",
+      "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/d1bd33_2025-05-31_14-18-00.json",
+          "date": "2025-05-31_14-18-00",
+          "hash": "d1bd33",
+          "full_hash": "d1bd335f4bfea8e6510c97067c4a427420dfec0bbb9e67700a6174ef1dcfd0e8"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/7d34a6_2025-05-31_11-54-53.json",
+          "date": "2025-05-31_11-54-53",
+          "hash": "7d34a6",
+          "full_hash": "7d34a675fcc05d51ee8e816d9d744c97cb0875cadc7928182c36da5c5cacf723"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/8a1291_2025-05-31_10-32-58.json",
+          "date": "2025-05-31_10-32-58",
+          "hash": "8a1291",
+          "full_hash": "8a12913e6ae9e1913be2605328552e43136a5593f0e610fa066a677af5f6a706"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/45b722_2025-05-30_14-41-07.json",
+          "date": "2025-05-30_14-41-07",
+          "hash": "45b722",
+          "full_hash": "45b722038f984a1b063657f621bf62eb8bf618130416f137caf703580665c601"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/66e9dc_2025-05-30_13-16-09.json",
+          "date": "2025-05-30_13-16-09",
+          "hash": "66e9dc",
+          "full_hash": "66e9dc535e0cbf43015e1d1bc6cc0063decb4c7de73ab89fc645b97185c70492"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/8b36e7_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "8b36e7",
+          "full_hash": "8b36e78e5c6b5588cbf5e560313f4244fc1339e10034a50d0b8c1d3f027145a2"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/66e9dc_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "66e9dc",
+          "full_hash": "66e9dc535e0cbf43015e1d1bc6cc0063decb4c7de73ab89fc645b97185c70492"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/183337_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "183337",
+          "full_hash": "183337f884466f9aaad46abf6ef41720d7cdc2c4e925d0c85d422319868c76fa"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Parasail/66e9dc_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "66e9dc",
+          "full_hash": "66e9dc535e0cbf43015e1d1bc6cc0063decb4c7de73ab89fc645b97185c70492"
+        }
+      ]
+    },
+    "llama4_17b-novita": {
+      "model_name": "meta-llama/llama-4-maverick-17b-128e-instruct",
+      "model_short_name": "Llama4_17b",
+      "creator": "Meta",
+      "service_provider": "OpenRouter/Novita",
+      "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/Novita/0cc1e2_2025-05-31_14-00-00.json",
+          "date": "2025-05-31_14-00-00",
+          "hash": "0cc1e2",
+          "full_hash": "0cc1e26deb9dc68d3dfc2507fc783b5cfacbb6fa71bc5ddbb5cd42c03d305776"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Novita/36580f_2025-05-31_11-42-51.json",
+          "date": "2025-05-31_11-42-51",
+          "hash": "36580f",
+          "full_hash": "36580f236be16e4a515b8b8c29479fcea2b8f59234a5b1b6d96c38f4e1991a1a"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Novita/4b58f0_2025-05-31_10-22-20.json",
+          "date": "2025-05-31_10-22-20",
+          "hash": "4b58f0",
+          "full_hash": "4b58f080283fde30e7e17b1440a12a8d23ea0eeac6a97d68e593987a0f5cfe2f"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Novita/4a37ce_2025-05-30_14-37-35.json",
+          "date": "2025-05-30_14-37-35",
+          "hash": "4a37ce",
+          "full_hash": "4a37ce255df4c7b68d27f8d851b4f5d6a1917dd130475367b4d69c0712e941bf"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Novita/5deac6_2025-05-30_13-24-47.json",
+          "date": "2025-05-30_13-24-47",
+          "hash": "5deac6",
+          "full_hash": "5deac6d35d739bd9dfe4b718124399e5bd992e321a6e1c2c669566af8f74205a"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Novita/51871e_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "51871e",
+          "full_hash": "51871e635e520a49c89af0e3122c7c14e7394225dc0acae9f30654e8bcfdb93a"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Novita/4d7441_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "4d7441",
+          "full_hash": "4d74413d10ccd04552cd77f8394bde7bb6e3718855bb66714c983628e2cacb12"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Novita/6cd559_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "6cd559",
+          "full_hash": "6cd55983b1a500ecb590c5ed62316a4ecad7aafeb4bf7fdc78345c44204de3b4"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Novita/21c9f8_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "21c9f8",
+          "full_hash": "21c9f8574f762c9360f1c35f15251026c31ae1acbf9cd673acad00bf8cff5fd7"
+        }
+      ]
+    },
+    "llama4_17b-ncompass": {
+      "model_name": "meta-llama/llama-4-maverick-17b-128e-instruct",
+      "model_short_name": "Llama4_17b",
+      "creator": "Meta",
+      "service_provider": "OpenRouter/NCompass",
+      "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/b9a0e0_2025-05-31_13-40-58.json",
+          "date": "2025-05-31_13-40-58",
+          "hash": "b9a0e0",
+          "full_hash": "b9a0e0bd230ab367d37c8c6d16c4229ff453ca5a59d92a16ceb69896e2ce8f40"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/2c5cc5_2025-05-31_11-24-34.json",
+          "date": "2025-05-31_11-24-34",
+          "hash": "2c5cc5",
+          "full_hash": "2c5cc586c67380f03f919e6a1b0c46f91b00a67b11777fa9df2a2d996814aa4e"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/597c9f_2025-05-31_10-08-28.json",
+          "date": "2025-05-31_10-08-28",
+          "hash": "597c9f",
+          "full_hash": "597c9fd0117a14677d28763369e4f58342a9398da3acfb84aed07e7b2a44f643"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/4f8966_2025-05-30_14-22-20.json",
+          "date": "2025-05-30_14-22-20",
+          "hash": "4f8966",
+          "full_hash": "4f8966126433db0aa02decb11beb472c9429614c54c2438fd382721ef7a86dde"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/15e6b8_2025-05-30_13-03-30.json",
+          "date": "2025-05-30_13-03-30",
+          "hash": "15e6b8",
+          "full_hash": "15e6b8ce627f194195205380b92f2857d40be43d311b5be879daecddfa5568aa"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/5dfece_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "5dfece",
+          "full_hash": "5dfece48ec6d372aedc124a169557f5a6a908c4c6881efd9da5514e1e6b11cf9"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/4d7441_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "4d7441",
+          "full_hash": "4d74413d10ccd04552cd77f8394bde7bb6e3718855bb66714c983628e2cacb12"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/89cf78_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "89cf78",
+          "full_hash": "89cf785951a3a679e61de2ecaf298c433c8dcfa5ced08b66c5c8c81a461c016e"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/NCompass/66e9dc_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "66e9dc",
+          "full_hash": "66e9dc535e0cbf43015e1d1bc6cc0063decb4c7de73ab89fc645b97185c70492"
+        }
+      ]
+    },
+    "llama4_17b-lambda": {
+      "model_name": "meta-llama/llama-4-maverick",
+      "model_short_name": "Llama4_17b",
+      "creator": "Meta",
+      "service_provider": "OpenRouter/Lambda",
+      "signatures": [
+        {
+          "file": "signatures/openrouter/llama-4/Lambda/43237f_2025-05-31_13-28-46.json",
+          "date": "2025-05-31_13-28-46",
+          "hash": "43237f",
+          "full_hash": "43237fad06300810ae10da9a1c5a4d3a8fb8a8aa3d842b00ff77ff3de06aaac8"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Lambda/7d34a6_2025-05-31_11-08-23.json",
+          "date": "2025-05-31_11-08-23",
+          "hash": "7d34a6",
+          "full_hash": "7d34a675fcc05d51ee8e816d9d744c97cb0875cadc7928182c36da5c5cacf723"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Lambda/b8ec09_2025-05-31_09-58-46.json",
+          "date": "2025-05-31_09-58-46",
+          "hash": "b8ec09",
+          "full_hash": "b8ec098a312e46a98b233247001211d05dd621560400fbe55fb05b46b141097d"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Lambda/690709_2025-05-31_02-10-20.json",
+          "date": "2025-05-31_02-10-20",
+          "hash": "690709",
+          "full_hash": "6907095f5d94adbffc9470a73838172cfea5b201fe714862c991691400c53273"
+        },
+        {
+          "file": "signatures/openrouter/llama-4/Lambda/33487c_2025-05-30_18-39-25.json",
+          "date": "2025-05-30_18-39-25",
+          "hash": "33487c",
+          "full_hash": "33487c523ce4dead3b7ca44fca50090892e5aedc11ea9e7be47b401dad2a54ab"
+        }
+      ]
+    },
+    "gpt_4o_2024_05_13-openai": {
+      "model_name": "gpt-4o-2024-05-13",
+      "model_short_name": "gpt-4o-2024-05-13",
+      "creator": "OpenAI",
+      "service_provider": "OpenAI",
+      "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o-2024-05-13/09cd68_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "09cd68",
+          "full_hash": "09cd68d903d0c1025c5cea954cfb3ed01c1601c4a2f6064e69c467d02d6ce746"
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-05-13/d9f13f_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "d9f13f",
+          "full_hash": "d9f13fcafc58f1e1969c3821a29e75e47a54e81bc74102777a2699a802421767"
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-05-13/6d36eb_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "6d36eb",
+          "full_hash": "6d36eb518bf2e6d13d774d5cbb811cc9ba0c10695feb75a6ccd96432ae50b322"
+        }
+      ]
+    },
+    "gpt_4o-openai": {
+      "model_name": "gpt-4o",
+      "model_short_name": "gpt-4o",
+      "creator": "OpenAI",
+      "service_provider": "OpenAI",
+      "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o/f94f13_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "f94f13",
+          "full_hash": "f94f13aaf4663bef422c862916463e133dd3a7868ecb33c842e8d863e5764024"
+        },
+        {
+          "file": "signatures/openai/gpt-4o/b43390_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "b43390",
+          "full_hash": "b433906aea5842f6ad379b844116dd01e4bb5f610f95d42f73c79dc6df68b914"
+        },
+        {
+          "file": "signatures/openai/gpt-4o/22cb0a_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "22cb0a",
+          "full_hash": "22cb0af0b113ea746eff6463996de592700744e7ac2c4caa924978e2eb12e922"
+        }
+      ]
+    },
+    "gpt_4o_2024_11_20-openai": {
+      "model_name": "gpt-4o-2024-11-20",
+      "model_short_name": "gpt-4o-2024-11-20",
+      "creator": "OpenAI",
+      "service_provider": "OpenAI",
+      "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/39c6b6_2025-05-30.json",
+          "date": "2025-05-30",
+          "hash": "39c6b6",
+          "full_hash": "39c6b6251b41542c216fe78c479d4390f83f423597f0f12a383a1deba17b66e6"
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/bdc670_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "bdc670",
+          "full_hash": "bdc67042e2bcc8c1bac258d7b372587ba2b285c674d52ebcff9568f81b9c1716"
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/b60e23_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "b60e23",
+          "full_hash": "b60e239c1d38b84cc4a159abadd2efdf9a7afdde413281cec12e1b2c7c2eceb8"
+        },
+        {
+          "file": "signatures/openai/gpt-4o-2024-11-20/87f681_2025-05-29.json",
+          "date": "2025-05-29",
+          "hash": "87f681",
+          "full_hash": "87f681ceb0b4186dc06d1c32bc279bc75ecd0d9850c2fff1ef58ca9d6136ebac"
+        }
+      ]
+    }
+  }
+}
