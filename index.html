@@ -42,7 +42,21 @@
                     <div class="nav-tab py-4 px-1 text-gray-500 font-medium hover:text-indigo-600 hover:border-b-2 hover:border-indigo-600 transition-colors duration-200" data-tab="history">Historical Data</div>
                     <div class="nav-tab py-4 px-1 text-gray-500 font-medium hover:text-indigo-600 hover:border-b-2 hover:border-indigo-600 transition-colors duration-200" data-tab="about">About stampr AI</div>
                 </div>
-                <p id="last-updated" class="text-sm text-gray-500">Last updated: April 19, 2025</p>
+                <div class="flex items-center">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            placeholder="Search models..." 
+                            class="w-48 pl-10 pr-4 py-1 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                        >
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>

@@ -125,10 +125,10 @@ async function loadSignatureData() {
                 month: 'long', 
                 day: 'numeric' 
             });
-            const lastUpdatedEl = document.getElementById('last-updated');
-            if (lastUpdatedEl) {
-                lastUpdatedEl.textContent = `Last updated: ${lastUpdated}`;
-            }
+            // const lastUpdatedEl = document.getElementById('last-updated');
+            // if (lastUpdatedEl) {
+            //     lastUpdatedEl.textContent = `Last updated: ${lastUpdated}`;
+            // }
         }
         
         // Update model cards
