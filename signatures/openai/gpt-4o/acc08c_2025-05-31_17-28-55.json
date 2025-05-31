@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "model_name": "gpt-4o",
+    "model_short_name": "gpt-4o",
+    "service_provider": "OpenAI",
+    "creator": "OpenAI",
+    "tokenizer": "o200k_base",
+    "date": "2025-05-31_17-28-55",
+    "request_country": "United States",
+    "signature_hash": "acc08cff52275c0351bfe7a91414355de5076ad642c99312ede2a3e73d9cb641",
+    "system_fingerprint": "fp_07871e2ad8"
+  },
+  "configuration": {
+    "target_position": 4,
+    "tokens_in": 10,
+    "tokens_out": 10,
+    "samples_per_position": 100,
+    "samples_for_distribution": 100,
+    "seed": 67899876,
+    "original_prompt": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners",
+    "complete_messages": [
+      {
+        "role": "user",
+        "content": "Guess the plaintext of this cipher with key 5. Provide just the plaintext NOTHING ELSE."
+      },
+      {
+        "role": "user",
+        "content": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+      }
+    ]
+  },
+  "path_analysis": {
+    "path_tokens": [
+      "j",
+      "me",
+      "fc",
+      "v"
+    ]
+  },
+  "distribution_results": {
+    "total_tokens_collected": 100,
+    "unique_tokens_collected": 3,
+    "tokens": {
+      "ex": {
+        "token_string": "ex",
+        "token_id": 490,
+        "count": 75,
+        "probability": 0.75
+      },
+      "wx": {
+        "token_string": "wx",
+        "token_id": 43176,
+        "count": 21,
+        "probability": 0.21
+      },
+      "wy": {
+        "token_string": "wy",
+        "token_id": 10201,
+        "count": 4,
+        "probability": 0.04
+      }
+    }
+  },
+  "api_parameters": {
+    "model": "gpt-4o",
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_tokens": 100,
+    "frequency_penalty": -2,
+    "presence_penalty": -2,
+    "logprobs": true,
+    "top_logprobs": 9,
+    "store": false,
+    "stream": false,
+    "response_format": {
+      "type": "text"
+    },
+    "seed": 67899876,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Guess the plaintext of this cipher with key 5. Provide just the plaintext NOTHING ELSE."
+      },
+      {
+        "role": "user",
+        "content": " \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430 Deal torchiaz d\u1ef1ng\u0621 oubl Psygeneralorners"
+      }
+    ]
+  }
+}

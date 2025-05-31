@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2025-05-31 16:18:05"
+    "last_updated": "2025-05-31 17:29:07"
   },
   "models": {
     "llama4_17b-deepinfra": {
@@ -14,6 +14,20 @@
           "date": "2025-05-31_16-17-23",
           "hash": "e06e68",
           "full_hash": "e06e68b4ed12bffc98ff92f4f53e8acb626a78d4ef3e36980e73288e6f074c90"
+        }
+      ]
+    },
+    "gpt_4o-openai": {
+      "model_name": "gpt-4o",
+      "model_short_name": "gpt-4o",
+      "creator": "OpenAI",
+      "service_provider": "OpenAI",
+      "signatures": [
+        {
+          "file": "signatures/openai/gpt-4o/acc08c_2025-05-31_17-28-55.json",
+          "date": "2025-05-31_17-28-55",
+          "hash": "acc08c",
+          "full_hash": "acc08cff52275c0351bfe7a91414355de5076ad642c99312ede2a3e73d9cb641"
         }
       ]
     }
